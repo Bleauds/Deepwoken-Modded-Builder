@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+	
+<!-- Mirrored from deepwoken.co/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 23 Mar 2025 18:01:57 GMT -->
+<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="favicon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<!-- Primary Meta Tags -->
+	<meta name="title" content="Deepwoken Builder" />
+	<meta
+		name="description"
+		content="Deepwoken stats builder, with full talents and mantra support. Available for all devices! Made by Cyfiee"
+	/>
+
+	<!-- Open Graph / Facebook -->
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://discord.gg/B3BwytYWVK" />
+	<meta property="og:title" content="Home - Deepwoken Builder" />
+	<meta
+		property="og:description"
+		content="Deepwoken stats builder, with full talents and mantra support. Available for all devices! Made by Cyfiee"
+	/>
+	<meta
+		property="og:image"
+		content="../cdn.discordapp.com/attachments/854957876313063447/1199965058848018462/dark-favicon.png"
+	/>
+	<!--<script src="https://hb.vntsm.com/v4/live/vms/sites/deepwoken.co/index.js"></script>
+	 <script>
+self.__VM = self.__VM || [];
+self.__VM.push(function (admanager, scope) {
+    scope.Config.get('billboard').display('slot-1');
+     scope.Config.get('desktop_takeover').display('slot-2');
+     scope.Config.get('leaderboard').display('slot-3');
+     scope.Config.get('mobile_banner').display('slot-4');
+     scope.Config.get('mobile_mpu').display('slot-5');
+     scope.Config.get('mobile_takeover').display('slot-6');
+     scope.Config.get('mpu').display('slot-7');
+   // Based on your layout, here are the responsive tags. The placement will change based on screen width.
+   // With the mobile breakpoint set by default at max-width:1024px
+});-->
+</script>
+	<!-- Ad tag -->
+	<script type="text/javascript">
+		window.ramp = window.ramp || {};
+		window.ramp.que = window.ramp.que || [];
+		window.ramp.passiveMode = true;
+	</script>
+	<script>
+		window.pwUnits = [
+			{
+				selectorId: 'first-med-rect',
+				type: 'med_rect_atf'
+			},
+			{
+				type: 'bottom_rail'
+			},
+			{
+				type: 'left_rail'
+			},
+			{
+				type: 'right_rail'
+			},
+			{
+				type: 'corner_ad_video'
+			}
+		];
+		var init = function () {
+			ramp
+				// pass in the array where you defined the units
+				.addUnits(window.pwUnits)
+				.then(() => {
+					// then show the units
+					ramp.displayUnits();
+				})
+				.catch((e) => {
+					// catch errors
+					ramp.displayUnits();
+					console.log(e);
+				});
+		};
+		ramp.onReady = function () {
+			console.log('Ads API is initialized');
+			init();
+		};
+		let previousUrl = location.href;
+		const observer = new MutationObserver(function(mutations) {
+		if (location.href !== previousUrl) {
+			previousUrl = location.href;
+			console.log(ramp)
+			ramp
+						.destroyUnits('all')
+						.then(() => {
+							// pass in the array 'pwUnits'
+							ramp.addUnits(window.pwUnits).then(() => {
+								ramp.displayUnits();
+
+								console.log('units displayed upon navigation');
+							});
+						})
+						.catch((e) => {
+							// catch errors
+
+							ramp.displayUnits();
+
+							console.log(e);
+						});
+				}
+		});
+		const config = {subtree: true, childList: true};
+		observer.observe(document, config);
+	</script>
+	<script type="text/javascript" async="true" src="../cdn.intergient.com/1025149/74714/ramp.html">
+	</script>
+		
+		<link href="_app/immutable/assets/0.DD9ggIW9.css" rel="stylesheet">
+		<link href="_app/immutable/assets/Icon.B_4K0AlN.css" rel="stylesheet">
+		<link href="_app/immutable/assets/2.DwMSxaPB.css" rel="stylesheet"><title>Home - Deepwoken Builder</title><!-- HEAD_svelte-6vsytv_START --><meta name="title" content="Home - Deepwoken Builder" class="svelte-3bkedl"><meta name="description" content="Deepwoken stats builder / planner / maker, with full talents and mantra support. Available for all devices! Made by Cyfer#2380" class="svelte-3bkedl"><meta property="og:type" content="website" class="svelte-3bkedl"><meta property="og:url" content="https://discord.gg/B3BwytYWVK" class="svelte-3bkedl"><meta property="og:title" content="Home - Deepwoken Builder" class="svelte-3bkedl"><meta property="og:description" content="Deepwoken stats builder / planner / maker, with full talents and mantra support. Available for all devices! Made by Cyfer#2380" class="svelte-3bkedl"><meta property="og:image" content="https://cdn.discordapp.com/attachments/854957876313063447/1199965058848018462/dark-favicon.png" class="svelte-3bkedl"><meta property="twitter:url" content="https://discord.gg/B3BwytYWVK" class="svelte-3bkedl"><meta property="twitter:title" content="Home - Deepwoken Builder" class="svelte-3bkedl"><meta property="twitter:description" content="Deepwoken stats builder / planner / maker, with full talents and mantra support. Available for all devices! Made by Cyfer#2380" class="svelte-3bkedl"><meta property="twitter:image" content="https://cdn.discordapp.com/attachments/854957876313063447/1199965058848018462/dark-favicon.png" class="svelte-3bkedl"><meta name="keywords" content="deepwoken, roblox, deepwoken roblox, deepwoken builder, builder, dw builder, dw, deepwoken stat builder, stat builder, build maker, dw build maker, deepwoken build maker, build maker deepwoken, dw build, deepwoken vercel" class="svelte-3bkedl"><meta name="author" content="Cyfer" class="svelte-3bkedl"><meta name="description" content="Deepwoken stats builder / planner / maker, with full talents and mantra support. Available for all devices! Made by Cyfer#2380" class="svelte-3bkedl"><!-- HEAD_svelte-6vsytv_END -->
+	</head>
+	<!-- Google tag (gtag.js) -->
+	<script>
+		window._pwGA4PageviewId = ''.concat(Date.now());
+		window.dataLayer = window.dataLayer || [];
+		window.gtag =
+			window.gtag ||
+			function () {
+				dataLayer.push(arguments);
+			};
+		gtag('js', new Date());
+		gtag('config', 'G-LVL3Z5R4QP', { send_page_view: false });
+		gtag('config', 'G-00M516D817');
+		gtag('event', 'ramp_js', {
+			send_to: 'G-LVL3Z5R4QP',
+			pageview_id: window._pwGA4PageviewId
+		});
+	</script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-00M516D817"></script>
+	<body data-sveltekit-preload-data="hover">
+		<script>
+		var global = global || window
+		
+		//
+		window.dataLayer = window.dataLayer || [];
+		</script>
+			<div style="display: contents">  <head data-svelte-h="svelte-1v51az5"><meta charset="utf-8"> <link rel="preconnect" href="https://fonts.googleapis.com/"> <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet"> <script>var global = global || window;
+
+		//
+		window.dataLayer = window.dataLayer || [];
+		function gtag() {
+			dataLayer.push(arguments);
+		}
+		gtag('js', new Date());
+
+		gtag('config', 'G-00M516D817');</script> <style lang="scss">/* CSS variables */
+		:root {
+			--button-background: #04100d;
+			--background: radial-gradient(#18221a, #04100d);
+			--color: white;
+			--container-background: rgba(216, 215, 202, 1);
+		}
+		body {
+			display: flex;
+			align-items: center;
+			flex-direction: column;
+			padding: 60px;
+			background: var(--background);
+			min-height: 600px;
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+			overflow-x: hidden;
+		}
+		.black-silence {
+			background: #171717 !important;
+			color: white !important;
+		}
+		/* Festive stuff! 
+		.festive-grid-item {
+			border: 5px solid transparent !important;
+			border-image: url(/borderthin-festive.png) 25% repeat !important;
+			border-image-width: 5px !important;
+			background: white;
+		}
+		.festive-builder-container {
+			border: 5px solid transparent !important;
+			border-image: url(/border-festive.png) 25% repeat !important;
+			border-image-width: 10px !important;
+		}
+		.festive {
+			background: radial-gradient(#820016, #45000c);
+		}
+		.snow-container {
+			position: fixed;
+			top: 0;
+			left: 0;
+			overflow: hidden;
+			width: 100vw;
+			height: 100vh;
+			z-index: 99999;
+			pointer-events: none;
+		}
+
+		.snowflake {
+			position: absolute !important;
+			background-color: white;
+			border-radius: 50%;
+			opacity: 0.8;
+			pointer-events: none;
+		}
+
+		@keyframes fall {
+			0% {
+				opacity: 0;
+				transform: translateY(0);
+			}
+			10% {
+				opacity: 1;
+			}
+			100% {
+				opacity: 0.5;
+				transform: translateY(100vh);
+			}
+		}
+
+		@keyframes diagonal-fall {
+			0% {
+				opacity: 0;
+				transform: translate(0, 0);
+			}
+			10% {
+				opacity: 1;
+			}
+			100% {
+				opacity: 0.25;
+				transform: translate(10vw, 100vh);
+			}
+		}*/
+		.fixed {
+			position: fixed;
+			color: white;
+			border: 1px solid transparent;
+			border-image: url(border.png) 45%;
+			border-image-width: 15px;
+			border-image-outset: 2px;
+			padding: 5px;
+		}
+		/* */
+		.toggle-desktop {
+			margin: 5px;
+			color: #202020;
+			border: 1px solid transparent;
+			border-image: url(border.png) 45%;
+			border-image-width: 15px;
+			border-image-outset: 2px;
+			padding: 5px;
+			font-size: 14px;
+			background-color: hsl(56, 16%, 82%);
+		}
+		/* */
+		.footer {
+			font-family: 'Lora', 'sans-serif';
+			font-size: 12px;
+			padding: 5px;
+		}
+		.selected {
+			color: white !important;
+			background-color: #1a1a1a !important;
+		}
+		/* Loading */
+		.loading {
+			display: none;
+		}
+		#footer-ad {
+			width: 100%;
+		}
+		#first-med-rect {
+			display: none;
+		}
+		@media only screen and (max-width: 600px) {
+			#first-med-rect {
+				display: block;
+			}
+		}
+		._toastItem {
+			border-image: url(borderthin.png) 45% !important;
+			border-image-width: 10px !important;
+			border-image-outset: 2px !important;
+			background: hsl(56, 16%, 82%) !important;
+			color: black !important;
+		}
+
+		input:disabled,
+		select:disabled {
+			cursor: not-allowed;
+		}</style></head> <div class="notifWrapper"><ul class="_toastContainer svelte-yh90az"> </ul></div>    <div class="nav right nav-menu border"><div style="display: flex; align-items: center; padding: 0px 25px 0px 15px; border-bottom: 1px lightgray solid"><img src="menu.png" alt="icon" style="max-width: 18px; margin-right: 10px;"> <p data-svelte-h="svelte-1erc25j">User controls</p> <button class="close-button"></button></div> <a class="nav-option" id="login" href="index.html" data-svelte-h="svelte-1gyv62p">Profile</a> <a class="nav-option" id="logout" href="index.html" data-svelte-h="svelte-1jv28vl">Log out</a></div>  <div class="nav left nav-menu border" data-sveltekit-reload><div style="display: flex; align-items: center; padding: 0px 25px 0px 15px; border-bottom: 1px lightgray solid"><img src="menu.png" alt="icon" style="max-width: 18px; margin-right: 10px;"> <p data-svelte-h="svelte-1qxw3o2">Navigation</p> <button class="close-button"></button></div> <a id="home" class="nav-option" href="index.html" data-svelte-h="svelte-wq15t4">Home</a> <a id="builder" class="nav-option" href="builder.html" data-svelte-h="svelte-1wqtt15">Builder</a> <a id="talents" class="nav-option" href="talents.html" data-svelte-h="svelte-2cz34x">Talents</a> <a id="discord" class="nav-option" target="_blank" rel="noreferrer" href="https://discord.gg/B3BwytYWVK" data-svelte-h="svelte-51rhru">Discord</a> <a id="aen" class="nav-option" href="aen.html" data-svelte-h="svelte-zsn60e">Aen (Discord Bot)</a> <a id="support" class="nav-option" href="support.html" data-svelte-h="svelte-lpvlrt">Support Me</a> <a id="privacy" class="nav-option" href="privacy.html" data-svelte-h="svelte-15849ia">Privacy Policy</a>  <div class="themes"><hr> <div style="display: flex; justify-content: space-between"><button class="theme-button" style="background: radial-gradient(#18221a, #04100d)" id="overworld"></button><button class="theme-button" style="background: radial-gradient(#264a50, #040d13)" id="depths"></button><button class="theme-button" style="background: radial-gradient(#c0c2cb, #4c4f53)" id="gale"></button><button class="theme-button" style="background: radial-gradient(#4f3c29, #1a1814)" id="chimes"></button><button class="theme-button" style="background: radial-gradient(#5c001c, #400114)" id="silksong"></button></div>  <div style="font-size: 12px; color: grey; margin: 5px" data-svelte-h="svelte-1aul8bd"><b>@cyfiee</b> - v3.1</div></div></div> <div class="navbar border"><div class="logo"><button id="navbutton" class="nav-button border-thin" data-svelte-h="svelte-131a9vx"><img src="menu.png" alt="nav menu" style="max-height: 100%;"></button> <a style="display: flex; align-items: center; color: white; font-size: 15px; margin-left: 10px; text-decoration: none" href="index.html" data-svelte-h="svelte-4d1lng"><img src="favicon.png" alt="icon" style="max-width: 25px; margin-right: 5px;"> <p>Deepwoken Hub</p></a></div>  <div id="profile"><p id="profileName" style="margin-right: 15px">Guest</p> <div id="profilePictureContainer" style="width: 25px; height: 25px" class="svelte-142ncmc"><button id="profilePictureButton" class="svelte-142ncmc"><img id="profilePicture" style="pointer-events: none" src="discord.png" alt="discord" class="svelte-142ncmc"></button> <div class="login-button border-thin svelte-142ncmc"></div> </div></div> </div>  <div id="first-med-rect"></div>    <div class="container svelte-3bkedl" data-svelte-h="svelte-1nwgews"><div class="grid-item border svelte-3bkedl" style="grid-column: 1 / span 3; grid-row: 1 / span 1"><h1 class="svelte-3bkedl">Changelog <i style="color: grey; font-family:'Courier New', Courier, monospace" class="svelte-3bkedl">v3.1</i></h1> <hr class="svelte-3bkedl">
+		the mysterious number changed. what could it mean? theories suspect it&#39;s a countdown. many others
+		believe it&#39;s nothing more than an arbitrary number thats changes per the whims of some higher being.
+		who knows..? perhaps the answer lies within the discord...</div> <div class="grid-item border svelte-3bkedl" style="grid-column: 4 / span 1; grid-row: 1 / span 2"><h1 class="svelte-3bkedl">Chromatic Report</h1>
+		I am no longer ashamed of my own creation. I have been freed from the shackles of my own design.
+		<h2 class="svelte-3bkedl"><i style="color: grey;" class="svelte-3bkedl">2nd Febuary</i></h2> <hr class="svelte-3bkedl"> <ul class="svelte-3bkedl"><b class="svelte-3bkedl">Just kidding.</b></ul>
+		Chromatic has been well, actually. I recently took a big break for Lunar New Year, and now that it&#39;s
+		over, the chains of work starts shackling me again. When will I be free. I just want to play video
+		games.</div> <div class="grid-item border svelte-3bkedl" style="grid-column: 1 / span 1; grid-row: 2 / span 1"><h1 class="svelte-3bkedl">Top Supporters</h1> <hr class="svelte-3bkedl"> <ol class="svelte-3bkedl"><li class="svelte-3bkedl"><b class="svelte-3bkedl">Xeri</b></li> <li class="svelte-3bkedl"><b class="svelte-3bkedl">Sheep</b></li> <li class="svelte-3bkedl"><b class="svelte-3bkedl">Penjji</b></li> <li class="svelte-3bkedl"><b class="svelte-3bkedl">laronalt1</b></li> <li class="svelte-3bkedl"><b class="svelte-3bkedl">weegerzy</b></li></ol>
+		Thank you so much for your continued support!!!</div> <div class="grid-item border svelte-3bkedl" style="grid-column: 2 / span 2; grid-row: 2 / span 1"><h1 class="svelte-3bkedl">can someone remind me to update this later?</h1> <hr class="svelte-3bkedl"> Immovable
+		Object, Unstoppable Force
+		<p class="svelte-3bkedl">Author: <b class="svelte-3bkedl">Tim!</b></p> <p class="svelte-3bkedl">Have that one friend that keeps asking for PvE builds? Here. Here it is. Everything. You&#39;re
+			that one friend? Click the god damned link.</p> <p class="svelte-3bkedl">Over 16 builds fitting for various scenarios and playstyle can be found on the builder Discord <a href="https://discord.com/channels/1067416449980837900/1108270455976099860" target="_blank" rel="noreferrer" class="svelte-3bkedl">here!</a></p></div> </div>    
+			
+			<script>
+				{
+					__sveltekit_12rqkzc = {
+						base: new URL(".", location).pathname.slice(0, -1)
+					};
+
+					const element = document.currentScript.parentElement;
+
+					Promise.all([
+						import("_app/immutable/entry/start.DLM8dxvO.js"),
+						import("_app/immutable/entry/app.B6OY6F_z.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element, {
+							node_ids: [0, 2],
+							data: [null,null],
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+			
+		
+	</body>
+
+<!-- Mirrored from deepwoken.co/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 23 Mar 2025 18:01:58 GMT -->
+</html>

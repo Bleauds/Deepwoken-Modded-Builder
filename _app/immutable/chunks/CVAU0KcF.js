@@ -1,0 +1,2 @@
+import{w as t}from"./C8XpiCkM.js";const a="https://api.deepwoken.co",n=t({talents:{},mantras:{},weapons:{},enchants:{}}),o=t({categorized:{},lastUpdated:null,isLoading:!0}),e=t(!1),c=t(),r=t([]),i=t(),l=t(),S=t([]),p=t(),d=t({}),k=t(),f=t(),h=t(),u=t([]),b=t(),g=t(),m=t(),w=t({}),M=t([]),v=t("");export{a,r as b,l as c,n as d,k as e,M as f,f as g,h,b as i,g as j,m as k,e as l,w as m,v as n,S as o,i as p,o as q,d as r,p as s,u as t,c as u};
+//# sourceMappingURL=CVAU0KcF.js.map

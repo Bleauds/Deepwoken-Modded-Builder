@@ -1,0 +1,30 @@
+{
+  "talents": [
+    {
+      "name": "Fishman",
+      "description": "You can execute enemies in water. Gain additional healing from knocking others in water.",
+      "rarity": "rare",
+      "buffs": [
+        { "health": 5 }
+      ],
+      "requirements": []
+    },
+    {
+      "name": "Dazing Finisher",
+      "description": "Flourishing enemies that are dazed by you causes them to not be knocked back and become charmed.",
+      "mystic": "Charm Caster",
+      "rarity": "advanced",
+      "buffs": {
+      },
+      "requirements": [
+        { "charisma": 1 }
+      ],
+      "need": [
+        "Charismatic Cast",
+        "Chaotic Charm",
+        "Tough Love",
+        "Lasting Charisma"
+      ]
+    }
+  ]
+}
