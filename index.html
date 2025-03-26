@@ -1,334 +1,1118 @@
+
 <!DOCTYPE html>
 <html lang="en">
-	
-<!-- Mirrored from deepwoken.co/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 23 Mar 2025 18:01:57 GMT -->
-<head>
-		<meta charset="utf-8" />
-		<link rel="icon" href="favicon.png" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<!-- Primary Meta Tags -->
-	<meta name="title" content="Deepwoken Builder" />
-	<meta
-		name="description"
-		content="Deepwoken stats builder, with full talents and mantra support. Available for all devices! Made by Cyfiee"
-	/>
+   <!-- Mirrored from deepwoken.co/builder by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 23 Mar 2025 18:01:47 GMT -->
+   <head>
+      <html lang="en" style="--button-background: #5c001c; --background: radial-gradient(#5c001c, #400114);">
+         <head>
+   </head>
+   <meta charset="utf-8" />
+   <link rel="icon" href="favicon.png" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <!-- Primary Meta Tags -->
+   <meta name="title" content="Deepwoken Builder" />
+   <meta
+      name="description"
+      content="Deepwoken stats builder, with full talents and mantra support. Available for all devices! Made by Cyfiee"
+      />
+   <!-- Open Graph / Facebook -->
+   <meta property="og:type" content="website" />
+   <meta property="og:url" content="https://discord.gg/vMBHH8BkDC" />
+   <meta property="og:title" content="Home - Deepwoken Modded" />
+   <meta
+      property="og:description"
+      content="Deepwoken stats builder, with full talents and mantra support. Available for all devices! Made by Cyfiee"
+      />
+   <meta
+      property="og:image"
+      content="../cdn.discordapp.com/attachments/854957876313063447/1199965058848018462/dark-favicon.png"
+      />
+   <!--<script src="https://hb.vntsm.com/v4/live/vms/sites/deepwoken.co/index.js"></script>
+      <script>
+      self.__VM = self.__VM || [];
+      self.__VM.push(function (admanager, scope) {
+        scope.Config.get('billboard').display('slot-1');
+         scope.Config.get('desktop_takeover').display('slot-2');
+         scope.Config.get('leaderboard').display('slot-3');
+         scope.Config.get('mobile_banner').display('slot-4');
+         scope.Config.get('mobile_mpu').display('slot-5');
+         scope.Config.get('mobile_takeover').display('slot-6');
+         scope.Config.get('mpu').display('slot-7');
+       // Based on your layout, here are the responsive tags. The placement will change based on screen width.
+       // With the mobile breakpoint set by default at max-width:1024px
+      });-->
+   </script>
+   <!-- Ad tag -->
+   <script type="text/javascript">
+      window.ramp = window.ramp || {};
+      window.ramp.que = window.ramp.que || [];
+      window.ramp.passiveMode = true;
+   </script>
+   <script>
+      window.pwUnits = [
+      	{
+      		selectorId: 'first-med-rect',
+      		type: 'med_rect_atf'
+      	},
+      	{
+      		type: 'bottom_rail'
+      	},
+      	{
+      		type: 'left_rail'
+      	},
+      	{
+      		type: 'right_rail'
+      	},
+      	{
+      		type: 'corner_ad_video'
+      	}
+      ];
+      var init = function () {
+      	ramp
+      		// pass in the array where you defined the units
+      		.addUnits(window.pwUnits)
+      		.then(() => {
+      			// then show the units
+      			ramp.displayUnits();
+      		})
+      		.catch((e) => {
+      			// catch errors
+      			ramp.displayUnits();
+      			console.log(e);
+      		});
+      };
+      ramp.onReady = function () {
+      	console.log('Ads API is initialized');
+      	init();
+      };
+      let previousUrl = location.href;
+      const observer = new MutationObserver(function(mutations) {
+      if (location.href !== previousUrl) {
+      	previousUrl = location.href;
+      	console.log(ramp)
+      	ramp
+      				.destroyUnits('all')
+      				.then(() => {
+      					// pass in the array 'pwUnits'
+      					ramp.addUnits(window.pwUnits).then(() => {
+      						ramp.displayUnits();
+      
+      						console.log('units displayed upon navigation');
+      					});
+      				})
+      				.catch((e) => {
+      					// catch errors
+      
+      					ramp.displayUnits();
+      
+      					console.log(e);
+      				});
+      		}
+      });
+      const config = {subtree: true, childList: true};
+      observer.observe(document, config);
+   </script>
+   <script type="text/javascript" async="true" src="../cdn.intergient.com/1025149/74714/ramp.html"></script>
+   <link href="_app/immutable/assets/0.DD9ggIW9.css" rel="stylesheet">
+   <link href="_app/immutable/assets/Icon.B_4K0AlN.css" rel="stylesheet">
+   <link href="_app/immutable/assets/4.SrwoI1B3.css" rel="stylesheet">
+   <link href="_app/immutable/assets/BuildMenu.CDysIOrQ.css" rel="stylesheet"><title> Deepwoken Builder </title><!-- HEAD_svelte-ymnxwf_START --><meta name="title" content="Deepwoken Modded Builder"><meta name="description" content="Deepwoken Modded stats builder, with full talents and mantra support. Available for all devices! Made by Cyfer#2380"><meta property="og:type" content="website"><meta property="og:url" content="https://discord.gg/B3BwytYWVK"><meta property="og:title" content="Deepwoken Builder"><meta property="og:description" content="Deepwoken stats builder, with full talents and mantra support. Available for all devices! Made by Cyfer#2380"><meta property="og:image" content="https://cdn.discordapp.com/attachments/854957876313063447/1199965058848018462/dark-favicon.png"><meta property="twitter:url" content="https://discord.gg/B3BwytYWVK"><meta property="twitter:title" content="Deepwoken Builder"><meta property="twitter:description" content="Deepwoken stats builder, with full talents and mantra support. Available for all devices! Made by Cyfer#2380"><meta property="twitter:image" content="https://cdn.discordapp.com/attachments/854957876313063447/1199965058848018462/dark-favicon.png"><meta name="keywords" content="deepwoken, roblox, deepwoken roblox, deepwoken builder, builder, dw builder, dw, deepwoken stat builder, stat builder, build maker, dw build maker, deepwoken build maker, build maker deepwoken, dw build, deepwoken vercel"><meta name="author" content="Cyfer"><meta name="description" content="Deepwoken stats builder, with full talents and mantra support. Available for all devices! Made by Bleaud"><!-- HEAD_svelte-ymnxwf_END -->
+   </head>
+   <!-- Google tag (gtag.js) -->
+   <script>
+      window._pwGA4PageviewId = ''.concat(Date.now());
+      window.dataLayer = window.dataLayer || [];
+      window.gtag =
+      	window.gtag ||
+      	function () {
+      		dataLayer.push(arguments);
+      	};
+      gtag('js', new Date());
+      gtag('config', 'G-LVL3Z5R4QP', { send_page_view: false });
+      gtag('config', 'G-00M516D817');
+      gtag('event', 'ramp_js', {
+      	send_to: 'G-LVL3Z5R4QP',
+      	pageview_id: window._pwGA4PageviewId
+      });
+   </script>
+   <script async src="https://www.googletagmanager.com/gtag/js?id=G-00M516D817"></script>
 
-	<!-- Open Graph / Facebook -->
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://discord.gg/B3BwytYWVK" />
-	<meta property="og:title" content="Home - Deepwoken Builder" />
-	<meta
-		property="og:description"
-		content="Deepwoken stats builder, with full talents and mantra support. Available for all devices! Made by Cyfiee"
-	/>
-	<meta
-		property="og:image"
-		content="../cdn.discordapp.com/attachments/854957876313063447/1199965058848018462/dark-favicon.png"
-	/>
-	<!--<script src="https://hb.vntsm.com/v4/live/vms/sites/deepwoken.co/index.js"></script>
-	 <script>
-self.__VM = self.__VM || [];
-self.__VM.push(function (admanager, scope) {
-    scope.Config.get('billboard').display('slot-1');
-     scope.Config.get('desktop_takeover').display('slot-2');
-     scope.Config.get('leaderboard').display('slot-3');
-     scope.Config.get('mobile_banner').display('slot-4');
-     scope.Config.get('mobile_mpu').display('slot-5');
-     scope.Config.get('mobile_takeover').display('slot-6');
-     scope.Config.get('mpu').display('slot-7');
-   // Based on your layout, here are the responsive tags. The placement will change based on screen width.
-   // With the mobile breakpoint set by default at max-width:1024px
-});-->
+   <!-- paste  below-->
+   <body data-sveltekit-preload-data="hover">
+	<script>
+	   var global = global || window
+	   window.dataLayer = window.dataLayer || [];
+	</script>
+<div style="display: contents">
+	<meta charset="utf-8">
+	<link rel="preconnect" href="https://fonts.googleapis.com/">
+	<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+	<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet">
+	<script>var global = global || window;
+	   //
+	   window.dataLayer = window.dataLayer || [];
+	   function gtag() {
+		dataLayer.push(arguments);
+	   }
+	   gtag('js', new Date());
+	   
+	   gtag('config', 'G-00M516D817');
+	</script> 
+	<style lang="scss">
+	   :root {
+	   --button-background: #04100d;
+	   --background: radial-gradient(#18221a, #04100d);
+	   --color: white;
+	   --container-background: rgba(216, 215, 202, 1);
+	   }
+	   body {
+	   display: flex;
+	   align-items: center;
+	   flex-direction: column;
+	   padding: 60px;
+	   background: var(--background);
+	   min-height: 600px;
+	   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	   overflow-x: hidden;
+	   }
+	   .black-silence {
+	   background: #171717 !important;
+	   color: white !important;
+	   }
+	   /* Festive stuff! 
+	   .festive-grid-item {
+	   border: 5px solid transparent !important;
+	   border-image: url(/borderthin-festive.png) 25% repeat !important;
+	   border-image-width: 5px !important;
+	   background: white;
+	   }
+	   .festive-builder-container {
+	   border: 5px solid transparent !important;
+	   border-image: url(/border-festive.png) 25% repeat !important;
+	   border-image-width: 10px !important;
+	   }
+	   .festive {
+	   background: radial-gradient(#820016, #45000c);
+	   }
+	   .snow-container {
+	   position: fixed;
+	   top: 0;
+	   left: 0;
+	   overflow: hidden;
+	   width: 100vw;
+	   height: 100vh;
+	   z-index: 99999;
+	   pointer-events: none;
+	   }
+	   .snowflake {
+	   position: absolute !important;
+	   background-color: white;
+	   border-radius: 50%;
+	   opacity: 0.8;
+	   pointer-events: none;
+	   }
+	   @keyframes fall {
+	   0% {
+	   opacity: 0;
+	   transform: translateY(0);
+	   }
+	   10% {
+	   opacity: 1;
+	   }
+	   100% {
+	   opacity: 0.5;
+	   transform: translateY(100vh);
+	   }
+	   }
+	   @keyframes diagonal-fall {
+	   0% {
+	   opacity: 0;
+	   transform: translate(0, 0);
+	   }
+	   10% {
+	   opacity: 1;
+	   }
+	   100% {
+	   opacity: 0.25;
+	   transform: translate(10vw, 100vh);
+	   }
+	   }*/
+	   .fixed {
+	   position: fixed;
+	   color: white;
+	   border: 1px solid transparent;
+	   border-image: url(border.png) 45%;
+	   border-image-width: 15px;
+	   border-image-outset: 2px;
+	   padding: 5px;
+	   }
+	   /* */
+	   .toggle-desktop {
+	   margin: 5px;
+	   color: #202020;
+	   border: 1px solid transparent;
+	   border-image: url(border.png) 45%;
+	   border-image-width: 15px;
+	   border-image-outset: 2px;
+	   padding: 5px;
+	   font-size: 14px;
+	   background-color: hsl(56, 16%, 82%);
+	   }
+	   /* */
+	   .footer {
+	   font-family: 'Lora', 'sans-serif';
+	   font-size: 12px;
+	   padding: 5px;
+	   }
+	   .selected {
+	   color: white !important;
+	   background-color: #1a1a1a !important;
+	   }
+	   /* Loading */
+	   .loading {
+	   display: none;
+	   }
+	   #footer-ad {
+	   width: 100%;
+	   }
+	   #first-med-rect {
+	   display: none;
+	   }
+	   @media only screen and (max-width: 600px) {
+	   #first-med-rect {
+	   display: block;
+	   }
+	   }
+	   ._toastItem {
+	   border-image: url(borderthin.png) 45% !important;
+	   border-image-width: 10px !important;
+	   border-image-outset: 2px !important;
+	   background: hsl(56, 16%, 82%) !important;
+	   color: black !important;
+	   }
+	   input:disabled,
+	   select:disabled {
+	   cursor: not-allowed;
+	   }
+</style>
+<div class="navbar border">
+   <div class="logo">
+	  <button id="navbutton" class="nav-button border-thin" data-svelte-h="svelte-131a9vx"><img src="menu.png" alt="nav menu" style="max-height: 100%;"></button> 
+	  <a style="display: flex; align-items: center; color: white; font-size: 15px; margin-left: 10px; text-decoration: none"data-svelte-h="svelte-4d1lng">
+		 <img src="favicon.png" alt="icon" style="max-width: 25px; margin-right: 5px;"> 
+		 <p>Deepwoken Modded Hub</p>
+	  </a>
+   </div>
+   <div id="profile">
+	  <p id="profileName" style="margin-right: 15px">By Bleaud</p>
+	  <div id="profilePictureContainer" style="width: 25px; height: 25px" class="svelte-142ncmc">
+		 <button id="profilePictureButton" class="svelte-142ncmc"><img id="profilePicture" style="pointer-events: none" src="discord.png" alt="discord" class="svelte-142ncmc"></button> 
+		 <div class="login-button border-thin svelte-142ncmc"></div>
+	  </div>
+   </div>
+</div>
+<div id="first-med-rect"></div>
+<div class="error-container border" style="display: none" data-svelte-h="svelte-1adslop">
+   <h1 style="text-align: center">Maintenence</h1>
+   Cyfer is currently working on changes to the website. In the meantime, you can join the<a href="https://discord.gg/deepwokenbuilder" target="_blank">Discord</a> to stay up to date about the site's availability!.
+</div>
+<div class="builder-container" id="builder-container" style="max-width: 475px; width: 90vw;">
+   <div class="build-info border show">
+	  <div class="author-container">
+		 <div class="author">
+			<div id="profilePictureContainer" style="width: 30px; height: 30px" class="svelte-142ncmc">
+			   <button id="profilePictureButton" class="svelte-142ncmc"><img id="profilePicture" style="pointer-events: none" src="discord.png" alt="discord" class="svelte-142ncmc"></button> 
+			   <div class="login-button border-thin svelte-142ncmc"></div>
+			</div>
+			<div class="author-name" data-svelte-h="svelte-by65n7">
+			   <div>Anonymous</div>
+			</div>
+		 </div>
+		 <div class="menu-wrapper">
+			<div class="menu-container svelte-18h6jo9"><button class="p-1 rounded hover:bg-black/5 transition-colors svelte-18h6jo9"></button>  </div>
+		 </div>
+	  </div>
+	  <input id="build-name" class="input title" placeholder="Build name">  
+	  <div id="tags">  </div>
+	  <div contenteditable="true" id="build-description" class="input description show" placeholder="Build description"></div>
+   </div>
+   <div class="tabs border">
+	  <div class="social-buttons"> </div>
+	  <div style="display: none" class="svelte-2e1jrf"><input id="buildLink" readonly="" value="https://deepwoken.co/builder?id=XXXXXXXX" class="svelte-2e1jrf">  <button class="export-link svelte-2e1jrf"> Get Link</button> </div>
+	  <div class="tabs-buttons border"> <button class="tabs-button border-thin">Stats</button><button class="tabs-button border-thin">Talents</button></div>
+   </div>
+   <div class="tabs-container border">
+	  <div class="container" id="Stats">
+		 <div class="meta-stats grid-item border svelte-g2d5k9">
+			<div class="stat-item svelte-g2d5k9">
+			   <b class="svelte-g2d5k9">Race</b> 
+			   <select class="meta-selections input svelte-g2d5k9" label="Race" id="Race" stattype="meta" statname="Race">
+				  <option value="1" style="">Etrean</option>
+				  <option value="2" style="">Celtor</option>
+				  <option value="3" style="">Adret</option>
+				  <option value="4" style="">Canor</option>
+				  <option value="5" style="">Gremor</option>
+				  <option value="6" style="">Khan</option>
+				  <option value="7" style="">Felinor</option>
+				  <option value="8" style="">Vesperian</option>
+				  <option value="9" style="">Capra</option>
+				  <option value="10" style="">Ganymede</option>
+				  <option value="11" style="">Tiran</option>
+				  <option value="12" style="">Drakkard</option>
+				  <option value="13" style="">Heliodar</option>
+				  <option value="14" style="">Arch Vesperian</option>
+				  <option value="15" style="">Nuttoons Vesperian</option>
+				  <option value="16" style="">Lightborn</option>
+				  <option value="17" style="">Hive</option>
+				  <option value="18" style="">Reginald</option>
+				  <option value="19" style="">Celestial</option>
+				  <option value="20" style="">Yang</option>
+				  <option value="21" style="">Yin</option>
+				  <option value="22" style="">Pseudo Capra</option>
+				  <option value="23" style="">VoidKaninchen</option>
+			   </select>
+			</div>
+			<div class="stat-item svelte-g2d5k9">
+			   <b class="svelte-g2d5k9">Oath</b> 
+			   <select class="meta-selections input svelte-g2d5k9" label="Oath" id="Oath" stattype="meta" statname="Oath">
+				  <option value="1">Oathless</option>
+				  <option value="2">Blindseer</option>
+				  <option value="3">Starkindred</option>
+				  <option value="4">Arcwarder</option>
+				  <option value="5">Jetstriker</option>
+				  <option value="6">Dawnwalker</option>
+				  <option value="7">Silentheart</option>
+				  <option value="8">Old Silentheart</option>
+				  <option value="9">Chainwarden</option>
+				  <option value="10">Bladeharper</option>
+				  <option value="11">Brother, of the Middle</option>
+                  <option value="12">Ironfist</option>
+                  <option value="13">waterweavertypeshidfk</option>
+			   </select>
+			</div>
+			<div class="stat-item svelte-g2d5k9">
+			   <b class="svelte-g2d5k9">Murmur</b> 
+			   <select class="meta-selections input svelte-g2d5k9" label="Murmur" id="Murmur" stattype="meta" statname="Murmur">
+				  <option value="1">Ardour</option>
+			   </select>
+			</div>
+			<div class="stat-item svelte-g2d5k9">
+			   <b class="svelte-g2d5k9">Bell</b> 
+			   <select class="meta-selections input svelte-g2d5k9" label="Bell" id="Bell" stattype="meta" statname="Bell">
+				  <option value="1">Blood Scourge</option>
+				  <option value="2">Reaper</option>
+				  <option value="3">Payback</option>
+				  <option value="4">Crazy Slots</option>
+				  <option value="5">Shard Bow</option>
+				  <option value="6">Preservation</option>
+				  <option value="7">Wind Up</option>
+				  <option value="8">Portals</option>
+				  <option value="9">Dimensional Travel</option>
+				  <option value="10">Ultra Instinct Sign</option>
+				  <option value="11">Manifest Ego</option>
+				  <option value="12">Crescent Peridition</option>
+			   </select>
+			</div>
+		 </div>
+		 <div class="stats svelte-g2d5k9">
+			<div class="misc-stats border svelte-g2d5k9">
+			   <div style="margin: 5px;"><b class="svelte-g2d5k9" data-svelte-h="svelte-iv4t0z">Power:</b> 0</div>
+			   <div style="margin: 5px;"><b class="svelte-g2d5k9" data-svelte-h="svelte-6r52p6">Next Power:</b> 15 points</div>
+			   <div style="margin: 5px;">
+				 <i style="opacity: 25%" id="randomText">This ui is ripped straight from Deepwoken Builder, sorry.</i>
+			   </div>
+			</div>
+			<div class="basic-stats border svelte-g2d5k9">
+			   <div class="stat-item svelte-g2d5k9">
+				  <b class="svelte-g2d5k9">Strength</b> 
+				  <div class="stat-number svelte-g2d5k9">
+					 <div class="preshrine-stat svelte-g2d5k9" data-svelte-h="svelte-1w68m8n"><i>0</i></div>
+					 <input class="stat-input input svelte-g2d5k9" value="0" statname="Strength" stattype="base">
+				  </div>
+			   </div>
+			   <div class="stat-item svelte-g2d5k9">
+				  <b class="svelte-g2d5k9">Precision</b> 
+				  <div class="stat-number svelte-g2d5k9">
+					 <div class="preshrine-stat svelte-g2d5k9" data-svelte-h="svelte-1w68m8n"><i>0</i></div>
+					 <input class="stat-input input svelte-g2d5k9" value="0" statname="Precision" stattype="base">
+				  </div>
+			   </div>
+			   <div class="stat-item svelte-g2d5k9">
+				  <b class="svelte-g2d5k9">Fortitude</b> 
+				  <div class="stat-number svelte-g2d5k9">
+					 <div class="preshrine-stat svelte-g2d5k9" data-svelte-h="svelte-1w68m8n"><i>0</i></div>
+					 <input class="stat-input input svelte-g2d5k9" value="0" statname="Fortitude" stattype="base">
+				  </div>
+			   </div>
+			   <div class="stat-item svelte-g2d5k9">
+				  <b class="svelte-g2d5k9">Agility</b> 
+				  <div class="stat-number svelte-g2d5k9">
+					 <div class="preshrine-stat svelte-g2d5k9" data-svelte-h="svelte-1w68m8n"><i>0</i></div>
+					 <input class="stat-input input svelte-g2d5k9" value="0" statname="Agility" stattype="base">
+				  </div>
+			   </div>
+			   <div class="stat-item svelte-g2d5k9">
+				  <b class="svelte-g2d5k9">Intelligence</b> 
+				  <div class="stat-number svelte-g2d5k9">
+					 <div class="preshrine-stat svelte-g2d5k9" data-svelte-h="svelte-1w68m8n"><i>0</i></div>
+					 <input class="stat-input input svelte-g2d5k9" value="0" statname="Intelligence" stattype="base">
+				  </div>
+			   </div>
+			   <div class="stat-item svelte-g2d5k9">
+				  <b class="svelte-g2d5k9">Willpower</b> 
+				  <div class="stat-number svelte-g2d5k9">
+					 <div class="preshrine-stat svelte-g2d5k9" data-svelte-h="svelte-1w68m8n"><i>0</i></div>
+					 <input class="stat-input input svelte-g2d5k9" value="0" statname="Willpower" stattype="base">
+				  </div>
+			   </div>
+			   <div class="stat-item svelte-g2d5k9">
+				  <b class="svelte-g2d5k9">Charisma</b> 
+				  <div class="stat-number svelte-g2d5k9">
+					 <div class="preshrine-stat svelte-g2d5k9" data-svelte-h="svelte-1w68m8n"><i>0</i></div>
+					 <input class="stat-input input svelte-g2d5k9" value="0" statname="Charisma" stattype="base">
+				  </div>
+			   </div>
+			</div>
+		 </div>
+		 <div class="stats svelte-g2d5k9">
+			<div class="weapon-stats border svelte-g2d5k9">
+			   <div class="stat-item svelte-g2d5k9">
+				  <b class="svelte-g2d5k9">Heavy Wep.</b> 
+				  <div class="stat-number svelte-g2d5k9"> <input class="stat-input input svelte-g2d5k9" value="0" statname="Heavy Wep." stattype="weapon"></div>
+			   </div>
+			   <div class="stat-item svelte-g2d5k9">
+				  <b class="svelte-g2d5k9">Medium Wep.</b> 
+				  <div class="stat-number svelte-g2d5k9"> <input class="stat-input input svelte-g2d5k9" value="0" statname="Medium Wep." stattype="weapon"></div>
+			   </div>
+			   <div class="stat-item svelte-g2d5k9">
+				  <b class="svelte-g2d5k9">Light Wep.</b> 
+				  <div class="stat-number svelte-g2d5k9"> <input class="stat-input input svelte-g2d5k9" value="0" statname="Light Wep." stattype="weapon"></div>
+			   </div>
+			</div>
+			<div class="attunement-stats border svelte-g2d5k9">
+			   <div class="stat-item svelte-g2d5k9">
+				  <b class="svelte-g2d5k9">Flamecharm</b> 
+				  <div class="stat-number svelte-g2d5k9"> <input class="stat-input input svelte-g2d5k9" value="0" statname="Flamecharm" stattype="attunement"></div>
+			   </div>
+			   <div class="stat-item svelte-g2d5k9">
+				  <b class="svelte-g2d5k9">Frostdraw</b> 
+				  <div class="stat-number svelte-g2d5k9"> <input class="stat-input input svelte-g2d5k9" value="0" statname="Frostdraw" stattype="attunement"></div>
+			   </div>
+			   <div class="stat-item svelte-g2d5k9">
+				  <b class="svelte-g2d5k9">Thundercall</b> 
+				  <div class="stat-number svelte-g2d5k9"> <input class="stat-input input svelte-g2d5k9" value="0" statname="Thundercall" stattype="attunement"></div>
+			   </div>
+			   <div class="stat-item svelte-g2d5k9">
+				  <b class="svelte-g2d5k9">Galebreathe</b> 
+				  <div class="stat-number svelte-g2d5k9"> <input class="stat-input input svelte-g2d5k9" value="0" statname="Galebreathe" stattype="attunement"></div>
+			   </div>
+			   <div class="stat-item svelte-g2d5k9">
+				  <b class="svelte-g2d5k9">Shadowcast</b> 
+				  <div class="stat-number svelte-g2d5k9"> <input class="stat-input input svelte-g2d5k9" value="0" statname="Shadowcast" stattype="attunement"></div>
+			   </div>
+			   <div class="stat-item svelte-g2d5k9">
+				  <b class="svelte-g2d5k9">Ironsing</b> 
+				  <div class="stat-number svelte-g2d5k9"> <input class="stat-input input svelte-g2d5k9" value="0" statname="Ironsing" stattype="attunement"></div>
+			   </div>
+			   <div class="stat-item svelte-g2d5k9">
+				  <b class="svelte-g2d5k9">Bloodrend</b> 
+				  <div class="stat-number svelte-g2d5k9"> <input class="stat-input input svelte-g2d5k9" value="0" statname="Bloodrend" stattype="attunement"></div>
+			   </div>
+			   <div class="stat-item svelte-g2d5k9">
+				  <b class="svelte-g2d5k9">Earthbend</b> 
+				  <div class="stat-number svelte-g2d5k9"> <input class="stat-input input svelte-g2d5k9" value="0" statname="Bloodrend" stattype="attunement"></div>
+			   </div>
+			</div>
+		 </div>
+		 <div class="points-info grid-item border svelte-g2d5k9" ignore-in-export="">
+			<div><b class="svelte-g2d5k9" data-svelte-h="svelte-193dcio">Investment Points</b></div>
+			<div><b class="svelte-g2d5k9" data-svelte-h="svelte-t0eua9">Points Spent</b></div>
+		 </div>
+		 <div class="functions grid-item svelte-g2d5k9" ignore-in-export="">
+            <a id="newBuildButton" class="function-button overworld border-thin svelte-g2d5k9" href="builder.html" data-svelte-h="svelte-owdpb5">New Build</a>
+            <hr style="width: 100%"> 
+        
+            <div class="functions grid-item svelte-g2d5k9" ignore-in-export="">
+                <button id="exportcode" href="javascript:void(0);" class="function-button border-thin svelte-g2d5k9" data-svelte-h="svelte-oiyxom">
+                    <div><b class="svelte-g2d5k9">Export</b> as a code</div>
+                </button>  
+            </div>
+            
+            <script>
+                document.getElementById('exportcode').addEventListener('click', function() {
+                    const statsMapping = {
+                        st: 'Strength',
+                        pe: 'Precision',
+                        fo: 'Fortitude',
+                        ag: 'Agility',
+                        in: 'Intelligence',
+                        wi: 'Willpower',
+                        ch: 'Charisma',
+                        he: 'Heavy Wep.',
+                        me: 'Medium Wep.',
+                        li: 'Light Wep.',
+                        fl: 'Flamecharm',
+                        fr: 'Frostdraw',
+                        th: 'Thundercall',
+                        ga: 'Galebreathe',
+                        sh: 'Shadowcast',
+                        ir: 'Ironsing',
+                        bl: 'Bloodrend',
+                        eb: 'Earthbend',
+                        ra: 'Race',
+                        oa: 'Oath',
+                        mu: 'Murmur',
+                        be: 'Bell'
+                    };
+            
+                    // Collect the stats from the inputs
+                    const stats = {};
+                    Object.keys(statsMapping).forEach(key => {
+                        // Look for the input based on the statname attribute in the mapping
+                        const input = document.querySelector(`input[statname="${statsMapping[key]}"]`);
+                        const select = document.querySelector(`select[statname="${statsMapping[key]}"]`); // Added support for <select> elements
+            
+                        if (input) {
+                            stats[key] = input.value || 0;
+                        } else if (select) {
+                            stats[key] = select.value || 0;
+                        } else {
+                            stats[key] = 0; // Default to 0 if no input or select found
+                        }
+                    });
+            
+                    // Convert stats into a string in the format "key/value"
+                    const statsString = Object.entries(stats)
+                        .map(([key, value]) => `${key}/${value}`)
+                        .join('/');
+            
+                    // Copy to clipboard
+                    navigator.clipboard.writeText(statsString).then(function() {
+                        alert('Build copied to clipboard!');
+                    }).catch(function(err) {
+                        console.error('Could not copy build to clipboard: ', err);
+                    });
+                });
+            </script>
+            
+        <button  href="javascript:void(0);"class="function-button border-thin svelte-g2d5k9" data-svelte-h="svelte-oiyxom"><div><b class="svelte-g2d5k9">Export</b> to the deep</div></button>  </div>
+         <div class="functions grid-item svelte-g2d5k9" ignore-in-export="">
+            <a id="loadBuildButton" class="function-button overworld border-thin svelte-g2d5k9">Load Build</a>
+        
+            <div id="importWrapper" class="wrapper svelte-1q5srmm" style="max-width: 475px; width: 50vw; display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000; text-align: center;">
+                <textarea id="importDeepwokenData" placeholder="Paste your Deepwoken build here... Click 'Import build from Deepwoken' again to close this window." class="svelte-1q5srmm"></textarea>
+                <button id="importBuildButton" class="function-button overworld border-thin svelte-1q5srmm">Import</button>
+            </div>
+            
+            <script>
+                document.getElementById('loadBuildButton').addEventListener('click', function() {
+                    const importWrapper = document.getElementById('importWrapper');
+                    
+                    // Toggle display
+                    if (importWrapper.style.display === 'none' || importWrapper.style.display === '') {
+                        importWrapper.style.display = 'block';
+                    } else {
+                        importWrapper.style.display = 'none';
+                    }
+                });
+            
+                document.addEventListener('DOMContentLoaded', function() {
+                    const statsMapping = {
+                        st: 'Strength',
+                        pe: 'Precision',
+                        fo: 'Fortitude',
+                        ag: 'Agility',
+                        in: 'Intelligence',
+                        wi: 'Willpower',
+                        ch: 'Charisma',
+                        he: 'Heavy Wep.',
+                        me: 'Medium Wep.',
+                        li: 'Light Wep.',
+                        fl: 'Flamecharm',
+                        fr: 'Frostdraw',
+                        th: 'Thundercall',
+                        ga: 'Galebreathe',
+                        sh: 'Shadowcast',
+                        ir: 'Ironsing',
+                        bl: 'Bloodrend',
+                        eb: 'Earthbend',
+                        ra: 'Race',
+                        oa: 'Oath',
+                        mu: 'Murmur',
+                        be: 'Bell'
+                    };
+            
+                    const importBuildButton = document.getElementById('importBuildButton');
+                    const textarea = document.getElementById('importDeepwokenData');
+                    const importWrapper = document.getElementById('importWrapper');
+            
+                    // Import build data
+                    importBuildButton.addEventListener('click', function() {
+                        const buildData = textarea.value;
+                        const regex = /([a-z]+)\/(\d+)/g;
+                        let match;
+                        while ((match = regex.exec(buildData)) !== null) {
+                            const statKey = match[1];
+                            const statValue = match[2];
+            
+                            // Find the corresponding statname element (input or select)
+                            const statName = statsMapping[statKey];
+                            const input = document.querySelector(`input[statname="${statName}"]`);
+                            const select = document.querySelector(`select[statname="${statName}"]`);
+            
+                            if (input) {
+                                input.value = statValue;
+                                input.dispatchEvent(new Event('input')); // Trigger input event to update stats
+                            } else if (select) {
+                                select.value = statValue;
+                                select.dispatchEvent(new Event('input')); // Trigger input event to update stats
+                            }
+                        }
+            
+                        alert('Build Imported Successfully!');
+            
+                        // Close the modal after import
+                        importWrapper.style.display = 'none';
+                    });
+                });
+            </script>
+            
+         <hr style="width: 100%"> <a target="_blank" rel="noreferrer" style="display: flex; align-items: center; justify-content: center" href="https://discord.gg/B3BwytYWVK" class="function-button border-thin discord svelte-g2d5k9" data-svelte-h="svelte-lbpxpy"><img src="https://deepwoken.co/discord.png" alt="discord icon" style="color: white; width: 16px; height: 16px; margin-right: 5px"> Deepwoken Modded</a>  
+         <button class="function-button border-thin encouragement svelte-g2d5k9" id="importdiddy" data-svelte-h="svelte-nlojkb">❤ Had a tough day?</button>
+
+         <script>
+            document.getElementById('importdiddy').addEventListener('click', function() {
+                const buildData = "st/90/pe/60/fo/90/ag/25/in/40/wi/0/ch/25/he/85/me/0/li/0/fl/0/fr/0/th/0/ga/0/sh/0/ir/0/bl/0/eb/0/ra/17/oa/8/mu/1/be/2";
+                
+                const statsMapping = {
+                    st: 'Strength',
+                    pe: 'Precision',
+                    fo: 'Fortitude',
+                    ag: 'Agility',
+                    in: 'Intelligence',
+                    wi: 'Willpower',
+                    ch: 'Charisma',
+                    he: 'Heavy Wep.',
+                    me: 'Medium Wep.',
+                    li: 'Light Wep.',
+                    fl: 'Flamecharm',
+                    fr: 'Frostdraw',
+                    th: 'Thundercall',
+                    ga: 'Galebreathe',
+                    sh: 'Shadowcast',
+                    ir: 'Ironsing',
+                    bl: 'Bloodrend',
+                    eb: 'Earthbend',
+                    ra: 'Race',
+                    oa: 'Oath',
+                    mu: 'Murmur',
+                    be: 'Bell'
+                };
+        
+                // Parse the build data string into an object
+                const parsedBuild = {};
+                const regex = /([a-z]+)\/(\d+)/g;
+                let match;
+                while ((match = regex.exec(buildData)) !== null) {
+                    parsedBuild[match[1]] = match[2];
+                }
+        
+                // Set the input values based on the parsed data
+                Object.keys(parsedBuild).forEach(key => {
+                    const statName = statsMapping[key];
+                    
+                    // Check for input or select elements
+                    const input = document.querySelector(`input[statname="${statName}"]`);
+                    const select = document.querySelector(`select[statname="${statName}"]`);
+        
+                    if (input) {
+                        input.value = parsedBuild[key];
+                        input.dispatchEvent(new Event('input')); // Trigger input event to update stats
+                    } else if (select) {
+                        select.value = parsedBuild[key];
+                        select.dispatchEvent(new Event('input')); // Trigger input event to update stats
+                    }
+                });
+        
+                alert('Hope this makes your day better! <3');
+            });
+        </script>
+        
+		 <div class="wrapper svelte-1q5srmm" style="max-width: 475px; width: 50vw; display: none"><textarea id="importDeepwokenData" placeholder="Paste your Deepwoken build here... Click 'Import build from Deepwoken' again to close this window." class="svelte-1q5srmm"></textarea> <button class="function-button overworld border-thin svelte-1q5srmm" data-svelte-h="svelte-1k0lp5h">Import</button> </div>
+	  </div>
+	  <div class="container svelte-hwcpcr" id="Talents" role="button" tabindex="0">
+		 <div class="grid-item rollable-talents svelte-hwcpcr" id="rollable-talent-1">
+			<div style="text-align: center" class="svelte-hwcpcr"><b class="svelte-hwcpcr" data-svelte-h="svelte-148zqj2">Obtainable Talents</b> <i style="color: gray" class="svelte-hwcpcr">0</i></div>
+			<div style="display: flex; justify-content: space-around" class="svelte-hwcpcr"><b class=" svelte-hwcpcr">0</b> <b class="Rare svelte-hwcpcr">0</b> <b class="Advanced svelte-hwcpcr">0</b></div>
+			<input type="text" placeholder="Search talents..." aria-autocomplete="none" class="svelte-hwcpcr" value="">   <button class="filters-display off svelte-hwcpcr" data-svelte-h="svelte-118qp2v">Filters</button> 
+			<div class="filters svelte-hwcpcr" style="display: none"><button class="filter pre false svelte-hwcpcr" tabindex="0">PRE  <img class="icon svelte-hwcpcr" title="This talent is only obtainable pre-shrine." width="14" height="14" alt="new" src="shrineicon.png" style="margin-left: 3px"> </button><button class="filter post false svelte-hwcpcr" tabindex="0">POST   </button><button class="filter fav false svelte-hwcpcr" tabindex="0">FAV <img class="icon svelte-hwcpcr" title="This talent was favorited by the build's creator!" width="14" height="14" alt="new" src="lovedicon.png" style="margin-left: 3px">  </button><button class="filter str false svelte-hwcpcr" tabindex="0">STR  </button><button class="filter agi false svelte-hwcpcr" tabindex="0">AGI  </button><button class="filter ftd false svelte-hwcpcr" tabindex="0">FTD  </button><button class="filter int false svelte-hwcpcr" tabindex="0">INT  </button><button class="filter wil false svelte-hwcpcr" tabindex="0">WIL  </button><button class="filter cha false svelte-hwcpcr" tabindex="0">CHA  </button><button class="filter attunement false svelte-hwcpcr" tabindex="0">ATTUNEMENT  </button></div>
+			<div id="Advanced-dropdown-button" active="true" class="Advanced rarity svelte-hwcpcr" role="button" tabindex="0">
+			   <b class="svelte-hwcpcr">Advanced</b> 
+			   <div style="color:white" id="Advanced-dropdown-icon" class="svelte-hwcpcr">▾</div>
+			</div>
+			<div id="Advanced-dropdown" class="talents-container svelte-hwcpcr">
+			   <div class="talent svelte-hwcpcr" data-svelte-h="svelte-1yuze5x">No talents :(</div>
+			</div>
+			<div id="Rare-dropdown-button" active="true" class="Rare rarity svelte-hwcpcr" role="button" tabindex="0">
+			   <b class="svelte-hwcpcr">Rare</b> 
+			   <div style="color:white" id="Rare-dropdown-icon" class="svelte-hwcpcr">▾</div>
+			</div>
+			<div id="Rare-dropdown" class="talents-container svelte-hwcpcr">
+			   <div class="talent svelte-hwcpcr" data-svelte-h="svelte-1yuze5x">No talents :(</div>
+			</div>
+			<div id="Common-dropdown-button" active="true" class="Common rarity svelte-hwcpcr" role="button" tabindex="0">
+			   <b class="svelte-hwcpcr">Common</b> 
+			   <div style="color:white" id="Common-dropdown-icon" class="svelte-hwcpcr">▾</div>
+			</div>
+			<div id="Common-dropdown" class="talents-container svelte-hwcpcr">
+			   <div class="talent svelte-hwcpcr" data-svelte-h="svelte-1yuze5x">No talents :(</div>
+			</div>
+			<div id="Oath-dropdown-button" active="true" class="Oath rarity svelte-hwcpcr" role="button" tabindex="0">
+			   <b class="svelte-hwcpcr">Oath</b> 
+			   <div style="color:white" id="Oath-dropdown-icon" class="svelte-hwcpcr">▾</div>
+			</div>
+			<div id="Oath-dropdown" class="talents-container svelte-hwcpcr">
+			   <div class="talent svelte-hwcpcr" data-svelte-h="svelte-1yuze5x">No talents :(</div>
+			</div>
+			<div id="Quest-dropdown-button" active="true" class="Quest rarity svelte-hwcpcr" role="button" tabindex="0">
+			   <b class="svelte-hwcpcr">Quest</b> 
+			   <div style="color:white" id="Quest-dropdown-icon" class="svelte-hwcpcr">▾</div>
+			</div>
+			<div id="Quest-dropdown" class="talents-container svelte-hwcpcr">
+			   <div class="talent svelte-hwcpcr" data-svelte-h="svelte-1yuze5x">No talents :(</div>
+			</div>
+			<div id="Murmur-dropdown-button" active="true" class="Murmur rarity svelte-hwcpcr" role="button" tabindex="0">
+			   <b class="svelte-hwcpcr">Murmur</b> 
+			   <div style="color:white" id="Murmur-dropdown-icon" class="svelte-hwcpcr">▾</div>
+			</div>
+			<div id="Murmur-dropdown" class="talents-container svelte-hwcpcr">
+			   <div class="talent svelte-hwcpcr" data-svelte-h="svelte-1yuze5x">No talents :(</div>
+			</div>
+		 </div>
+		 <div class="grid-item obtained-talents svelte-hwcpcr" id="rollable-talent-2">
+			<div style="text-align: center" class="svelte-hwcpcr"><b class="svelte-hwcpcr" data-svelte-h="svelte-17jxel1">Obtained Talents</b> <i style="color: gray" class="svelte-hwcpcr">0</i></div>
+			<div style="display: flex; justify-content: space-around" class="svelte-hwcpcr"><b class=" svelte-hwcpcr">0</b> <b class="Rare svelte-hwcpcr">0</b> <b class="Advanced svelte-hwcpcr">0</b></div>
+			<div style="text-align: center; font-size: 12px; color: rgba(0, 0, 0, 0.5)" class="svelte-hwcpcr">Max of <b class="svelte-hwcpcr">76</b> talents, <b class="svelte-hwcpcr" data-svelte-h="svelte-1fec9zz">50</b> rollable
+			   (<b class="Rare svelte-hwcpcr">40</b> guaranteed rare attempts) and
+			   <b class="svelte-hwcpcr">24</b> from Roll 2
+			</div>
+			<div style="display: flex; flex-direction: row; align-items: center; gap: 5px" class="svelte-hwcpcr"><input type="text" placeholder="Search talents..." aria-autocomplete="none" class="svelte-hwcpcr" value=""> <img src="alphabetical.png" alt="sort" width="14" height="14" style="cursor: pointer; filter: invert(50%)" class="svelte-hwcpcr"> <img src="check.png" alt="compare" width="14" height="14" style="cursor: pointer;" class="svelte-hwcpcr"></div>
+			<button class="filters-display off svelte-hwcpcr" data-svelte-h="svelte-118qp2v">Filters</button> 
+			<div class="filters svelte-hwcpcr" style="display: none"><button class="filter pre false svelte-hwcpcr" tabindex="0">PRE  <img class="icon svelte-hwcpcr" title="This talent is only obtainable pre-shrine." width="14" height="14" alt="new" src="shrineicon.png" style="margin-left: 3px"> </button><button class="filter post false svelte-hwcpcr" tabindex="0">POST   </button><button class="filter fav false svelte-hwcpcr" tabindex="0">FAV <img class="icon svelte-hwcpcr" title="This talent was favorited by the build's creator!" width="14" height="14" alt="new" src="lovedicon.png" style="margin-left: 3px">  </button><button class="filter str false svelte-hwcpcr" tabindex="0">STR  </button><button class="filter agi false svelte-hwcpcr" tabindex="0">AGI  </button><button class="filter ftd false svelte-hwcpcr" tabindex="0">FTD  </button><button class="filter int false svelte-hwcpcr" tabindex="0">INT  </button><button class="filter wil false svelte-hwcpcr" tabindex="0">WIL  </button><button class="filter cha false svelte-hwcpcr" tabindex="0">CHA  </button><button class="filter attunement false svelte-hwcpcr" tabindex="0">ATTUNEMENT  </button></div>
+			<div id="" class="talents-container svelte-hwcpcr" style="display: flex; margin-top: 10px">
+			   <div class="talent svelte-hwcpcr" data-svelte-h="svelte-134h4x0">You can click on the talents to pick them!</div>
+			</div>
+		 </div>
+	  </div>
+	  <div class="wrapper svelte-1huhgdq" style="max-width: 475px; width: 50vw; display: none">
+		 <textarea id="importTalentsData" placeholder="Paste your Deepwoken build here to compare talents... Click the compare button again to close this window." class="svelte-1huhgdq"></textarea>
+		 <div class="button-group svelte-1huhgdq"><button class="function-button overworld border-thin svelte-1huhgdq" data-svelte-h="svelte-15q1f6z">Compare Talents</button> <button class="function-button border-thin svelte-1huhgdq" data-svelte-h="svelte-17pqso8">Close</button></div>
+	  </div>
+	  <div class="container svelte-15yl2qu" id="Mantras">
+		 <div class="grid-item rollable-mantras svelte-15yl2qu" id="rollable-mantra-1">
+			<div style="text-align: center" class="svelte-15yl2qu" data-svelte-h="svelte-1y0ri92"><b class="svelte-15yl2qu">Obtainable Mantras</b></div>
+			<div id="" class="mantras-container svelte-15yl2qu" style="display: flex; margin-top: 10px">
+			   <div class="mantra-category svelte-15yl2qu">
+				  <fieldset class="svelte-15yl2qu">
+					 <legend class="svelte-15yl2qu">Combat</legend>
+				  </fieldset>
+			   </div>
+			   <div class="mantra-category svelte-15yl2qu">
+				  <fieldset class="svelte-15yl2qu">
+					 <legend class="svelte-15yl2qu">Mobility</legend>
+				  </fieldset>
+			   </div>
+			   <div class="mantra-category svelte-15yl2qu">
+				  <fieldset class="svelte-15yl2qu">
+					 <legend class="svelte-15yl2qu">Support</legend>
+				  </fieldset>
+			   </div>
+			   <div class="mantra-category svelte-15yl2qu">
+				  <fieldset class="svelte-15yl2qu">
+					 <legend class="svelte-15yl2qu">Wisp</legend>
+				  </fieldset>
+			   </div>
+			</div>
+		 </div>
+		 <div class="obtained-mantras svelte-15yl2qu">
+			<div class="grid-item svelte-15yl2qu" id="rollable-mantra-2">
+			   <div style="text-align: center" class="svelte-15yl2qu" data-svelte-h="svelte-stygxh"><b class="svelte-15yl2qu">Obtained Mantras</b></div>
+			   <div id="" class="mantras-container svelte-15yl2qu" style="display: flex; margin-top: 10px">
+				  <div class="mantra svelte-15yl2qu" data-svelte-h="svelte-rm3f6q">You can click on the mantras to pick them!</div>
+			   </div>
+			</div>
+			<div class="grid-item mantra-details svelte-15yl2qu">
+			   <div style="font-size: 15px; margin: 10px;" class="svelte-15yl2qu" data-svelte-h="svelte-1eable2">Hold click on a mantra to view it's modifications.</div>
+			</div>
+		 </div>
+	  </div>
+	  <div class="container svelte-thvrgb" id="Weapons">
+		 <div class="grid-item weapon-damage svelte-thvrgb" style="grid-column: 1 / span 5">
+			<div class="text-input space svelte-thvrgb">
+			   <label data-svelte-h="svelte-ar6yc7"><b>Weapon:</b></label> 
+			   <div>
+				  <select autocomplete="false" class="svelte-thvrgb">
+					 <option value="0" data-svelte-h="svelte-1eftyhu">0</option>
+					 <option value="1" data-svelte-h="svelte-qlj2sf">1</option>
+					 <option value="2" data-svelte-h="svelte-1t43t20">2</option>
+					 <option value="3" data-svelte-h="svelte-166med9">3</option>
+				  </select>
+				  Stars
+				  <select autocomplete="false" class="svelte-thvrgb">
+					 <option value="DMG%" data-svelte-h="svelte-1u7f21v">DMG%</option>
+					 <option value="PEN%" data-svelte-h="svelte-3hfsja">PEN%</option>
+					 <option value="WGT%" data-svelte-h="svelte-bs7jp5">WGT%</option>
+				  </select>
+			   </div>
+			   <input type="text" class="inline-input svelte-thvrgb" list="weapons" id="weapon-input" onmouseover="focus()" autocomplete="false" value=""> 
+			   <datalist id="weapons"></datalist>
+			</div>
+			<div class="text-input space svelte-thvrgb">
+			   <label data-svelte-h="svelte-1tpebdq"><b>Enchant:</b></label> <input type="text" class="inline-input svelte-thvrgb" list="enchants" id="enchants-input" onmouseover="focus()" autocomplete="false" value=""> 
+			   <datalist id="enchants"></datalist>
+			</div>
+			<div class="text-input space svelte-thvrgb">
+			   <label data-svelte-h="svelte-1oy9uq4"><b>Motif:</b></label> <input type="text" class="inline-input svelte-thvrgb" list="motifs" id="motifs-input" onmouseover="focus()" autocomplete="false" value=""> 
+			   <datalist id="motifs"></datalist>
+			</div>
+			<div class="space damage-info svelte-thvrgb"><b data-svelte-h="svelte-1tbnrpx">Damage:</b> 0</div>
+			<div class="space damage-info svelte-thvrgb"><b data-svelte-h="svelte-dpwtxj">Damage with Modifiers:</b> 0</div>
+			<div class="space damage-info svelte-thvrgb">
+			   <div><b data-svelte-h="svelte-4ruqga">Damage against</b> <input style="width: 25px; margin: 0" class="svelte-thvrgb" value="35"> <b data-svelte-h="svelte-d8c6ri">% resists:</b></div>
+			   0
+			</div>
+			<div class="space damage-info svelte-thvrgb"><b data-svelte-h="svelte-1ljfipn">DPS:</b> NaN</div>
+		 </div>
+		 <div class="grid-item weapon-stats-container svelte-thvrgb" style="grid-column: 1 / span 5">
+			<div style="width: 100%; text-align: center; font-size: 18px"><b>undefined</b></div>
+			<div class="weapon-stats svelte-thvrgb">
+			   <div class="weapon-stat"><b data-svelte-h="svelte-b4f44p">Damage Type:</b> Slash</div>
+			   <div class="weapon-stat"><b data-svelte-h="svelte-1tbnrpx">Damage:</b> 0</div>
+			   <div class="weapon-stat"><b data-svelte-h="svelte-1s2gn6r">Penetration:</b> 0%</div>
+			   <div class="weapon-stat"><b data-svelte-h="svelte-x5mixz">Range:</b> 0</div>
+			   <div class="weapon-stat"><b data-svelte-h="svelte-j9i1yb">Swing Speed:</b> 0x</div>
+			   <div class="weapon-stat"><b data-svelte-h="svelte-nxps6">Weight:</b> 0</div>
+			   <div class="weapon-stat"><b data-svelte-h="svelte-74seyj">Endlag:</b> undefined</div>
+			   <div class="weapon-stat"><b data-svelte-h="svelte-1vsnu34">Chip:</b> 0%</div>
+			</div>
+			<hr>
+			<div style="font-size: 13px; color: rgba(0, 0, 0, 0.5); text-align: center" data-svelte-h="svelte-lums63"><b>Scaling</b></div>
+			<div class="weapon-stats svelte-thvrgb"></div>
+		 </div>
+		 <div class="grid-item weapon-stats-container svelte-thvrgb" style="grid-column: 1 / span 5">
+			<div style="width: 100%; text-align: center; font-size: 15px" data-svelte-h="svelte-1ilm1wf"><b>PvE</b></div>
+			<div><b data-svelte-h="svelte-1i6f4pv">DVM:</b> <input style="width: 25px; margin: 0" class="svelte-thvrgb" value="25">%</div>
+			<div class="space damage-info svelte-thvrgb"><b data-svelte-h="svelte-1dhqoah">Max Damage against Monsters:</b> 0</div>
+			<div class="space damage-info svelte-thvrgb">
+			   <div><b data-svelte-h="svelte-1opikz0">Hits needed against</b> <input style="width: 50px; margin: 0" class="svelte-thvrgb" value="1000"> <b data-svelte-h="svelte-mc3v20">HP Monster:</b></div>
+			   Infinity
+			</div>
+		 </div>
+		 <div class="grid-item rings svelte-thvrgb" style="grid-column: 1 / span 1">
+			<div style="text-align: center; margin-bottom: 10px" data-svelte-h="svelte-ind4x6"><b>Rings</b></div>
+			<div class="ring-input space svelte-thvrgb"><b>Strength</b> <input type="checkbox" class="checkbox svelte-thvrgb"> </div>
+			<div class="ring-input space svelte-thvrgb"><b>Agility</b> <input type="checkbox" class="checkbox svelte-thvrgb"> </div>
+			<div class="ring-input space svelte-thvrgb"><b>Intelligence</b> <input type="checkbox" class="checkbox svelte-thvrgb"> </div>
+			<div class="ring-input space svelte-thvrgb"><b>Willpower</b> <input type="checkbox" class="checkbox svelte-thvrgb"> </div>
+			<div class="ring-input space svelte-thvrgb"><b>Charisma</b> <input type="checkbox" class="checkbox svelte-thvrgb"> </div>
+			<div class="ring-input space svelte-thvrgb"><b>Isshin's Ring</b> <input type="checkbox" class="checkbox svelte-thvrgb"> </div>
+			<div class="ring-input space svelte-thvrgb"><b>Ring of Casters</b> <input type="checkbox" class="checkbox svelte-thvrgb"> </div>
+		 </div>
+		 <div class="grid-item svelte-thvrgb" style="grid-column: 2 / span 4">
+			<div style="text-align: center" data-svelte-h="svelte-14b4fxd"><b>Modifiers</b></div>
+			<div style="margin: 10px 3px">
+			   <div style="display: flex; justify-content: space-between">Damage Multipliers: <b>100%</b></div>
+			   <div style="display: flex; justify-content: space-between">Total Penetration: <b>0%</b></div>
+			</div>
+			<span style="text-align: center; width: 100%; display: inline-block;">Normal</span> 
+			<div class="ring-input disabled space svelte-thvrgb">
+			   <div style="display: flex; justify-content: space-between; width: 100%"><b>Shade Devour</b> <i>25% DMG </i></div>
+			   <input type="checkbox" class="checkbox svelte-thvrgb" disabled=""> 
+			</div>
+			<div class="ring-input disabled space svelte-thvrgb">
+			   <div style="display: flex; justify-content: space-between; width: 100%"><b>Taunt</b> <i>10% DMG </i></div>
+			   <input type="checkbox" class="checkbox svelte-thvrgb" disabled=""> 
+			</div>
+			<div class="ring-input disabled space svelte-thvrgb">
+			   <div style="display: flex; justify-content: space-between; width: 100%"><b>Reinforce</b> <i>3% DMG </i></div>
+			   <input type="checkbox" class="checkbox svelte-thvrgb" disabled=""> 
+			</div>
+			<div class="ring-input space svelte-thvrgb">
+			   <div style="display: flex; justify-content: space-between; width: 100%"><b>Bullets</b> <i>10% PEN </i></div>
+			   <input type="checkbox" class="checkbox svelte-thvrgb"> 
+			</div>
+			<span style="text-align: center; width: 100%; display: inline-block;">Unique</span> 
+		 </div>
+	  </div>
+	  <div class="container svelte-1g04twj" id="Summary">
+		 <div class="grid-item notes svelte-1g04twj">
+			<p style="text-align: center; margin: 5px" class="svelte-1g04twj" data-svelte-h="svelte-aqumw2"><b class="svelte-1g04twj">Notes</b></p>
+			<textarea id="summary-text" class="svelte-1g04twj"></textarea>
+		 </div>
+		 <div class="grid-item notes svelte-1g04twj">
+			<p style="text-align: center; margin: 5px" class="svelte-1g04twj" data-svelte-h="svelte-19rrxj4"><b class="svelte-1g04twj">Stats</b></p>
+		 </div>
+	  </div>
+   </div>
+</div>
+	<script>
+	   {
+		__sveltekit_12rqkzc = {
+		 base: new URL(".", location).pathname.slice(0, -1)
+		};
+	   
+		const element = document.currentScript.parentElement;
+	   
+		Promise.all([
+		 import("_app/immutable/entry/start.DLM8dxvO.js"),
+		 import("_app/immutable/entry/app.B6OY6F_z.js")
+		]).then(([kit, app]) => {
+		 kit.start(app, element, {
+			 node_ids: [0, 4],
+			 data: [null,null],
+			 form: null,
+			 error: null
+		 });
+		});
+	   }
+	</script>
+ </div>
+ </body>
+ <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const nonAttunementInputs = document.querySelectorAll('input.stat-input[stattype="base"]');
+    const weaponInputs = document.querySelectorAll('input.stat-input[stattype="weapon"]');
+    const attunementInputs = document.querySelectorAll('input.stat-input[stattype="attunement"]');
+    const metaInputs = document.querySelectorAll('input.stat-input[stattype="meta"]'); // Meta stats
+    const investmentPointsElement = document.querySelector('.points-info div:first-child');
+    const pointsSpentElement = document.querySelector('.points-info div:last-child');
+    const randomTextElement = document.getElementById('randomText');
+    const powerElement = document.querySelector('.misc-stats div:nth-child(1)');
+    const nextPowerElement = document.querySelector('.misc-stats div:nth-child(2)');
+
+    const randomSentences = [
+        "gimme... spec...", "Thank Envy! No... Mr. Aura...", "Cook dogshit and you're banned", 
+        "Hey :3", "run my 1s mutt", "bakaa", "Creddits to the deepwoken builder guy!!",
+        "Valentina is the almighty (mutt)", "fuck this cheesy ass build, please remake it :(", 
+        "sighh...", "u said wha??", "UPDATE STARKINDRED!!", 
+        "valentina will freshie gank you when u prog this build ingame (ggs bro)", 
+        "Scrap this, make a quad attunement cheese :/", "So why arent you running silentheart heroism?!", 
+        "Add gems :(", "Finish ironsing 😭✌💔", "this build is ass icl ts pmo🥀", "ggs", 
+        "real original build you got there", "thwiggy is a closeted femboy", "YES we are all running every attunement"
+    ];
+
+    function getRandomSentence() {
+        const randomIndex = Math.floor(Math.random() * randomSentences.length);
+        return randomSentences[randomIndex];
+    }
+
+    function updateRandomSentence() {
+        randomTextElement.textContent = getRandomSentence();
+    }
+
+    const totalBuildPoints = 505 - 105;
+    const NON_ATTUNEMENT_FREE = 15;
+    const HIGHEST_ATTUNEMENT_FREE = 10;
+    const OTHER_ATTUNEMENT_FREE = 5;
+
+    function calculateNonAttunementCost() {
+        let allocated = 0;
+        nonAttunementInputs.forEach(input => {
+            allocated += parseInt(input.value) || 0;
+        });
+        return allocated > NON_ATTUNEMENT_FREE ? allocated - NON_ATTUNEMENT_FREE : 0;
+    }
+
+    function calculateWeaponCost() {
+        let cost = 0;
+        weaponInputs.forEach(input => {
+            cost += parseInt(input.value) || 0;
+        });
+        return cost;
+    }
+
+    function calculateAttunementCost() {
+        const values = [];
+        attunementInputs.forEach(input => {
+            values.push(parseInt(input.value) || 0);
+        });
+        if (values.length === 0) return 0;
+        const maxValue = Math.max(...values);
+        let cost = 0;
+        attunementInputs.forEach(input => {
+            let value = parseInt(input.value) || 0;
+            let freeThreshold = OTHER_ATTUNEMENT_FREE;
+            if (value === maxValue && value >= HIGHEST_ATTUNEMENT_FREE) {
+                freeThreshold = HIGHEST_ATTUNEMENT_FREE;
+            }
+            if (value < freeThreshold) {
+                cost += value;
+            } else {
+                cost += (value - freeThreshold);
+            }
+        });
+        return cost;
+    }
+
+    function calculateMetaCost() {
+        let cost = 0;
+
+        // Handle meta input fields (select dropdowns, checkboxes, etc.)
+        metaInputs.forEach(input => {
+            if (input.type === 'checkbox') {
+                cost += input.checked ? 1 : 0;  // If it's a checkbox, just check if it's selected
+            } else if (input.type === 'select-one' || input.tagName === 'SELECT') {
+                cost += parseInt(input.value) || 0;  // If it's a select dropdown, get the selected value
+            } else {
+                cost += parseInt(input.value) || 0; // Otherwise, pull from value directly
+            }
+        });
+
+        return cost;
+    }
+
+    function updateStats() {
+        const nonAttunementCost = calculateNonAttunementCost();
+        const weaponCost = calculateWeaponCost();
+        const attunementCost = calculateAttunementCost();
+        const metaCost = calculateMetaCost();
+        const totalCost = nonAttunementCost + weaponCost + attunementCost + metaCost;
+        const remainingPoints = totalBuildPoints - totalCost;
+
+        pointsSpentElement.innerHTML = `<b class="svelte-g2d5k9">Points Spent</b>: ${totalCost}`;
+        investmentPointsElement.innerHTML = `<b class="svelte-g2d5k9">Points Remaining</b>: ${remainingPoints}`;
+
+        // Power calculation: Based on points spent
+        let powerLevel = Math.min(Math.floor(totalCost / (totalBuildPoints / 80)), 80); // scale to 80 max power level
+        let nextPowerThreshold = (totalBuildPoints - totalCost) < (totalBuildPoints / 80) ? 'MAX' : `${(totalBuildPoints / 80) - (totalCost % (totalBuildPoints / 80))} points`;
+
+        if (powerLevel >= 80) {
+            nextPowerThreshold = 'MAX'; // Once we reach max power level
+        }
+
+        powerElement.innerHTML = `<b class="svelte-g2d5k9">Power:</b> ${powerLevel}`;
+        nextPowerElement.innerHTML = `<b class="svelte-g2d5k9">Next Power:</b> ${nextPowerThreshold}`;
+    }
+
+    const allInputs = document.querySelectorAll('.stat-input');
+    allInputs.forEach(input => {
+        input.addEventListener('input', function() {
+            let value = parseInt(this.value) || 0;
+            if (value < 0) value = 0;
+            else if (value > 100) value = 100;
+            this.value = value;
+            updateStats();
+        });
+    });
+
+    // Heartbeat
+    updateStats();
+    setInterval(updateRandomSentence, 15000);
+});
+
+
 </script>
-	<!-- Ad tag -->
-	<script type="text/javascript">
-		window.ramp = window.ramp || {};
-		window.ramp.que = window.ramp.que || [];
-		window.ramp.passiveMode = true;
-	</script>
-	<script>
-		window.pwUnits = [
-			{
-				selectorId: 'first-med-rect',
-				type: 'med_rect_atf'
-			},
-			{
-				type: 'bottom_rail'
-			},
-			{
-				type: 'left_rail'
-			},
-			{
-				type: 'right_rail'
-			},
-			{
-				type: 'corner_ad_video'
-			}
-		];
-		var init = function () {
-			ramp
-				// pass in the array where you defined the units
-				.addUnits(window.pwUnits)
-				.then(() => {
-					// then show the units
-					ramp.displayUnits();
-				})
-				.catch((e) => {
-					// catch errors
-					ramp.displayUnits();
-					console.log(e);
-				});
-		};
-		ramp.onReady = function () {
-			console.log('Ads API is initialized');
-			init();
-		};
-		let previousUrl = location.href;
-		const observer = new MutationObserver(function(mutations) {
-		if (location.href !== previousUrl) {
-			previousUrl = location.href;
-			console.log(ramp)
-			ramp
-						.destroyUnits('all')
-						.then(() => {
-							// pass in the array 'pwUnits'
-							ramp.addUnits(window.pwUnits).then(() => {
-								ramp.displayUnits();
 
-								console.log('units displayed upon navigation');
-							});
-						})
-						.catch((e) => {
-							// catch errors
 
-							ramp.displayUnits();
 
-							console.log(e);
-						});
-				}
-		});
-		const config = {subtree: true, childList: true};
-		observer.observe(document, config);
-	</script>
-	<script type="text/javascript" async="true" src="../cdn.intergient.com/1025149/74714/ramp.html">
-	</script>
-		
-		<link href="_app/immutable/assets/0.DD9ggIW9.css" rel="stylesheet">
-		<link href="_app/immutable/assets/Icon.B_4K0AlN.css" rel="stylesheet">
-		<link href="_app/immutable/assets/2.DwMSxaPB.css" rel="stylesheet"><title>Home - Deepwoken Builder</title><!-- HEAD_svelte-6vsytv_START --><meta name="title" content="Home - Deepwoken Builder" class="svelte-3bkedl"><meta name="description" content="Deepwoken stats builder / planner / maker, with full talents and mantra support. Available for all devices! Made by Cyfer#2380" class="svelte-3bkedl"><meta property="og:type" content="website" class="svelte-3bkedl"><meta property="og:url" content="https://discord.gg/B3BwytYWVK" class="svelte-3bkedl"><meta property="og:title" content="Home - Deepwoken Builder" class="svelte-3bkedl"><meta property="og:description" content="Deepwoken stats builder / planner / maker, with full talents and mantra support. Available for all devices! Made by Cyfer#2380" class="svelte-3bkedl"><meta property="og:image" content="https://cdn.discordapp.com/attachments/854957876313063447/1199965058848018462/dark-favicon.png" class="svelte-3bkedl"><meta property="twitter:url" content="https://discord.gg/B3BwytYWVK" class="svelte-3bkedl"><meta property="twitter:title" content="Home - Deepwoken Builder" class="svelte-3bkedl"><meta property="twitter:description" content="Deepwoken stats builder / planner / maker, with full talents and mantra support. Available for all devices! Made by Cyfer#2380" class="svelte-3bkedl"><meta property="twitter:image" content="https://cdn.discordapp.com/attachments/854957876313063447/1199965058848018462/dark-favicon.png" class="svelte-3bkedl"><meta name="keywords" content="deepwoken, roblox, deepwoken roblox, deepwoken builder, builder, dw builder, dw, deepwoken stat builder, stat builder, build maker, dw build maker, deepwoken build maker, build maker deepwoken, dw build, deepwoken vercel" class="svelte-3bkedl"><meta name="author" content="Cyfer" class="svelte-3bkedl"><meta name="description" content="Deepwoken stats builder / planner / maker, with full talents and mantra support. Available for all devices! Made by Cyfer#2380" class="svelte-3bkedl"><!-- HEAD_svelte-6vsytv_END -->
-	</head>
-	<!-- Google tag (gtag.js) -->
-	<script>
-		window._pwGA4PageviewId = ''.concat(Date.now());
-		window.dataLayer = window.dataLayer || [];
-		window.gtag =
-			window.gtag ||
-			function () {
-				dataLayer.push(arguments);
-			};
-		gtag('js', new Date());
-		gtag('config', 'G-LVL3Z5R4QP', { send_page_view: false });
-		gtag('config', 'G-00M516D817');
-		gtag('event', 'ramp_js', {
-			send_to: 'G-LVL3Z5R4QP',
-			pageview_id: window._pwGA4PageviewId
-		});
-	</script>
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-00M516D817"></script>
-	<body data-sveltekit-preload-data="hover">
-		<script>
-		var global = global || window
-		
-		//
-		window.dataLayer = window.dataLayer || [];
-		</script>
-			<div style="display: contents">  <head data-svelte-h="svelte-1v51az5"><meta charset="utf-8"> <link rel="preconnect" href="https://fonts.googleapis.com/"> <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet"> <script>var global = global || window;
-
-		//
-		window.dataLayer = window.dataLayer || [];
-		function gtag() {
-			dataLayer.push(arguments);
-		}
-		gtag('js', new Date());
-
-		gtag('config', 'G-00M516D817');</script> <style lang="scss">/* CSS variables */
-		:root {
-			--button-background: #04100d;
-			--background: radial-gradient(#18221a, #04100d);
-			--color: white;
-			--container-background: rgba(216, 215, 202, 1);
-		}
-		body {
-			display: flex;
-			align-items: center;
-			flex-direction: column;
-			padding: 60px;
-			background: var(--background);
-			min-height: 600px;
-			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-			overflow-x: hidden;
-		}
-		.black-silence {
-			background: #171717 !important;
-			color: white !important;
-		}
-		/* Festive stuff! 
-		.festive-grid-item {
-			border: 5px solid transparent !important;
-			border-image: url(/borderthin-festive.png) 25% repeat !important;
-			border-image-width: 5px !important;
-			background: white;
-		}
-		.festive-builder-container {
-			border: 5px solid transparent !important;
-			border-image: url(/border-festive.png) 25% repeat !important;
-			border-image-width: 10px !important;
-		}
-		.festive {
-			background: radial-gradient(#820016, #45000c);
-		}
-		.snow-container {
-			position: fixed;
-			top: 0;
-			left: 0;
-			overflow: hidden;
-			width: 100vw;
-			height: 100vh;
-			z-index: 99999;
-			pointer-events: none;
-		}
-
-		.snowflake {
-			position: absolute !important;
-			background-color: white;
-			border-radius: 50%;
-			opacity: 0.8;
-			pointer-events: none;
-		}
-
-		@keyframes fall {
-			0% {
-				opacity: 0;
-				transform: translateY(0);
-			}
-			10% {
-				opacity: 1;
-			}
-			100% {
-				opacity: 0.5;
-				transform: translateY(100vh);
-			}
-		}
-
-		@keyframes diagonal-fall {
-			0% {
-				opacity: 0;
-				transform: translate(0, 0);
-			}
-			10% {
-				opacity: 1;
-			}
-			100% {
-				opacity: 0.25;
-				transform: translate(10vw, 100vh);
-			}
-		}*/
-		.fixed {
-			position: fixed;
-			color: white;
-			border: 1px solid transparent;
-			border-image: url(border.png) 45%;
-			border-image-width: 15px;
-			border-image-outset: 2px;
-			padding: 5px;
-		}
-		/* */
-		.toggle-desktop {
-			margin: 5px;
-			color: #202020;
-			border: 1px solid transparent;
-			border-image: url(border.png) 45%;
-			border-image-width: 15px;
-			border-image-outset: 2px;
-			padding: 5px;
-			font-size: 14px;
-			background-color: hsl(56, 16%, 82%);
-		}
-		/* */
-		.footer {
-			font-family: 'Lora', 'sans-serif';
-			font-size: 12px;
-			padding: 5px;
-		}
-		.selected {
-			color: white !important;
-			background-color: #1a1a1a !important;
-		}
-		/* Loading */
-		.loading {
-			display: none;
-		}
-		#footer-ad {
-			width: 100%;
-		}
-		#first-med-rect {
-			display: none;
-		}
-		@media only screen and (max-width: 600px) {
-			#first-med-rect {
-				display: block;
-			}
-		}
-		._toastItem {
-			border-image: url(borderthin.png) 45% !important;
-			border-image-width: 10px !important;
-			border-image-outset: 2px !important;
-			background: hsl(56, 16%, 82%) !important;
-			color: black !important;
-		}
-
-		input:disabled,
-		select:disabled {
-			cursor: not-allowed;
-		}</style></head> <div class="notifWrapper"><ul class="_toastContainer svelte-yh90az"> </ul></div>    <div class="nav right nav-menu border"><div style="display: flex; align-items: center; padding: 0px 25px 0px 15px; border-bottom: 1px lightgray solid"><img src="menu.png" alt="icon" style="max-width: 18px; margin-right: 10px;"> <p data-svelte-h="svelte-1erc25j">User controls</p> <button class="close-button"></button></div> <a class="nav-option" id="login" href="index.html" data-svelte-h="svelte-1gyv62p">Profile</a> <a class="nav-option" id="logout" href="index.html" data-svelte-h="svelte-1jv28vl">Log out</a></div>  <div class="nav left nav-menu border" data-sveltekit-reload><div style="display: flex; align-items: center; padding: 0px 25px 0px 15px; border-bottom: 1px lightgray solid"><img src="menu.png" alt="icon" style="max-width: 18px; margin-right: 10px;"> <p data-svelte-h="svelte-1qxw3o2">Navigation</p> <button class="close-button"></button></div> <a id="home" class="nav-option" href="index.html" data-svelte-h="svelte-wq15t4">Home</a> <a id="builder" class="nav-option" href="builder.html" data-svelte-h="svelte-1wqtt15">Builder</a> <a id="talents" class="nav-option" href="talents.html" data-svelte-h="svelte-2cz34x">Talents</a> <a id="discord" class="nav-option" target="_blank" rel="noreferrer" href="https://discord.gg/B3BwytYWVK" data-svelte-h="svelte-51rhru">Discord</a> <a id="aen" class="nav-option" href="aen.html" data-svelte-h="svelte-zsn60e">Aen (Discord Bot)</a> <a id="support" class="nav-option" href="support.html" data-svelte-h="svelte-lpvlrt">Support Me</a> <a id="privacy" class="nav-option" href="privacy.html" data-svelte-h="svelte-15849ia">Privacy Policy</a>  <div class="themes"><hr> <div style="display: flex; justify-content: space-between"><button class="theme-button" style="background: radial-gradient(#18221a, #04100d)" id="overworld"></button><button class="theme-button" style="background: radial-gradient(#264a50, #040d13)" id="depths"></button><button class="theme-button" style="background: radial-gradient(#c0c2cb, #4c4f53)" id="gale"></button><button class="theme-button" style="background: radial-gradient(#4f3c29, #1a1814)" id="chimes"></button><button class="theme-button" style="background: radial-gradient(#5c001c, #400114)" id="silksong"></button></div>  <div style="font-size: 12px; color: grey; margin: 5px" data-svelte-h="svelte-1aul8bd"><b>@cyfiee</b> - v3.1</div></div></div> <div class="navbar border"><div class="logo"><button id="navbutton" class="nav-button border-thin" data-svelte-h="svelte-131a9vx"><img src="menu.png" alt="nav menu" style="max-height: 100%;"></button> <a style="display: flex; align-items: center; color: white; font-size: 15px; margin-left: 10px; text-decoration: none" href="index.html" data-svelte-h="svelte-4d1lng"><img src="favicon.png" alt="icon" style="max-width: 25px; margin-right: 5px;"> <p>Deepwoken Hub</p></a></div>  <div id="profile"><p id="profileName" style="margin-right: 15px">Guest</p> <div id="profilePictureContainer" style="width: 25px; height: 25px" class="svelte-142ncmc"><button id="profilePictureButton" class="svelte-142ncmc"><img id="profilePicture" style="pointer-events: none" src="discord.png" alt="discord" class="svelte-142ncmc"></button> <div class="login-button border-thin svelte-142ncmc"></div> </div></div> </div>  <div id="first-med-rect"></div>    <div class="container svelte-3bkedl" data-svelte-h="svelte-1nwgews"><div class="grid-item border svelte-3bkedl" style="grid-column: 1 / span 3; grid-row: 1 / span 1"><h1 class="svelte-3bkedl">Changelog <i style="color: grey; font-family:'Courier New', Courier, monospace" class="svelte-3bkedl">v3.1</i></h1> <hr class="svelte-3bkedl">
-		the mysterious number changed. what could it mean? theories suspect it&#39;s a countdown. many others
-		believe it&#39;s nothing more than an arbitrary number thats changes per the whims of some higher being.
-		who knows..? perhaps the answer lies within the discord...</div> <div class="grid-item border svelte-3bkedl" style="grid-column: 4 / span 1; grid-row: 1 / span 2"><h1 class="svelte-3bkedl">Chromatic Report</h1>
-		I am no longer ashamed of my own creation. I have been freed from the shackles of my own design.
-		<h2 class="svelte-3bkedl"><i style="color: grey;" class="svelte-3bkedl">2nd Febuary</i></h2> <hr class="svelte-3bkedl"> <ul class="svelte-3bkedl"><b class="svelte-3bkedl">Just kidding.</b></ul>
-		Chromatic has been well, actually. I recently took a big break for Lunar New Year, and now that it&#39;s
-		over, the chains of work starts shackling me again. When will I be free. I just want to play video
-		games.</div> <div class="grid-item border svelte-3bkedl" style="grid-column: 1 / span 1; grid-row: 2 / span 1"><h1 class="svelte-3bkedl">Top Supporters</h1> <hr class="svelte-3bkedl"> <ol class="svelte-3bkedl"><li class="svelte-3bkedl"><b class="svelte-3bkedl">Xeri</b></li> <li class="svelte-3bkedl"><b class="svelte-3bkedl">Sheep</b></li> <li class="svelte-3bkedl"><b class="svelte-3bkedl">Penjji</b></li> <li class="svelte-3bkedl"><b class="svelte-3bkedl">laronalt1</b></li> <li class="svelte-3bkedl"><b class="svelte-3bkedl">weegerzy</b></li></ol>
-		Thank you so much for your continued support!!!</div> <div class="grid-item border svelte-3bkedl" style="grid-column: 2 / span 2; grid-row: 2 / span 1"><h1 class="svelte-3bkedl">can someone remind me to update this later?</h1> <hr class="svelte-3bkedl"> Immovable
-		Object, Unstoppable Force
-		<p class="svelte-3bkedl">Author: <b class="svelte-3bkedl">Tim!</b></p> <p class="svelte-3bkedl">Have that one friend that keeps asking for PvE builds? Here. Here it is. Everything. You&#39;re
-			that one friend? Click the god damned link.</p> <p class="svelte-3bkedl">Over 16 builds fitting for various scenarios and playstyle can be found on the builder Discord <a href="https://discord.com/channels/1067416449980837900/1108270455976099860" target="_blank" rel="noreferrer" class="svelte-3bkedl">here!</a></p></div> </div>    
-			
-			<script>
-				{
-					__sveltekit_12rqkzc = {
-						base: new URL(".", location).pathname.slice(0, -1)
-					};
-
-					const element = document.currentScript.parentElement;
-
-					Promise.all([
-						import("_app/immutable/entry/start.DLM8dxvO.js"),
-						import("_app/immutable/entry/app.B6OY6F_z.js")
-					]).then(([kit, app]) => {
-						kit.start(app, element, {
-							node_ids: [0, 2],
-							data: [null,null],
-							form: null,
-							error: null
-						});
-					});
-				}
-			</script>
-		</div>
-			
-		
-	</body>
-
-<!-- Mirrored from deepwoken.co/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 23 Mar 2025 18:01:58 GMT -->
-</html>
+   </html>
