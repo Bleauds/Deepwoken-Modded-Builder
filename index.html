@@ -1162,7 +1162,7 @@ document.addEventListener('DOMContentLoaded', function() {
     background: url('hands.png') no-repeat;
     background-size: 250% 200%; /* Make the image larger horizontally */
     background-position: -50px top; /* Adjust to crop and center the image horizontally */
-    transform: rotate(-90deg) translateX(-50%), ; /* Rotate and translate the hand */
+    transform: rotate(-90deg), translateX(-50%), scaleY(-1); /* Rotate and translate the hand */
 }
 </style>
 </head>
@@ -1188,7 +1188,7 @@ setTimeout(() => {
         ease: "power2.out" 
     });
  gsap.to("#handr", {
-	x:"30px",
+	x:"60px",
 	y:"-130%",
 	duration: 1,
 	ease: "power2.out"
