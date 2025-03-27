@@ -1162,7 +1162,7 @@ document.addEventListener('DOMContentLoaded', function() {
     background: url('hands.png') no-repeat;
     background-size: 250% 200%; /* Make the image larger horizontally */
     background-position: -50px top; /* Adjust to crop and center the image horizontally */
-    transform: rotate(-90deg) translateX(-50%), ; /* Rotate and translate the hand */
+    transform: rotate(-90deg) translateX(-0%), ; /* Rotate and translate the hand */
 }
 </style>
 </head>
@@ -1187,6 +1187,12 @@ setTimeout(() => {
         // Delay to wait for the girl to show up
         ease: "power2.out" 
     });
+ gsap.to("#handr", {
+	x:"30px",
+	y:"-130%",
+	duration: 1,
+	ease: "power2.out"
+ });
 }, 1500);
 
 </script>
