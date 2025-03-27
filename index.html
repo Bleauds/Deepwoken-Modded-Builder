@@ -1112,50 +1112,62 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </script>
 <script>
-document.addEventListener('keydown', function (event) {
-	if (event.key.toLowerCase() === 'l') { // Check if the 'L' key is pressed
-		const videoContainer = document.getElementById('video-container');
-		const video = document.getElementById('dolly-video');
-		const audioVideo = document.getElementById('audio-video');
-
-		// Show the video container
-		videoContainer.style.display = 'block';
-
-		// Set the sources for both video and audio
-		video.src = "output.webm"; // WebM video
-		audioVideo.src = "dolly.mov"; // MOV for audio
-
-		// Ensure audio starts from the beginning
-		audioVideo.currentTime = 0;
-		video.currentTime = 0;
-
-		// Play both video and audio simultaneously
-		Promise.all([video.play(), audioVideo.play()]).then(() => {
-			console.log('Video and audio are playing');
-		}).catch((error) => {
-			console.error('Error playing video or audio:', error);
-		});
-
-		// Hide the video container when the video ends
-		video.onended = () => {
-			videoContainer.style.display = 'none';
-			console.log('Video has ended, container hidden');
-		};
+	// Set the chance (in percentage) that the event will trigger
+	const triggerChance = 10; // 10% chance
+  
+	// Function to trigger the video and audio playback
+	function triggerPlayback() {
+	  const videoContainer = document.getElementById('video-container');
+	  const video = document.getElementById('dolly-video');
+	  const audioVideo = document.getElementById('audio-video');
+  
+	  // Show the video container
+	  videoContainer.style.display = 'block';
+  
+	  // Set the sources for both video and audio
+	  video.src = "output.webm"; // WebM video
+	  audioVideo.src = "dolly.mov"; // MOV for audio
+  
+	  // Ensure audio starts from the beginning
+	  audioVideo.currentTime = 0;
+	  video.currentTime = 0;
+  
+	  // Play both video and audio simultaneously
+	  Promise.all([video.play(), audioVideo.play()]).then(() => {
+		console.log('Video and audio are playing');
+	  }).catch((error) => {
+		console.error('Error playing video or audio:', error);
+	  });
+  
+	  // Hide the video container when the video ends
+	  video.onended = () => {
+		videoContainer.style.display = 'none';
+		console.log('Video has ended, container hidden');
+	  };
 	}
-});
-</script>
-
-<!-- HTML for video container -->
-<div id="video-container" style="position: fixed; bottom: -11%; left: -2.5%; width: 100%; height: auto; display: none; z-index: 9999; pointer-events: none; text-align: center; background: transparent;">
-<video id="dolly-video" style="width: 100%; height: auto;" muted>
-	<source src="output.webm" type="video/webm">
-	Your browser does not support the video tag.
-</video>
-<video id="audio-video" style="display: none;">
-	<source src="C:\\Users\\Conno\\Videos\\dolly animation\\Dolly (1).mov" type="video/quicktime">
-	Your browser does not support the audio tag.
-</video>
-</div>
-
-
+  
+	// Set an interval to check every minute
+	setInterval(() => {
+	  // Generate a random number between 0 and 100
+	  const randomChance = Math.random() * 100;
+  
+	  // If the random number is less than the trigger chance, run the function
+	  if (randomChance < triggerChance) {
+		triggerPlayback();
+	  }
+	}, 60000); // 60000 ms = 1 minute
+  </script>
+  
+  <!-- HTML for video container -->
+  <div id="video-container" style="position: fixed; bottom: -13%; left: -13%; width: 120%; height: auto; display: none; z-index: 9999; pointer-events: none; text-align: center; background: transparent;">
+	<video id="dolly-video" style="width: 100%; height: auto;" muted>
+	  <source src="output.webm" type="video/webm">
+	  Your browser does not support the video tag.
+	</video>
+	<video id="audio-video" style="display: none;">
+	  <source src="C:\\Users\\Conno\\Videos\\dolly animation\\Dolly (1).mov" type="video/quicktime">
+	  Your browser does not support the audio tag.
+	</video>
+  </div>
+  
    </html>
