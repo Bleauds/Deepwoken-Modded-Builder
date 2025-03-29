@@ -116,7 +116,7 @@
    <link href="_app/immutable/assets/0.DD9ggIW9.css" rel="stylesheet">
    <link href="_app/immutable/assets/Icon.B_4K0AlN.css" rel="stylesheet">
    <link href="_app/immutable/assets/4.SrwoI1B3.css" rel="stylesheet">
-   <link href="_app/immutable/assets/BuildMenu.CDysIOrQ.css" rel="stylesheet"><title> Deepwoken Builder </title><!-- HEAD_svelte-ymnxwf_START --><meta name="title" content="Deepwoken Modded Builder"><meta name="description" content="Deepwoken Modded stats builder, with full talents and mantra support. Available for all devices! Made by Cyfer#2380"><meta property="og:type" content="website"><meta property="og:url" content="https://discord.gg/vMBHH8BkDC"><meta property="og:title" content="Deepwoken Builder"><meta property="og:description" content="Deepwoken stats builder, with full talents and mantra support. Available for all devices! Made by Cyfer#2380"><meta property="og:image" content="https://cdn.discordapp.com/attachments/854957876313063447/1199965058848018462/dark-favicon.png"><meta property="twitter:url" content="https://discord.gg/B3BwytYWVK"><meta property="twitter:title" content="Deepwoken Builder"><meta property="twitter:description" content="Deepwoken stats builder, with full talents and mantra support. Available for all devices! Made by Cyfer#2380"><meta property="twitter:image" content="https://cdn.discordapp.com/attachments/854957876313063447/1199965058848018462/dark-favicon.png"><meta name="keywords" content="deepwoken, roblox, deepwoken roblox, deepwoken builder, builder, dw builder, dw, deepwoken stat builder, stat builder, build maker, dw build maker, deepwoken build maker, build maker deepwoken, dw build, deepwoken vercel"><meta name="author" content="Cyfer"><meta name="description" content="Deepwoken stats builder, with full talents and mantra support. Available for all devices! Made by Bleaud"><!-- HEAD_svelte-ymnxwf_END -->
+   <link href="_app/immutable/assets/BuildMenu.CDysIOrQ.css" rel="stylesheet"><title> Deepwoken Builder </title><!-- HEAD_svelte-ymnxwf_START --><meta name="title" content="Deepwoken Modded Builder"><meta name="description" content="Deepwoken Modded stats builder, with full talents and mantra support. Available for all devices! Made by Cyfer#2380"><meta property="og:type" content="website"><meta property="og:url" content="https://discord.gg/vMBHH8BkDC"><meta property="og:title" content="Deepwoken Builder"><meta property="og:description" content="Deepwoken stats builder, with full talents and mantra support. Available for all devices! Made by Cyfer#2380"><meta property="og:image" content="https://cdn.discordapp.com/attachments/854957876313063447/1199965058848018462/dark-favicon.png"><meta property="twitter:url" content="https://discord.gg/vMBHH8BkDC"><meta property="twitter:title" content="Deepwoken Builder"><meta property="twitter:description" content="Deepwoken stats builder, with full talents and mantra support. Available for all devices! Made by Cyfer#2380"><meta property="twitter:image" content="https://cdn.discordapp.com/attachments/854957876313063447/1199965058848018462/dark-favicon.png"><meta name="keywords" content="deepwoken, roblox, deepwoken roblox, deepwoken builder, builder, dw builder, dw, deepwoken stat builder, stat builder, build maker, dw build maker, deepwoken build maker, build maker deepwoken, dw build, deepwoken vercel"><meta name="author" content="Cyfer"><meta name="description" content="Deepwoken stats builder, with full talents and mantra support. Available for all devices! Made by Bleaud"><!-- HEAD_svelte-ymnxwf_END -->
    </head>
    <!-- Google tag (gtag.js) -->
    <script>
@@ -294,6 +294,45 @@
 	   select:disabled {
 	   cursor: not-allowed;
 	   }
+	   .tabs-container {
+    position: relative; /* Acts as the positioning context for absolute children */
+    width: 100%;
+    height: auto; /* Allow height to adjust dynamically */
+    overflow: hidden; /* Prevent overflow issues */
+}
+
+#Stats, #Talents {
+    position: absolute; /* Stack them as layers */
+    top: 0;
+    left: 0;
+    width: 100%; /* Full width of the parent container */
+    height: auto; /* Allow height to adjust to content */
+    transition: opacity 0.3s ease; /* Smooth transition for opacity */
+}
+
+#Stats {
+    visibility: visible; /* Show Stats by default */
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#Talents {
+    visibility: hidden; /* Hide Talents by default */
+    opacity: 0;
+    pointer-events: none;
+}
+
+.tabs-button.selected {
+    border-bottom: 2px solid #ffffff; /* Highlight the active tab */
+    font-weight: bold;
+}
+
+/* Ensure the parent container adjusts to the tallest child */
+.builder-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
 </style>
 <div class="navbar border">
    <div class="logo">
@@ -342,6 +381,9 @@
 	  <div class="tabs-buttons border"> <button class="tabs-button border-thin">Stats</button><button class="tabs-button border-thin">Talents</button></div>
    </div>
    <div class="tabs-container border">
+	<div class="container svelte-hwcpcr" id="Talents" role="button" tabindex="0" style="display: grid;"><div class="grid-item rollable-talents svelte-hwcpcr" id="rollable-talent-1"><div style="text-align: center" class="svelte-hwcpcr"><b class="svelte-hwcpcr" data-svelte-h="svelte-148zqj2">Obtainable Talents</b> <i style="color: gray" class="svelte-hwcpcr">43</i></div> <div style="display: flex; justify-content: space-around" class="svelte-hwcpcr"><b class=" svelte-hwcpcr">9</b> <b class="Rare svelte-hwcpcr">7</b> <b class="Advanced svelte-hwcpcr">0</b></div> <input type="text" placeholder="Search talents..." aria-autocomplete="none" class="svelte-hwcpcr"> <button class="filters-display off svelte-hwcpcr" data-svelte-h="svelte-118qp2v">Filters</button> <div class="filters svelte-hwcpcr" style="display: none"><button class="filter pre false svelte-hwcpcr" tabindex="0">PRE  <img class="icon svelte-hwcpcr" title="This talent is only obtainable pre-shrine." width="14" height="14" alt="new" src="/shrineicon.png" style="margin-left: 3px"> </button><button class="filter post false svelte-hwcpcr" tabindex="0">POST   </button><button class="filter fav false svelte-hwcpcr" tabindex="0">FAV <img class="icon svelte-hwcpcr" title="This talent was favorited by the build's creator!" width="14" height="14" alt="new" src="/lovedicon.png" style="margin-left: 3px">  </button><button class="filter str false svelte-hwcpcr" tabindex="0">STR  </button><button class="filter agi false svelte-hwcpcr" tabindex="0">AGI  </button><button class="filter ftd false svelte-hwcpcr" tabindex="0">FTD  </button><button class="filter int false svelte-hwcpcr" tabindex="0">INT  </button><button class="filter wil false svelte-hwcpcr" tabindex="0">WIL  </button><button class="filter cha false svelte-hwcpcr" tabindex="0">CHA  </button><button class="filter attunement false svelte-hwcpcr" tabindex="0">ATTUNEMENT  </button></div> <div id="Advanced-dropdown-button" active="true" class="Advanced rarity svelte-hwcpcr" role="button" tabindex="0"><b class="svelte-hwcpcr">Advanced</b> <div style="color:white" id="Advanced-dropdown-icon" class="svelte-hwcpcr">▾</div></div> <div id="Advanced-dropdown" class="talents-container svelte-hwcpcr"><div class="talent svelte-hwcpcr" data-svelte-h="svelte-1yuze5x">No talents :(</div> </div><div id="Rare-dropdown-button" active="true" class="Rare rarity svelte-hwcpcr" role="button" tabindex="0"><b class="svelte-hwcpcr">Rare</b> <div style="color:white" id="Rare-dropdown-icon" class="svelte-hwcpcr">▾</div></div> <div id="Rare-dropdown" class="talents-container svelte-hwcpcr"><fieldset class="svelte-hwcpcr"><legend class="svelte-hwcpcr">Fish</legend></fieldset> <div class="talent Rare  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Fishman <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div><fieldset class="svelte-hwcpcr"><legend class="svelte-hwcpcr">Marauder</legend></fieldset> <div class="talent Rare  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Thresher Claws <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div><fieldset class="svelte-hwcpcr"><legend class="svelte-hwcpcr">Metamancer</legend></fieldset> <div class="talent Rare  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Lootskipper <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div><fieldset class="svelte-hwcpcr"><legend class="svelte-hwcpcr">Miscellaneous</legend></fieldset> <div class="talent Rare  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Return to the Dark Ages <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div><fieldset class="svelte-hwcpcr"><legend class="svelte-hwcpcr">Soul Converter</legend></fieldset> <div class="talent Rare  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Bloodiron Spirit <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div><fieldset class="svelte-hwcpcr"><legend class="svelte-hwcpcr">Warrior</legend></fieldset> <div class="talent Rare  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Chronostasis <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div><fieldset class="svelte-hwcpcr"><legend class="svelte-hwcpcr">Waterborne</legend></fieldset> <div class="talent Rare  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Scuba Drowner <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div> </div><div id="Common-dropdown-button" active="true" class="Common rarity svelte-hwcpcr" role="button" tabindex="0"><b class="svelte-hwcpcr">Common</b> <div style="color:white" id="Common-dropdown-icon" class="svelte-hwcpcr">▾</div></div> <div id="Common-dropdown" class="talents-container svelte-hwcpcr"><fieldset class="svelte-hwcpcr"><legend class="svelte-hwcpcr">Apex Predator</legend></fieldset> <div class="talent Common  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Sunken Predator <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div><fieldset class="svelte-hwcpcr"><legend class="svelte-hwcpcr">Athlete</legend></fieldset> <div class="talent Common  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Triathlete <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div><fieldset class="svelte-hwcpcr"><legend class="svelte-hwcpcr">Escape Artist</legend></fieldset> <div class="talent Common  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Robber Baron <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div><fieldset class="svelte-hwcpcr"><legend class="svelte-hwcpcr">Limitbreaker</legend></fieldset> <div class="talent Common  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Comeback Kid <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div><fieldset class="svelte-hwcpcr"><legend class="svelte-hwcpcr">Marauder</legend></fieldset> <div class="talent Common  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Anxious Guard <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div><fieldset class="svelte-hwcpcr"><legend class="svelte-hwcpcr">Miscellaneous</legend></fieldset> <div class="talent Common  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Dragon's Song <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div><div class="talent Common  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Full Reset <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div><div class="talent Common  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Gourmand <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div><div class="talent Common  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Martyr <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div><div class="talent Common  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Polite Awakening <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div><div class="talent Common  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Replenishing Knockout <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div><fieldset class="svelte-hwcpcr"><legend class="svelte-hwcpcr">Natural Armor</legend></fieldset> <div class="talent Common  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Armor Conserver <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div><div class="talent Common  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Lightweight <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div><div class="talent Common  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Padded Armor <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div><div class="talent Common  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Steel Scales <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div><fieldset class="svelte-hwcpcr"><legend class="svelte-hwcpcr">Saboteur</legend></fieldset> <div class="talent Common  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Explosive Efficiency <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div><div class="talent Common  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Hot Potato <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div><div class="talent Common  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Incendiary Formula <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div><div class="talent Common  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Pocket Bombs <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div><div class="talent Common  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Sulphur Surprise <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div><fieldset class="svelte-hwcpcr"><legend class="svelte-hwcpcr">Waterborne</legend></fieldset> <div class="talent Common  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Conditioned Swimmer <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div> </div><div id="Oath-dropdown-button" active="true" class="Oath rarity svelte-hwcpcr" role="button" tabindex="0"><b class="svelte-hwcpcr">Oath</b> <div style="color:white" id="Oath-dropdown-icon" class="svelte-hwcpcr">▾</div></div> <div id="Oath-dropdown" class="talents-container svelte-hwcpcr"><fieldset class="svelte-hwcpcr"><legend class="svelte-hwcpcr">Oathless</legend></fieldset> <div class="talent Oath  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Oath: Oathless <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div> </div><div id="Quest-dropdown-button" active="true" class="Quest rarity svelte-hwcpcr" role="button" tabindex="0"><b class="svelte-hwcpcr">Quest</b> <div style="color:white" id="Quest-dropdown-icon" class="svelte-hwcpcr">▾</div></div> <div id="Quest-dropdown" class="talents-container svelte-hwcpcr"><fieldset class="svelte-hwcpcr"><legend class="svelte-hwcpcr">Brawler</legend></fieldset> <div class="talent Quest  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Trained Fist <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div><fieldset class="svelte-hwcpcr"><legend class="svelte-hwcpcr">Drowned Secret</legend></fieldset> <div class="talent Quest  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Ethiron's Gaze <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div><fieldset class="svelte-hwcpcr"><legend class="svelte-hwcpcr">Ignition Union</legend></fieldset> <div class="talent Quest  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Union Hook <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div><fieldset class="svelte-hwcpcr"><legend class="svelte-hwcpcr">Marauder</legend></fieldset> <div class="talent Quest  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Thresher Scales <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div><fieldset class="svelte-hwcpcr"><legend class="svelte-hwcpcr">Metamancer</legend></fieldset> <div class="talent Quest  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Chain of Perfection <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div><fieldset class="svelte-hwcpcr"><legend class="svelte-hwcpcr">Miscellaneous</legend></fieldset> <div class="talent Quest  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Treefelling Blow <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div><fieldset class="svelte-hwcpcr"><legend class="svelte-hwcpcr">Navaen Nomad</legend></fieldset> <div class="talent Quest  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Way of Navae <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div><fieldset class="svelte-hwcpcr"><legend class="svelte-hwcpcr">Prospector</legend></fieldset> <div class="talent Quest  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Excavator <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div><div class="talent Quest  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Harvester <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div><fieldset class="svelte-hwcpcr"><legend class="svelte-hwcpcr">Saboteur</legend></fieldset> <div class="talent Quest  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Family Recipe <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div><fieldset class="svelte-hwcpcr"><legend class="svelte-hwcpcr">Sovereign of Slaughter</legend></fieldset> <div class="talent Quest  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Chime of Conflict <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div><fieldset class="svelte-hwcpcr"><legend class="svelte-hwcpcr">Warrior</legend></fieldset> <div class="talent Quest  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Critical Attack <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div><div class="talent Quest  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Engage <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div><fieldset class="svelte-hwcpcr"><legend class="svelte-hwcpcr">Weapon Master</legend></fieldset> <div class="talent Quest  shrine-false locked-false svelte-hwcpcr" role="button" tabindex="0" style="user-select: none; touch-action: auto;">Mercy Kill <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">   <img class="icon svelte-hwcpcr" title="This talent is newly obtainable from your recent stat changes!" width="14" height="14" alt="new" src="/newicon.png"></div> </div> </div><div id="Murmur-dropdown-button" active="true" class="Murmur rarity svelte-hwcpcr" role="button" tabindex="0"><b class="svelte-hwcpcr">Murmur</b> <div style="color:white" id="Murmur-dropdown-icon" class="svelte-hwcpcr">▾</div></div> <div id="Murmur-dropdown" class="talents-container svelte-hwcpcr"><div class="talent svelte-hwcpcr" data-svelte-h="svelte-1yuze5x">No talents :(</div> </div></div> <div class="grid-item obtained-talents svelte-hwcpcr" id="rollable-talent-2"><div style="text-align: center" class="svelte-hwcpcr"><b class="svelte-hwcpcr" data-svelte-h="svelte-17jxel1">Obtained Talents</b> <i style="color: gray" class="svelte-hwcpcr">0</i></div> <div style="display: flex; justify-content: space-around" class="svelte-hwcpcr"><b class=" svelte-hwcpcr">0</b> <b class="Rare svelte-hwcpcr">0</b> <b class="Advanced svelte-hwcpcr">0</b></div> <div style="text-align: center; font-size: 12px; color: rgba(0, 0, 0, 0.5)" class="svelte-hwcpcr">Max of <b class="svelte-hwcpcr">76</b> talents, <b class="svelte-hwcpcr" data-svelte-h="svelte-1fec9zz">50</b> rollable
+			(<b class="Rare svelte-hwcpcr">40</b> guaranteed rare attempts) and
+			<b class="svelte-hwcpcr">24</b> from Roll 2</div> <div style="display: flex; flex-direction: row; align-items: center; gap: 5px" class="svelte-hwcpcr"><input type="text" placeholder="Search talents..." aria-autocomplete="none" class="svelte-hwcpcr"> <img src="/alphabetical.png" alt="sort" width="14" height="14" style="cursor: pointer; filter: invert(50%)" class="svelte-hwcpcr"> <img src="/check.png" alt="compare" width="14" height="14" style="cursor: pointer;" class="svelte-hwcpcr"></div> <button class="filters-display off svelte-hwcpcr" data-svelte-h="svelte-118qp2v">Filters</button> <div class="filters svelte-hwcpcr" style="display: none"><button class="filter pre false svelte-hwcpcr" tabindex="0">PRE  <img class="icon svelte-hwcpcr" title="This talent is only obtainable pre-shrine." width="14" height="14" alt="new" src="/shrineicon.png" style="margin-left: 3px"> </button><button class="filter post false svelte-hwcpcr" tabindex="0">POST   </button><button class="filter fav false svelte-hwcpcr" tabindex="0">FAV <img class="icon svelte-hwcpcr" title="This talent was favorited by the build's creator!" width="14" height="14" alt="new" src="/lovedicon.png" style="margin-left: 3px">  </button><button class="filter str false svelte-hwcpcr" tabindex="0">STR  </button><button class="filter agi false svelte-hwcpcr" tabindex="0">AGI  </button><button class="filter ftd false svelte-hwcpcr" tabindex="0">FTD  </button><button class="filter int false svelte-hwcpcr" tabindex="0">INT  </button><button class="filter wil false svelte-hwcpcr" tabindex="0">WIL  </button><button class="filter cha false svelte-hwcpcr" tabindex="0">CHA  </button><button class="filter attunement false svelte-hwcpcr" tabindex="0">ATTUNEMENT  </button></div> <div id="" class="talents-container svelte-hwcpcr" style="display: flex; margin-top: 10px"><div class="talent svelte-hwcpcr" data-svelte-h="svelte-134h4x0">You can click on the talents to pick them!</div></div></div></div>
 	  <div class="container" id="Stats">
 		 <div class="meta-stats grid-item border svelte-g2d5k9">
 			<div class="stat-item svelte-g2d5k9">
@@ -387,7 +429,6 @@
 				  <option value="10">Bladeharper</option>
 				  <option value="11">Brother, of the Middle</option>
                   <option value="12">Ironfist</option>
-                  <option value="13">waterweavertypeshidfk</option>
 			   </select>
 			</div>
 			<div class="stat-item svelte-g2d5k9">
@@ -595,8 +636,134 @@
                 });
             </script>
             
-        <button  href="javascript:void(0);"class="function-button border-thin svelte-g2d5k9" data-svelte-h="svelte-oiyxom"><div><b class="svelte-g2d5k9">Export</b> to the deep</div></button>  </div>
-         <div class="functions grid-item svelte-g2d5k9" ignore-in-export="">
+        <button id="exportdeep" href="javascript:void(0);"class="function-button border-thin svelte-g2d5k9" data-svelte-h="svelte-oiyxom"><div><b class="svelte-g2d5k9">Export</b> to the deep</div></button>  </div>
+		<script>
+			document.getElementById('exportdeep').addEventListener('click', function() {
+				const statsMapping = {
+					st: 'Strength',
+					pe: 'Precision',
+					fo: 'Fortitude',
+					ag: 'Agility',
+					in: 'Intelligence',
+					wi: 'Willpower',
+					ch: 'Charisma',
+					he: 'Heavy Wep.',
+					me: 'Medium Wep.',
+					li: 'Light Wep.',
+					fl: 'Flamecharm',
+					fr: 'Frostdraw',
+					th: 'Thundercall',
+					ga: 'Galebreathe',
+					sh: 'Shadowcast',
+					ir: 'Ironsing',
+					bl: 'Bloodrend',
+					eb: 'Earthbend'
+				};
+			
+				// Collect stats
+				const stats = {};
+				Object.keys(statsMapping).forEach(key => {
+					const input = document.querySelector(`input[statname="${statsMapping[key]}"]`);
+					stats[key] = input ? input.value || 0 : 0;
+				});
+			
+				// Get build name & description
+				const buildName = document.getElementById('build-name')?.value.trim() || "Unnamed Build";
+				const buildDesc = document.getElementById('build-description')?.textContent.trim() || "No description.";
+			
+				// Get race name
+				const raceSelect = document.querySelector('select[statname="Race"]');
+				const race = raceSelect ? raceSelect.options[raceSelect.selectedIndex].text : "Unknown Race";
+			
+				// Get oath name
+				const oathSelect = document.querySelector('select[statname="Oath"]');
+				const oath = oathSelect ? oathSelect.options[oathSelect.selectedIndex].text : "Oathless";
+			
+				// Power Calculation (using your logic)
+				const totalBuildPoints = 505 - 105;
+				const NON_ATTUNEMENT_FREE = 15;
+				const HIGHEST_ATTUNEMENT_FREE = 10;
+				const OTHER_ATTUNEMENT_FREE = 5;
+			
+				function calculateNonAttunementCost() {
+					let allocated = 0;
+					document.querySelectorAll('input.stat-input[stattype="base"]').forEach(input => {
+						allocated += parseInt(input.value) || 0;
+					});
+					return allocated > NON_ATTUNEMENT_FREE ? allocated - NON_ATTUNEMENT_FREE : 0;
+				}
+			
+				function calculateWeaponCost() {
+					let cost = 0;
+					document.querySelectorAll('input.stat-input[stattype="weapon"]').forEach(input => {
+						cost += parseInt(input.value) || 0;
+					});
+					return cost;
+				}
+			
+				function calculateAttunementCost() {
+					const values = [];
+					document.querySelectorAll('input.stat-input[stattype="attunement"]').forEach(input => {
+						values.push(parseInt(input.value) || 0);
+					});
+					if (values.length === 0) return 0;
+					const maxValue = Math.max(...values);
+					let cost = 0;
+					document.querySelectorAll('input.stat-input[stattype="attunement"]').forEach(input => {
+						let value = parseInt(input.value) || 0;
+						let freeThreshold = OTHER_ATTUNEMENT_FREE;
+						if (value === maxValue && value >= HIGHEST_ATTUNEMENT_FREE) {
+							freeThreshold = HIGHEST_ATTUNEMENT_FREE;
+						}
+						cost += value < freeThreshold ? value : (value - freeThreshold);
+					});
+					return cost;
+				}
+			
+				function calculateMetaCost() {
+					let cost = 0;
+					document.querySelectorAll('input.stat-input[stattype="meta"]').forEach(input => {
+						if (input.type === 'checkbox') {
+							cost += input.checked ? 1 : 0;
+						} else if (input.type === 'select-one' || input.tagName === 'SELECT') {
+							cost += parseInt(input.value) || 0;
+						} else {
+							cost += parseInt(input.value) || 0;
+						}
+					});
+					return cost;
+				}
+			
+				// Compute total cost
+				const totalCost = calculateNonAttunementCost() + calculateWeaponCost() + calculateAttunementCost() + calculateMetaCost();
+			
+				// Compute power level
+				let powerLevel = Math.min(Math.floor(totalCost / (totalBuildPoints / 80)), 80);
+			
+				// Build formatted output
+				const output = `
+${buildName}, The ${oath} | ${buildDesc}
+=====
+LVL ${powerLevel} ${race}
+==ATTRIBUTES==
+${stats.st} Strength; ${stats.pe} Precision; ${stats.fo} Fortitude; ${stats.ag} Agility; ${stats.in} Intelligence; ${stats.wi} Willpower; ${stats.ch} Charisma
+=====
+${stats.he} Heavy Weapon; ${stats.me} Medium Weapon; ${stats.li} Light Weapon
+=====
+${stats.fl} Flamecharm; ${stats.fr} Frostdraw; ${stats.th} Thunder; ${stats.ga} Gale; ${stats.sh} Shadowcast; ${stats.ir} Ironsing; ${stats.bl} Bloodrend; ${stats.eb} Earthbend
+				`.trim();
+			
+				// Copy to clipboard
+				navigator.clipboard.writeText(output).then(() => {
+					alert('Build copied in Deepwoken format!');
+				}).catch(err => {
+					console.error('Could not copy build to clipboard:', err);
+				});
+			});
+			</script>
+			
+		 </script>
+		<div class="functions grid-item svelte-g2d5k9" ignore-in-export="">
             <a id="loadBuildButton" class="function-button overworld border-thin svelte-g2d5k9">Load Build</a>
         
             <div id="importWrapper" class="wrapper svelte-1q5srmm" style="max-width: 475px; width: 50vw; display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000; text-align: center;">
@@ -992,13 +1159,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const randomSentences = [
         "gimme... spec...", "Thank Envy! No... Mr. Aura...", "Cook dogshit and you're banned", 
-        "Hey :3", "run my 1s mutt", "bakaa", "Creddits to the deepwoken builder guy!!",
+        "Hey :3", "run my 1s mutt", "bakaa", "I love you", "I love you too", 
         "Valentina is the almighty (mutt)", "fuck this cheesy ass build, please remake it :(", 
-        "sighh...", "u said wha??", "UPDATE STARKINDRED!!", 
+        "sighh...", "u said wha??", "UPDATE STARKINDRED!!",
         "valentina will freshie gank you when u prog this build ingame (ggs bro)", 
         "Scrap this, make a quad attunement cheese :/", "So why arent you running silentheart heroism?!", 
         "Add gems :(", "Finish ironsing 😭✌💔", "this build is ass icl ts pmo🥀", "ggs", 
-        "real original build you got there", "thwiggy is a closeted femboy", "YES we are all running every attunement"
+        "real original build you got there", "thwiggy is a closeted femboy", "YES we are all running every attunement", "AgentMk07 was here!!",
+		"i likeee Super!!", "ryu coded some of this with his toes🥀", "What the hell is this?", "ok fine we can erp. - Ryu", "why dont YOU put a quote here, huh? yeah thats what i fucking thought"
     ];
 
     function getRandomSentence() {
@@ -1112,62 +1280,155 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </script>
 <script>
-	// Set the chance (in percentage) that the event will trigger
-	const triggerChance = 10; // 10% chance
-  
-	// Function to trigger the video and audio playback
-	function triggerPlayback() {
-	  const videoContainer = document.getElementById('video-container');
-	  const video = document.getElementById('dolly-video');
-	  const audioVideo = document.getElementById('audio-video');
-  
-	  // Show the video container
-	  videoContainer.style.display = 'block';
-  
-	  // Set the sources for both video and audio
-	  video.src = "output.webm"; // WebM video
-	  audioVideo.src = "dolly.mov"; // MOV for audio
-  
-	  // Ensure audio starts from the beginning
-	  audioVideo.currentTime = 0;
-	  video.currentTime = 0;
-  
-	  // Play both video and audio simultaneously
-	  Promise.all([video.play(), audioVideo.play()]).then(() => {
-		console.log('Video and audio are playing');
-	  }).catch((error) => {
-		console.error('Error playing video or audio:', error);
-	  });
-  
-	  // Hide the video container when the video ends
-	  video.onended = () => {
-		videoContainer.style.display = 'none';
-		console.log('Video has ended, container hidden');
-	  };
-	}
-  
-	// Set an interval to check every minute
-	setInterval(() => {
-	  // Generate a random number between 0 and 100
-	  const randomChance = Math.random() * 100;
-  
-	  // If the random number is less than the trigger chance, run the function
-	  if (randomChance < triggerChance) {
-		triggerPlayback();
-	  }
-	}, 60000); // 60000 ms = 1 minute
-  </script>
-  
-  <!-- HTML for video container -->
-  <div id="video-container" style="position: fixed; bottom: -13%; left: -13%; width: 120%; height: auto; display: none; z-index: 9999; pointer-events: none; text-align: center; background: transparent;">
-	<video id="dolly-video" style="width: 100%; height: auto;" muted>
-	  <source src="output.webm" type="video/webm">
-	  Your browser does not support the video tag.
-	</video>
-	<video id="audio-video" style="display: none;">
-	  <source src="C:\\Users\\Conno\\Videos\\dolly animation\\Dolly (1).mov" type="video/quicktime">
-	  Your browser does not support the audio tag.
-	</video>
-  </div>
-  
-   </html>
+	document.addEventListener('keydown', function (event) {
+		if (event.key.toLowerCase() === ']') { // Check if the 'L' key is pressed
+			const videoContainer = document.getElementById('video-container');
+			const video = document.getElementById('dolly-video');
+			const audio1 = document.getElementById('audio1');
+			const audio2 = document.getElementById('audio2');
+	
+			// Show the video container
+			videoContainer.style.display = 'block';
+	
+			// Reset video and audio positions
+			video.currentTime = 0;
+			audio1.currentTime = 0;
+			audio2.currentTime = 0;
+			const randomTextElement = document.getElementById('randomText');
+			randomTextElement.textContent = 'T̸͍̾́h̵͍̲́͝ĩ̵͖͖͐ş̵̘̓̄ ̶̲̏î̴͚͖̈s̶͇̀ ̴̱͖̇"̴͕̃H̵͔̠͐͗e̶̥͝ŕ̴͎"̴̜͓̌͘';
+			// Play video
+			video.play().then(() => {
+				console.log('Video is playing');
+	
+				// Play Audio 1 at 19 frames (~0.32 sec at 60 FPS)
+				setTimeout(() => {
+					randomTextElement.textContent = 'T̸͍̾́h̵͍̲́͝ĩ̵͖͖͐ş̵̘̓̄ ̶̲̏î̴͚͖̈s̶͇̀ ̴̱͖̇"̴͕̃H̵͔̠͐͗e̶̥͝ŕ̴͎"̴̜͓̌͘';
+					audio1.play();
+					console.log('Audio 1 started at 19 frames (0.32 sec)');
+				}, (19 / 60) * 1000);
+	
+				// Play Audio 2 at 80 frames (~1.33 sec at 60 FPS)
+				setTimeout(() => {
+					randomTextElement.textContent = 'Hahaha Haha...';
+					audio2.play();
+					console.log('Audio 2 started at 80 frames (1.33 sec)');
+				}, (80 / 60) * 1000);
+			}).catch(error => console.error('Error playing video:', error));
+	
+			// Hide video container when the video ends
+			video.onended = () => {
+				randomTextElement.textContent = 'Hahaha Haha...';
+				videoContainer.style.display = 'none';
+				audio1.pause();
+				audio2.pause();
+				console.log('Playback ended');
+				randomTextElement.textContent = 'Let me think';
+			};
+		}
+	});
+	</script>
+	
+	<!-- Video Container -->
+	<div id="video-container" style="position: fixed; bottom: -13%; left: -13%; width: 120%; height: auto; display: none; z-index: 9999; pointer-events: none; text-align: center; background: transparent;">
+		<video id="dolly-video" style="width: 100%; height: auto;" muted>
+			<source src="output.webm" type="video/webm">
+			Your browser does not support the video tag.
+		</video>
+	</div>
+	
+	<!-- Hidden Audio Elements -->
+	<audio id="audio1">
+		<source src="Dolly_shock.mp3.mp3" type="audio/mpeg">
+		Your browser does not support the audio tag.
+	</audio>
+	<audio id="audio2">
+		<source src="Dolly_laugh.mp3.mp3" type="audio/mpeg">
+		Your browser does not support the audio tag.
+	</audio>
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			const statsButton = document.querySelector('.tabs-button:nth-child(1)'); // Stats button
+			const talentsButton = document.querySelector('.tabs-button:nth-child(2)'); // Talents button
+			const statsContainer = document.getElementById('Stats'); // Stats container
+			const talentsContainer = document.getElementById('Talents'); // Talents container
+			const tabsContainer = document.querySelector('.tabs-container'); // Tabs container
+		
+			// Function to update the height of tabs-container
+			function updateContainerHeight() {
+				// Temporarily make both visible to measure their height
+				statsContainer.style.visibility = 'visible';
+				statsContainer.style.opacity = '0';
+				talentsContainer.style.visibility = 'visible';
+				talentsContainer.style.opacity = '0';
+		
+				const statsHeight = statsContainer.offsetHeight;
+				const talentsHeight = talentsContainer.offsetHeight;
+				const maxHeight = Math.max(statsHeight, talentsHeight);
+		
+				// Reset visibility and opacity based on the active tab
+				if (statsButton.classList.contains('selected')) {
+					statsContainer.style.visibility = 'visible';
+					statsContainer.style.opacity = '1';
+					talentsContainer.style.visibility = 'hidden';
+					talentsContainer.style.opacity = '0';
+				} else {
+					statsContainer.style.visibility = 'hidden';
+					statsContainer.style.opacity = '0';
+					talentsContainer.style.visibility = 'visible';
+					talentsContainer.style.opacity = '1';
+				}
+		
+				// Set the tabs-container height to the tallest content
+				tabsContainer.style.height = `${maxHeight}px`;
+			}
+		
+			// Function to show Stats and hide Talents
+			statsButton.addEventListener('click', function () {
+				statsContainer.style.visibility = 'visible';
+				statsContainer.style.opacity = '1';
+				statsContainer.style.pointerEvents = 'auto';
+		
+				talentsContainer.style.visibility = 'hidden';
+				talentsContainer.style.opacity = '0';
+				talentsContainer.style.pointerEvents = 'none';
+		
+				statsButton.classList.add('selected');
+				talentsButton.classList.remove('selected');
+		
+				updateContainerHeight();
+			});
+		
+			// Function to show Talents and hide Stats
+			talentsButton.addEventListener('click', function () {
+				statsContainer.style.visibility = 'hidden';
+				statsContainer.style.opacity = '0';
+				statsContainer.style.pointerEvents = 'none';
+		
+				talentsContainer.style.visibility = 'visible';
+				talentsContainer.style.opacity = '1';
+				talentsContainer.style.pointerEvents = 'auto';
+		
+				talentsButton.classList.add('selected');
+				statsButton.classList.remove('selected');
+		
+				updateContainerHeight();
+			});
+		
+			// Initialize: Show Stats by default and set initial height
+			statsContainer.style.visibility = 'visible';
+			statsContainer.style.opacity = '1';
+			statsContainer.style.pointerEvents = 'auto';
+		
+			talentsContainer.style.visibility = 'hidden';
+			talentsContainer.style.opacity = '0';
+			talentsContainer.style.pointerEvents = 'none';
+		
+			statsButton.classList.add('selected'); // Highlight Stats button by default
+			updateContainerHeight();
+		
+			// Recalculate height on window resize
+			window.addEventListener('resize', updateContainerHeight);
+		});
+		</script>
+
+</html>	
