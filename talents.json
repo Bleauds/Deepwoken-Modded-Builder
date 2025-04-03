@@ -1,30 +1,1417 @@
 {
-  "talents": [
-    {
-      "name": "Fishman",
-      "description": "You can execute enemies in water. Gain additional healing from knocking others in water.",
-      "rarity": "rare",
-      "buffs": [
-        { "health": 5 }
-      ],
-      "requirements": []
-    },
-    {
-      "name": "Dazing Finisher",
-      "description": "Flourishing enemies that are dazed by you causes them to not be knocked back and become charmed.",
-      "mystic": "Charm Caster",
-      "rarity": "advanced",
-      "buffs": {
+  "TalentsInfo": {
+      "The Sounds from Below": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "You can hear it pounding in your head. The sound that comes from beneath the waves. Will you respond?",
+          "Class": "Deepwoken",
+          "Stats": {
+              "Health": 115
+          },
+          "Stars": 3
       },
-      "requirements": [
-        { "charisma": 1 }
-      ],
-      "need": [
-        "Charismatic Cast",
-        "Chaotic Charm",
-        "Tough Love",
-        "Lasting Charisma"
-      ]
-    }
-  ]
+      "Raiton Path: Enlightened": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Your Lightning Attacks no longer apply 'Shock', instead applying 'Enlight'. During 'Enlight', opponent's Ether regen is halved, and Tempo gain is decreased. Stacking 3 'Enlights' will cause the opponent to Overcharge for 5 second with a cooldown of 20 seconds, resulting increased damage taken.",
+          "Class": "Anvil-strike",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Unipolar Path: Teslafication": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Your Thunder attacks are Purple, and your Metal attack are Copper. Attacking with Thunder attacks will buff your Metal attacks, and vice versa.",
+          "Class": "Thales",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Unipolar Conductivity": {
+          "InnateRarity": "Rare",
+          "Icon": "fists",
+          "Desc": "Landing a Metal attack 'copper-fies' your opponent for 7.5 seconds. Landing a Thunder attack during this state will apply 'Shock'.",
+          "Class": "Thales",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Flamewalker": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "When Warding Radiance is active you leave trails of flame when you slide.",
+          "Class": "Flame Warden",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Hell's Partisan": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "After landing a flame dagger on an opponent, your next hit against them will impale with a divine spear from above.",
+          "Class": "Flame Warden",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Warding Radiance": {
+          "InnateRarity": "Rare",
+          "Icon": "fists",
+          "Desc": "Every fire mantra builds up one halo stack. At 3 stacks a halo appears that allows you to slide further. Hell's Partisan is also triggered passively while this is active.",
+          "Class": "Flame Warden",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Manipulation Path: Agile Misery": {
+          "InnateRarity": "Rare",
+          "Icon": "fists",
+          "Desc": "Summoned blood pools have weakened effects, but also increase your movement speed. Agility mantras are now empowered with your Bloodrend, increasing mobility and blood loss. Landing Revenge will restore slight of your blood.",
+          "Class": "Blood Manipulation",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Rushing Demise": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Upon summoning a blood pool, your will receive a visible trace of blood, empowering your casted Agility mantras and dashing with blood.",
+          "Class": "Blood Manipulation",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Wind Step": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Create a step of wind below you when jumping in the air. Jumping while sliding down a slope or off a cliff launches you forwards.",
+          "Class": "Legion Shock Trooper",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Air Pressure": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Dodging an attack or hitting an enemy's block will transform your next dash into a Gale Dash.",
+          "Class": "Legion Shock Trooper",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Protective Offense": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Gain a layer of protective crosses upon spawning a blood pool, gaining slight defense.",
+          "Class": "Blood Manipulation",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Frozen Pin-Cushion": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Ice Daggers now freeze opponents.",
+          "Class": "Blood Manipulation",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Not So Cheap Trick": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "With the mastery of tricky blood control, you're able to sometimes blind your opponent.",
+          "Class": "Blood Manipulation",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Harvest Season": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Landing a Critical Attack will spawn a blood pool underneath the opponent.",
+          "Class": "Blood Manipulation",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Payback": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Guardbreaking an opponent will spawn a blood pool underneath them.",
+          "Class": "Blood Manipulation",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Deflecting Handyman": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Posture removal cooldown on parry is decreased by 0.25s.",
+          "Class": "Combat Accuracy",
+          "Stats": {
+              "Posture": 1
+          },
+          "Stars": 3
+      },
+      "Dead Eye": {
+          "InnateRarity": "Rare",
+          "Icon": "open_eye",
+          "Desc": "Opponents who have just dodged your attack will take +10% PEN on next attack. (8s CD)",
+          "Class": "Combat Accuracy",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Fatality": {
+          "InnateRarity": "Legendary",
+          "Icon": "fists",
+          "Desc": "Guardbreaking opponents stuns them for longer.",
+          "Class": "Combat Accuracy",
+          "Stats": {
+              "Posture": 1
+          },
+          "Stars": 3
+      },
+      "Sturdy Control": {
+          "InnateRarity": "Common",
+          "Icon": "shield",
+          "Desc": "Gain +2.5% PEN for every M1/Critical Attack everytime you get hit within 10s, capping at 15%. (15s CD)",
+          "Class": "Combat Accuracy",
+          "Stats": {
+              "Health": 5
+          },
+          "Stars": 3
+      },
+      "Master of His Craft": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Parrying a vent grants +20% PEN for 5 seconds. (10s CD)",
+          "Class": "Tactician",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Pinpoint Accuracy": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Bullets are able to track nearby enemies.",
+          "Class": "Tactician",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Successive Strikes": {
+          "InnateRarity": "Common",
+          "Icon": "open_eye",
+          "Desc": "Landing continous strikes with M1s or Critical Attacks will build up short stacks of increased damage that last 5 seconds. The timer will be regained on next stack. 'Dead Eye' will not cancel on your next hit.",
+          "Class": "Combat Accuracy",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Deadly Blow": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Dodging will increase your posture damage by 25% for next 3 seconds. (10s CD)",
+          "Class": "Combat Accuracy",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Stress Resistant": {
+          "InnateRarity": "Common",
+          "Icon": "shield",
+          "Desc": "While actively engaging in combat, insanity will not affect you every second time.",
+          "Class": "Mental Fortress",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Close Quarters": {
+          "InnateRarity": "Legendary",
+          "Icon": "shield",
+          "Desc": "The first parry in the aerial state will not knock you back. Instead, you extend it. (20s CD)",
+          "Class": "Tactician",
+          "Stats": {
+              "Posture": 1
+          },
+          "Stars": 3
+      },
+      "Upcoming Opportunity": {
+          "InnateRarity": "Legendary",
+          "Icon": "fist",
+          "Desc": "While not being as strong, you're still able to maintain a leading position. Uncap your PEN and gain +30% PEN for 3s upon parrying or dodging. (5s CD)",
+          "Class": "Tactician",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Professional's Standard": {
+          "InnateRarity": "Common",
+          "Icon": "fist",
+          "Desc": "Charmed opponents take +10% PEN.",
+          "Class": "Tactician",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Breaking Stereotype": {
+          "InnateRarity": "Common",
+          "Icon": "fist",
+          "Desc": "Blockbreaking an opponent with a critical attack will apply knockdown. You're both strong and smart now, give it a try. (15s CD)",
+          "Class": "Tactician",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Sucker Strike": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Landing a Critical Attack while being in a blood pool increases the damage output.",
+          "Class": "Blood Manipulation",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Emerging Transfusion": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Guardbreaking an opponent will pierce the opponent with a blood dagger.",
+          "Class": "Blood Manipulation",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Manipulation Path: Spirit Lantern": {
+          "InnateRarity": "Rare",
+          "Icon": "fists",
+          "Desc": "Landing Bloodrend attacks no longer spawn blood pools, and pools you spawn of Mantras have weakened effects on you, but instead Poison your opponents. Your Blood regeneration is passively increased. Landing multiple Bloodrend attacks will make the Lantern appear, empowering your Poison effects.",
+          "Class": "Blood Manipulation",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Venomous Chain": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Empower your Poisoning if successfully chained 3 times in a row, bypassing every resistance and dealing true 2% damage, no matter the opponent's health.",
+          "Class": "Blood Manipulation",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Heavy Disease": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Venomous Chain now summons a blood pool.",
+          "Class": "Blood Manipulation",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Simple Manipulation: Unstable Blood": {
+          "InnateRarity": "Common",
+          "Icon": "blood",
+          "Desc": "Landing Bloodrend attacks will spawn pools of blood and cause heavy bleeding.",
+          "Class": "Blood Manipulation",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Peaking Control": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "With a small chance on blood pool eruption from mantras, explode your opponent.",
+          "Class": "Blood Manipulation",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Piercing Totality": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Peaking Control now explodes everyone in range too and has increased PEN.",
+          "Class": "Blood Manipulation",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Blood Syphon": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Drain Sanity of those who are in the pool.",
+          "Class": "Lunatism",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Melted Wire": {
+          "InnateRarity": "Rare",
+          "Icon": "fists",
+          "Desc": "Landing a Thunder attack will build up charges. Using a Metal Attack will consume the charges and apply Burning.",
+          "Class": "Thales",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Raiton's Charge": {
+          "InnateRarity": "Rare",
+          "Icon": "fists",
+          "Desc": "Overcharge applies Burning.",
+          "Class": "Anvil-strike",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Wraith Path: Umbra": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Your Fire attacks are Black as Shadow in the night. Your Flame deals much lower burn damage but also disables Ether regen. Your Shadow attacks apply dark flames as well. Landing Flame or Shadow attacks will spawn Puppets of Flames. Disables Azure Flames if you have it.",
+          "Class": "Sunaikinti's Blessed",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Decay Path: Oxidize": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Your Metal has been rusted. Attacking with Metal mantras apply 'Rust', giving you Damage Resistance and increased Tempo Gain, but the effect is removed upon getting hit or damaging with something that isn't Ironsing.",
+          "Class": "Fullmetal",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Decaying Posture": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Deal more damage to opponents that have more posture than you. If welding Stone, deal more posture damage on M1s.",
+          "Class": "Fullmetal",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Oxidizing Blitz": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Metal mantras apply DOT to Health and Blood.",
+          "Class": "Fullmetal",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Battle Tendency": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "You can breathe more easily with +20% faster posture regen.",
+          "Class": "Bastion",
+          "Stats": {
+              "Posture": 2
+          },
+          "Stars": 3
+      },
+      "Braced Collapse": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "After being block broken, the next attack to hit you deals reduced damage.",
+          "Class": "Bastion",
+          "Stats": {
+              "Posture": 2
+          },
+          "Stars": 3
+      },
+      "Lightspeed Reflexes": {
+          "InnateRarity": "Rare",
+          "Icon": "fists",
+          "Desc": "Feinting gives you brief auto-parry.",
+          "Class": "Nimble Blade",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Brick Wall": {
+          "InnateRarity": "Legendary",
+          "Icon": "fists",
+          "Desc": "You refuse. You cannot be knocked off your feet until you are knocked completely unconscious.",
+          "Class": "Human Architecture",
+          "Stats": {
+              "Posture": 2,
+              "Health": 5
+          },
+          "Stars": 3
+      },
+      "Duelist's Dance": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Parrying an opponent gives you 25% more posture back.",
+          "Class": "Duelist",
+          "Stats": {
+              "Posture": 2
+          },
+          "Stars": 3
+      },
+      "Blade Dancer": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Landing an M1 removes your roll cooldown.",
+          "Class": "Vigil Swordsman",
+          "Stats": {
+              "Passive Agility": 1
+          },
+          "Stars": 3
+      },
+      "Pursuit": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "If you land your Revenge, clear the cooldown immediately. (25s CD)",
+          "Class": "Trickster",
+          "Stats": {
+              "Passive Agility": 1
+          },
+          "Stars": 3
+      },
+      "Cheap Shot": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Your attacks gain 10% PEN when you have an active speed boost.",
+          "Class": "Trickster",
+          "Stats": {
+              "Passive Agility": 1
+          },
+          "Stars": 3
+      },
+      "Down Comes the Claw": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Landing a Critical while you have a speed boost prevents your opponent from being able to dodge twice in a row for 5s.",
+          "Class": "Trickster",
+          "Stats": {
+              "Passive Agility": 1
+          },
+          "Stars": 3
+      },
+      "Maiming Claws": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Down Comes the Claw now disables your opponent's posture regeneration for 3s on proc.",
+          "Class": "Trickster",
+          "Stats": {
+              "Passive Agility": 1
+          },
+          "Stars": 3
+      },
+      "To the Finish": {
+          "InnateRarity": "Rare",
+          "Icon": "shield",
+          "Desc": "You take 10% less damage when below 30% health.",
+          "Class": "Freak Of Nature",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Unwavering Resolve": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Getting parried punishes your posture 33% less.",
+          "Class": "Rampaging Brute",
+          "Stats": {
+              "Posture": 2
+          },
+          "Stars": 3
+      },
+      "Harsh Response": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Enemies receive less posture back when parrying your attacks.",
+          "Class": "Colossus",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Steady Nerves": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "You dance from toe to toe - successful dodges restore posture.",
+          "Class": "Colossus",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Charismatic Cast": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Landing mantras on enemies charms them reducing damage done to you.",
+          "Class": "Charm Caster",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Matador": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Deal +20% more damage to human enemies with hyperarmor.",
+          "Class": "Weapon Master",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Murmur: Ardour": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "An application of your Soul Murmur that enables one to channel the murmur into raw strength.",
+          "Class": "Murmur",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Tough Love": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Deal 10% more damage to enemies charmed by you.",
+          "Class": "Charm Caster",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Magical Resolve": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Being hit increases Ether regen for a short duration.",
+          "Class": "Ether Adept",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Disbelief": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "You're resistant to the effects of Illusion magic. You are resistant to charms and tricks.",
+          "Class": "Mental Fortress",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Grasp on Reality": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Damage taken from insanity is reduced. Shared Misery is less effective against you.",
+          "Class": "Sturdy Resolve",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Eruption Path: Lava Serpent": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Your fire abilities no longer proc burn and instead proc an eruption under the enemies feet.",
+          "Class": "Lava Serpent",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Glass Path: Crystallization": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Your ice abilities no longer grant a slow effect or the ability to freeze and instead cause ice crystals to grow on your opponent.",
+          "Class": "Glassdancer",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Molten Defense": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Upon being block broken, you erupt. (30s CD)",
+          "Class": "Lava Serpent",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Meteor Impact": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Aerial moves will follow up into a devastating slam.",
+          "Class": "Falling Star Guard",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Flash Point": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Landing 3 Fire mantras will apply Burning.",
+          "Class": "Lava Serpent",
+          "Stats": {},
+          "Stars": 3
+      },
+      "The Floor is Lava": {
+          "InnateRarity": "Legendary",
+          "Icon": "fists",
+          "Desc": "Your Eruptions leave lethal pools of lava beneath them. Don't fall in.",
+          "Class": "Lava Serpent",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Double Trouble": {
+          "InnateRarity": "Common",
+          "Icon": "fists",
+          "Desc": "Landing a Fire attack while Eruption is charging will cause an explosion.",
+          "Class": "Lava Serpent",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Shared Misery": {
+          "InnateRarity": "Legendary",
+          "Icon": "open_eye",
+          "Desc": "Your attacks make you and people you're attacking go insane. If your opponents are going insane, deal increased 2% more DMG against them, or 1% if opponent has Grasp on Reality.",
+          "Class": "Heretic",
+          "Stats": {
+              "Health": 5
+          },
+          "Stars": 1
+      },
+      "All The Dead Gods": {
+          "InnateRarity": "Legendary",
+          "Icon": "open_eye",
+          "Desc": "All of your attacks now apply anti-heal for 6 seconds.",
+          "Class": "Heretic",
+          "Stats": {
+              "Health": 5
+          },
+          "Stars": 1
+      },
+      "Pleeksty's Faith": {
+          "InnateRarity": "Common",
+          "Icon": "fire_within",
+          "Desc": "When on fire, automatically quench flames at the cost of 20 ether. (10s CD)",
+          "Class": "Inferno",
+          "Stats": {
+              "Health": 5
+          },
+          "Stars": 1
+      },
+      "Cold Blood": {
+          "InnateRarity": "Legendary",
+          "Icon": "fire_within",
+          "Desc": "Your bloodloss is heavily reduced.",
+          "Class": "Blood Manipulation",
+          "Stats": {},
+          "Stars": 1
+      },
+      "Conditioned Runner": {
+          "InnateRarity": "Legendary",
+          "Icon": "boots",
+          "Desc": "You regenerate health faster than normal when running but less when not running.",
+          "Class": "Alley Cat",
+          "Stats": {
+              "Passive Agility": 1
+          },
+          "Stars": 3
+      },
+      "Safety Dance": {
+          "InnateRarity": "Rare",
+          "Icon": "fist",
+          "Desc": "Your dodge frames are doubled.",
+          "Class": "Leaf in the Wind",
+          "Stats": {},
+          "Stars": 2
+      },
+      "Observation": {
+          "InnateRarity": "Rare",
+          "Icon": "fist",
+          "Desc": "Dodge frames are larger if you cancel your roll immediately.",
+          "Class": "Leaf in the Wind",
+          "Stats": {},
+          "Stars": 2
+      },
+      "Speed Demon": {
+          "InnateRarity": "Rare",
+          "Icon": "fist",
+          "Desc": "Your attacks now inflict bleed while you have a speed boost. (1s CD)",
+          "Class": "Vigil Swordsman",
+          "Stats": {},
+          "Stars": 2
+      },
+      "Risky Moves": {
+          "InnateRarity": "Rare",
+          "Icon": "wind",
+          "Desc": "When you successfully dodge, you'll automatically dodge the next attack.",
+          "Class": "Butterfly",
+          "Stats": {
+              "Passive Agility": 1
+          },
+          "Stars": 3
+      },
+      "Ghost": {
+          "InnateRarity": "Legendary",
+          "Icon": "wind",
+          "Desc": "Dodging a move will briefly make you invisible or until you attack.",
+          "Class": "Butterfly",
+          "Stats": {
+              "Passive Agility": 1
+          },
+          "Stars": 3
+      },
+      "Overflowing Dam": {
+          "InnateRarity": "Rare",
+          "Icon": "dark_rift",
+          "Desc": "Having max ether makes your attacks do 15% more damage.",
+          "Class": "Caster",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Twelve Steps Ahead": {
+          "InnateRarity": "Common",
+          "Icon": "dark_rift",
+          "Desc": "Landing Prediction halves the cooldown of Prediction. Whiffing Prediction increases cooldown by 5s. Neither of these effects stack.",
+          "Class": "Omniscient",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Lord's Tithe": {
+          "InnateRarity": "Rare",
+          "Icon": "dark_rift",
+          "Desc": "Enemies you Reinforce are drained of their Ether.",
+          "Class": "Comrade",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Eureka": {
+          "InnateRarity": "Rare",
+          "Icon": "dark_rift",
+          "Desc": "Receive ether back on every successful perfect cast.",
+          "Class": "Caster",
+          "Stats": {},
+          "Stars": 0
+      },
+      "Ether Absorption": {
+          "InnateRarity": "Common",
+          "Icon": "dark_rift",
+          "Desc": "Receive Ether back when inflicted with damage from Mantras.",
+          "Class": "Caster",
+          "Stats": {},
+          "Stars": 0
+      },
+      "Spine Cutter": {
+          "InnateRarity": "Rare",
+          "Icon": "fists",
+          "Desc": "Hitting an enemy in the back after a roll cancel will initiate a second slash that deals your weapon's raw damage.",
+          "Class": "Duelist",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Million Ton Piercer": {
+          "InnateRarity": "Legendary",
+          "Icon": "boots",
+          "Desc": "Your PEN is now uncapped. All of your basic attacks have 15% more PEN.",
+          "Class": "Striking Serpent",
+          "Stats": {
+              "Health": 5
+          },
+          "Stars": 3
+      },
+      "Ether Overdrive": {
+          "InnateRarity": "Legendary",
+          "Icon": "boots",
+          "Desc": "Your PEN is now uncapped. All of your magical attacks have 15% more PEN.",
+          "Class": "Elementalist",
+          "Stats": {
+              "Health": 5
+          },
+          "Stars": 3
+      },
+      "Foolish Outburst": {
+          "InnateRarity": "Common",
+          "Icon": "boots",
+          "Desc": "Blocking or parrying a vent will absorb the Tempo cost of the vent. A Tactician steadies the course of battle.",
+          "Class": "Tactician",
+          "Stats": {
+              "Health": 5
+          },
+          "Stars": 3
+      },
+      "Dreambreaker": {
+          "InnateRarity": "Legendary",
+          "Icon": "boots",
+          "Desc": "Flourishing an opponent disables your Tempo drain and increases Tempo gain for 10s. Disables your opponent's Tempo gain for 7.5s.",
+          "Class": "Striking Serpent",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Collapsed Lung": {
+          "InnateRarity": "Legendary",
+          "Icon": "boots",
+          "Desc": "Block breaking an opponent closes off their ability to Vent for 3s.",
+          "Class": "Striking Serpent",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Dreambreaker's Left": {
+          "InnateRarity": "Legendary",
+          "Icon": "boots",
+          "Desc": "Landing 'Strong Left' mantra will activate Dreambreaker that is 2 times weaker.",
+          "Class": "Master of Strong Left",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Armorclad's Left": {
+          "InnateRarity": "Legendary",
+          "Icon": "boots",
+          "Desc": "Landing 'Strong Left' mantra will activate Armorclad that is 2 times weaker.",
+          "Class": "Master of Strong Left",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Perfect Flash": {
+          "InnateRarity": "Rare",
+          "Icon": "dark_rift",
+          "Desc": "Having full health causes your attacks to do 25% extra damage.",
+          "Class": "Caster",
+          "Stats": {
+              "Health": 2
+          },
+          "Stars": 1
+      },
+      "Tap Dancer": {
+          "InnateRarity": "Rare",
+          "Icon": "boots",
+          "Desc": "Roll again immediately after a roll cancel.",
+          "Class": "Duelist",
+          "Stats": {
+              "Passive Agility": 1,
+              "Health": 5,
+              "Posture": 1
+          },
+          "Stars": 1
+      },
+      "Reinforced Armor": {
+          "InnateRarity": "Legendary",
+          "Icon": "shield",
+          "Desc": "Incoming PEN is reduced by 25%.",
+          "Class": "Bastion",
+          "Stats": {
+              "Health": 5
+          },
+          "Stars": 3
+      },
+      "Piercing Blow": {
+          "InnateRarity": "Rare",
+          "Icon": "shield",
+          "Desc": "Attacks that break an opponent's block ignore their Armor resistances.",
+          "Class": "Raging Bull",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Shield Breaker": {
+          "InnateRarity": "Common",
+          "Icon": "shield",
+          "Desc": "Blunt damage now fully ignores the posture bonus from shields.",
+          "Class": "Rampaging Brute",
+          "Stats": {
+              "Posture": 1
+          },
+          "Stars": 3
+      },
+      "Knight's Rally": {
+          "InnateRarity": "Common",
+          "Icon": "shield",
+          "Desc": "When using a shield, you ready your block more quickly after taking a hit.",
+          "Class": "Shieldmaster",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Turtle Shell": {
+          "InnateRarity": "Common",
+          "Icon": "shield",
+          "Desc": "If your shield is on your back, take reduced backstab damage and negate Spine Cutter.",
+          "Class": "Shieldmaster",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Armorclad": {
+          "InnateRarity": "Legendary",
+          "Icon": "shield",
+          "Desc": "Flourishing or getting guardbroken gives you slight damage resistance for 10 seconds.",
+          "Class": "Everlasting Defense",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Exoskeleton": {
+          "InnateRarity": "Legendary",
+          "Icon": "skeleton_torso",
+          "Desc": "Your already existing layer of fortified Natural Armor has become stronger. Natural Armor durability is now 5 times more durable.",
+          "Class": "Freak of Nature",
+          "Stats": {
+              "Health": 5
+          },
+          "Stars": 3
+      },
+      "Ether Pack": {
+          "Icon": "shield",
+          "Desc": "It's just ether! What else could you ask for?",
+          "Class": "Miscellaneous",
+          "Stats": {
+              "Ether": 15
+          },
+          "Stars": 3
+      },
+      "Armor Conserver": {
+          "Icon": "shield",
+          "Desc": "You lose 15% less armor when hit.",
+          "Class": "Miscellaneous",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Lightweight": {
+          "Icon": "boots",
+          "Desc": "Move faster when your armor runs out of durability.",
+          "Class": "Miscellaneous",
+          "Stats": {
+              "Passive Agility": 3,
+              "Posture": 1
+          },
+          "Stars": 3
+      },
+      "Speed Emission": {
+          "Icon": "boots",
+          "Desc": "Gain a slight speed boost after landing a vent.",
+          "Class": "Miscellaneous",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Flash Pressure": {
+          "Icon": "open_eye",
+          "Desc": "Breeze Blitz now deals an extra devastating slash if you hit the first one.",
+          "Class": "Deepwoken",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Underdog": {
+          "InnateRarity": "Legendary",
+          "Icon": "shield",
+          "Desc": "You deal 5% more damage to those with higher HP than you.",
+          "Class": "Champion",
+          "Stats": {
+              "Health": 3
+          },
+          "Stars": 2
+      },
+      "Piercing Will": {
+          "InnateRarity": "Legendary",
+          "Icon": "open_eye",
+          "Desc": "You gain additional 15% PEN when you're running out of Sanity.",
+          "Class": "Heretic",
+          "Stats": {
+              "Health": 5
+          },
+          "Stars": 3
+      },
+      "Unfazed": {
+          "InnateRarity": "Rare",
+          "Icon": "open_eye",
+          "Desc": "You are more resilient to the side effects of going insane. You no longer Shiver and you Panic with less severity.",
+          "Class": "Heretic",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Lose Your Mind": {
+          "InnateRarity": "Rare",
+          "Icon": "open_eye",
+          "Desc": "Deal 10% damage whenever you're running out of Sanity.",
+          "Class": "Heretic",
+          "Stats": {
+              "Health": 5
+          },
+          "Stars": 3
+      },
+      "Solidifier": {
+          "InnateRarity": "Common",
+          "Icon": "fist",
+          "Desc": "Getting hit with an elemental attack cause you to resist further elemental attacks for 10 seconds. Elemental attacks deal slightly decreased damage.",
+          "Class": "Founder",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Impermeable": {
+          "InnateRarity": "Common",
+          "Icon": "fist",
+          "Desc": "Landing an Earthbend mantra in close range will coat your body in earth dust and crumbles, reducing blood loss.",
+          "Class": "Founder",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Natural Disaster": {
+          "InnateRarity": "Common",
+          "Icon": "fist",
+          "Desc": "Apply 'Concussion' upon landing 3 Earthbend attacks, slightly blinding & dazing your opponents, as well blocking their view to health.",
+          "Class": "Founder",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Memento Mori": {
+          "InnateRarity": "Common",
+          "Icon": "fist",
+          "Desc": "Going insane will cause more destruction with Earthbend attacks, hitting everyone in range.",
+          "Class": "Founder",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Annihilator": {
+          "InnateRarity": "Common",
+          "Icon": "fist",
+          "Desc": "Earthbend attacks can cause bone destruction with a chance, slowing down your opponents.",
+          "Class": "Founder",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Battlefield Strategist": {
+          "InnateRarity": "Common",
+          "Icon": "fist",
+          "Desc": "Landing long-ranged Earthbend attacks will spawn spikes of rocks underneath the opponent. Short-ranged attacks will spawn a wall of solid rock behind the opponent. (20s CD)",
+          "Class": "Vandal",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Master Earthbender": {
+          "InnateRarity": "Common",
+          "Icon": "fist",
+          "Desc": "You're the master of attunement Earthbend. You deal 20% more damage on guardbreak with Earthbend attacks, and 10% casually.",
+          "Class": "Founder",
+          "Stats": {
+              "Health": 10
+          },
+          "Stars": 3
+      },
+      "Master Flamecharmer": {
+          "InnateRarity": "Rare",
+          "Icon": "flame_within",
+          "Desc": "Taking this WILL LOCK Eruption Path. You may pick only one Master Flamecharmer. You're the master of attunement Flamecharm. You take less DMG from fire.",
+          "Class": "Flamecharmer",
+          "Stats": {
+              "Health": 10
+          },
+          "Stars": 3
+      },
+      "Master Bloodrender": {
+          "InnateRarity": "Rare",
+          "Icon": "flame_within",
+          "Desc": "You're the master of attunement Bloodrend. You deal more damage with Bloodrend attacks.",
+          "Class": "Blood Manipulation",
+          "Stats": {
+              "Health": 10
+          },
+          "Stars": 3
+      },
+      "Master Flamecharmer (Eruption)": {
+          "InnateRarity": "Rare",
+          "Icon": "flame_within",
+          "Desc": "Taking this WONT LOCK Eruption Path. You may pick only one Master Flamecharmer. You're the master of attunement Flamecharm. You take less DMG from fire.",
+          "Class": "Flamecharmer",
+          "Stats": {
+              "Health": 10
+          },
+          "Stars": 3
+      },
+      "The Final Act": {
+          "InnateRarity": "Legendary",
+          "Icon": "flame_within",
+          "Desc": "Hitting people with your M1s that are on fire will cause them to explode. (15s CD)",
+          "Class": "Flamecharmer",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Emperor Flame": {
+          "InnateRarity": "Legendary",
+          "Icon": "flame_within",
+          "Desc": "Upon activating Final Act, coat yourself in flames for 20s, increasing damage and walkspeed slightly. (60s CD)",
+          "Class": "Flamecharmer",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Azure Flames": {
+          "InnateRarity": "Rare",
+          "Icon": "flame_within",
+          "Desc": "Your fire now burns blue and deals increased burn damage. Does not works with Wraith Path: Umbra.",
+          "Class": "Elementalist",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Explosive Flourish": {
+          "InnateRarity": "Rare",
+          "Icon": "flame_within",
+          "Desc": "Hitting opponent with Fire attack after flourishing them causes an explosion. (15s CD)",
+          "Class": "Flamecharmer",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Return to the Dark Ages": {
+          "InnateRarity": "Rare",
+          "Icon": "flame_within",
+          "Desc": "Your mantra damage is cut by 10%, but your incoming mantra damage is cut by 10% too.",
+          "Class": "Miscellaneous",
+          "Stats": {
+              "Health": 5
+          },
+          "Stars": 3
+      },
+      "Neuroplasticity": {
+          "InnateRarity": "Rare",
+          "Icon": "flame_within",
+          "Desc": "You gain 5% PEN on your mantras.",
+          "Class": "Miscellaneous",
+          "Stats": {
+              "Health": 5
+          },
+          "Stars": 3
+      },
+      "Dazing Finisher": {
+          "InnateRarity": "Rare",
+          "Icon": "flame_within",
+          "Desc": "Flourishing enemies that are charmed by you cause them to not be knocked back and dazed instead.",
+          "Class": "Charm Caster",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Flaming Flourish": {
+          "InnateRarity": "Common",
+          "Icon": "flame_within",
+          "Desc": "Your flourish now applies Burn.",
+          "Class": "Flamecharmer",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Master Frostdrawer": {
+          "InnateRarity": "Rare",
+          "Icon": "fist",
+          "Desc": "You're the master of attunement Frostdraw. Lose less and steal more Water while using Sear or Gluttony enchants.",
+          "Class": "Frostdrawer",
+          "Stats": {
+              "Health": 10
+          },
+          "Stars": 3
+      },
+      "Crystal Shrapnel": {
+          "InnateRarity": "Common",
+          "Icon": "fist",
+          "Desc": "Your crystal explosions now have an AoE that applies crystals to all hit.",
+          "Class": "Glassdancer",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Reclaimed Glass": {
+          "InnateRarity": "Common",
+          "Icon": "fist",
+          "Desc": "Your Crystal Shrapnel explosions now grant you and any allies caught in them 10% Elemental Resistance for 10 seconds.",
+          "Class": "Glassdancer",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Temperature Shock": {
+          "InnateRarity": "Common",
+          "Icon": "fist",
+          "Desc": "Your fire mantras now detonate any stacked crystals.",
+          "Class": "Flashfreeze",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Volcanic Glass": {
+          "InnateRarity": "Legendary",
+          "Icon": "fist",
+          "Desc": "Detonating crystals causes an eruption soon after.",
+          "Class": "Flashfreeze",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Master Frostdrawer (Crystallization)": {
+          "InnateRarity": "Rare",
+          "Icon": "fist",
+          "Desc": "Taking this WONT LOCK Crystal Path. You may pick only one Master Frostdrawer. You're the master of attunement Frostdraw. Lose less and steal more Water while using Sear or Gluttony enchants.",
+          "Class": "Frostdrawer",
+          "Stats": {
+              "Health": 10
+          },
+          "Stars": 3
+      },
+      "Cryostasis": {
+          "InnateRarity": "Legendary",
+          "Icon": "fist",
+          "Desc": "After getting guardbroken, take decreased damage for 3s. (25s CD)",
+          "Class": "Frostdrawer",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Chilling Flourish": {
+          "InnateRarity": "Common",
+          "Icon": "fist",
+          "Desc": "Your flourish now applies Chill.",
+          "Class": "Frostdrawer",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Cold Heart": {
+          "InnateRarity": "Rare",
+          "Icon": "fist",
+          "Desc": "Your Chill now slows down Ether regeneration.",
+          "Class": "Frostdrawer",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Unyielding Frost": {
+          "InnateRarity": "Legendary",
+          "Icon": "fist",
+          "Desc": "Your Chill now lowers healing by half.",
+          "Class": "Frostdrawer",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Master Galebreather": {
+          "InnateRarity": "Rare",
+          "Icon": "fist",
+          "Desc": "Taking this WILL LOCK Specter Path. You may pick only one Master Galebreather. Hitting people that have Suffocation with your weapon will give you a speedboost and extend Suffocation.",
+          "Class": "Galebreather",
+          "Stats": {
+              "Health": 10
+          },
+          "Stars": 3
+      },
+      "Master Galebreather (Specter)": {
+          "InnateRarity": "Rare",
+          "Icon": "fist",
+          "Desc": "Taking this WON'T LOCK Specter Path. You may pick only one Master Galebreather. Hitting people that have Suffocation with your weapon will give you a speedboost and extend Suffocation.",
+          "Class": "Galebreather",
+          "Stats": {
+              "Health": 10
+          },
+          "Stars": 3
+      },
+      "Haunted Gale": {
+          "InnateRarity": "Rare",
+          "Icon": "fist",
+          "Desc": "Every 3 hits landed by perfectly casted Galebreathe mantras will cause the target to be quickly struck by a phantom of wind.",
+          "Class": "Galebreather",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Haunted Path: Specter": {
+          "InnateRarity": "Rare",
+          "Icon": "fist",
+          "Desc": "Your Wind attacks are now white. Your 'Haunted Gale' is now stronger. Instead of applying 'Suffocation', you apply 'Winded' instead.",
+          "Class": "Specter",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Spectral Shift": {
+          "InnateRarity": "Rare",
+          "Icon": "fist",
+          "Desc": "Activating 'A World Without Song' will make you Wraithlike.",
+          "Class": "Specter",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Suffocating Flourish": {
+          "InnateRarity": "Rare",
+          "Icon": "fist",
+          "Desc": "Upon flourishing an opponent, get a speedboost and apply 3s Suffocation to your opponent.",
+          "Class": "Galebreather",
+          "Stats": {},
+          "Stars": 3
+      },
+      "A World Without Song": {
+          "InnateRarity": "Legendary",
+          "Icon": "fist",
+          "Desc": "Landing Wind attacks will apply Suffocation that lasts 5 seconds.",
+          "Class": "Galebreather",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Master Thundercaller": {
+          "InnateRarity": "Rare",
+          "Icon": "fist",
+          "Desc": "You're the master of attunement Thundercall. Your thunder attacks now stun for more time.",
+          "Class": "Thundercaller",
+          "Stats": {
+              "Health": 10
+          },
+          "Stars": 3
+      },
+      "Electrocution": {
+          "InnateRarity": "Common",
+          "Icon": "fist",
+          "Desc": "Hitting an opponent 3 times with Thunder attacks within 15s will apply Electrocution effect for 10s. Blood loss & burn damage is heavily increased.",
+          "Class": "Thundercaller",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Short Circuit": {
+          "InnateRarity": "Rare",
+          "Icon": "fist",
+          "Desc": "Electrocution now applies Burn.",
+          "Class": "Thundercaller",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Scatter": {
+          "InnateRarity": "Rare",
+          "Icon": "fist",
+          "Desc": "Flourishing an enemy applies Electrocution.",
+          "Class": "Thundercaller",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Overload": {
+          "InnateRarity": "Legendary",
+          "Icon": "fist",
+          "Desc": "Hitting an opponent 3 times within 20s with your Thunder attacks now apply Overload for 15s to yourself. Overload increases damage and Tempo gain. If you have Raiton Path, coat yourself in Shock for 10 seconds, increasing Walkspeed and lowering Tempo drain. (30s CD)",
+          "Class": "Thundercaller",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Master Shadowcaster": {
+          "InnateRarity": "Rare",
+          "Icon": "fist",
+          "Desc": "You're the master of attunement Shadowcast. You steal more Ether with Shadow attacks.",
+          "Class": "Shadowcaster",
+          "Stats": {
+              "Health": 10
+          },
+          "Stars": 3
+      },
+      "There Shall Be No Light": {
+          "InnateRarity": "Legendary",
+          "Icon": "fist",
+          "Desc": "Your Shadow attacks apply 'Restrain'. During this effect, opponent's walkspeed is lowered, and you gain less posture penalty upon parrying.",
+          "Class": "Shadowcaster",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Common State of Inner Violence": {
+          "InnateRarity": "Legendary",
+          "Icon": "fist",
+          "Desc": "Successfully hitting enemy 6 times within a minute with Shadow attacks will make you enter the state of Violence for 20s. During this state, Ether regen and Tempo drain are increased. (50s CD)",
+          "Class": "Shadowcaster",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Empty Shell": {
+          "InnateRarity": "Common",
+          "Icon": "fist",
+          "Desc": "If opponent has less than 10% Ether left, drain their Tempo instead.",
+          "Class": "Shadowcaster",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Dark Synergy": {
+          "InnateRarity": "Common",
+          "Icon": "fist",
+          "Desc": "Engulf your enemy in shadows when flourishing them. If you have 'There Shall Be No Light', upon flourishing apply 'Restrain'.",
+          "Class": "Shadowcaster",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Master Ironsinger": {
+          "InnateRarity": "Rare",
+          "Icon": "fist",
+          "Desc": "You're the master of attunement Ironsing. Your Metal deal more Armor damage.",
+          "Class": "Ironsinger",
+          "Stats": {
+              "Health": 10
+          },
+          "Stars": 3
+      },
+      "Armor Synergy": {
+          "InnateRarity": "Common",
+          "Icon": "fist",
+          "Desc": "Having more than 90% Armor will make you take decreased damage.",
+          "Class": "Ironsinger",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Metal Eater": {
+          "InnateRarity": "Rare",
+          "Icon": "fist",
+          "Desc": "If you have no Ether while casting Ironsing mantra, use your Armor instead. Uses 20% of your Armor.",
+          "Class": "Ironsinger",
+          "Stats": {},
+          "Stars": 3
+      },
+      "An Ironsinger's Instinct": {
+          "InnateRarity": "Rare",
+          "Icon": "fist",
+          "Desc": "Successfully dodging an attack reduces the damage of the next attack taken. (20s CD)",
+          "Class": "Ironsinger",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Metal Drain": {
+          "InnateRarity": "Legendary",
+          "Icon": "fist",
+          "Desc": "Landing 3 hits with Ironsing mantras will cause opponent's Armor to slowly drain and your Armor to slowly regenerate. Landing a Critical Attack will also give you Armor regeneration.",
+          "Class": "Ironsinger",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Alloyblood": {
+          "InnateRarity": "Legendary",
+          "Icon": "fist",
+          "Desc": "Bleed damage is halved against you. Your bloodloss is heavily reduced.",
+          "Class": "Ironsinger",
+          "Stats": {},
+          "Stars": 3
+      },
+      "Charming Master": {
+          "InnateRarity": "Legendary",
+          "Icon": "fist",
+          "Desc": "Your attacks now apply overcharm for 10 seconds. While overcharm is active on your opponent, their HP & Ether regen, along with Tempo gain are halved. Vampirism heal is also cut by half. (20s CD)",
+          "Class": "Caster",
+          "Stats": {},
+          "Stars": 3
+      }
+  }
 }
