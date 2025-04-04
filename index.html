@@ -412,6 +412,7 @@
 		<script>
 			document.addEventListener('DOMContentLoaded', function () {
 				// Stats mapping from the export script
+				talentData.Icon ="https://deepwoken.co/newicon.png"
 				const statsMapping = {
 					st: 'Strength',
 					pe: 'Precision',
@@ -964,7 +965,7 @@
 							groupedTalents[rarity][className].push({
 								name: talentName,
 								desc: talentData.Desc,
-								icon: talentData.Icon || "https://deepwoken.co/newicon.png" // Default icon if none provided
+								icon: talentData.Icon ="https://deepwoken.co/newicon.png" // Default icon if none provided
 							});
 						}
 					}
@@ -1006,7 +1007,7 @@
 							talentDiv.innerHTML = `
 							  ${talent.name}
 							  <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">
-								<img class="icon svelte-hwcpcr" title="${talent.desc}" width="14" height="14" alt="new" src="${talent.icon}">
+								<img class="icon svelte-hwcpcr" title="${talent.desc}" width="14" height="14" alt="new" src="https://deepwoken.co/newicon.png">
 							  </div>
 							`;
 		
@@ -1081,7 +1082,7 @@
 							talentDiv.innerHTML = `
 							  ${talent.name}
 							  <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">
-								<img class="icon svelte-hwcpcr" title="${talent.desc}" width="14" height="14" alt="new" src="${talent.icon}">
+								<img class="icon svelte-hwcpcr" title="${talent.desc}" width="14" height="14" alt="new" src="https://deepwoken.co/newicon.png">
 							  </div>
 							`;
 		
@@ -1092,17 +1093,7 @@
 					});
 		
 					// Update the obtained talents count
-					const obtainedCount = Object.keys(currentTalents).length;
-					const obtainedCountElement = document.querySelector('#rollable-talent-2 .svelte-hwcpcr:nth-child(2) b:first-child');
-					if (obtainedCountElement) obtainedCountElement.textContent = obtainedCount;
-		
-					// Update rarity counts (simplified, adjust as needed)
-					const rareCount = Object.entries(currentTalents).filter(([name]) => talentsData[name]?.InnateRarity === "Rare").length;
-					const advancedCount = Object.entries(currentTalents).filter(([name]) => talentsData[name]?.InnateRarity === "Legendary").length;
-					const rareCountElement = document.querySelector('#rollable-talent-2 .Rare:nth-child(2)');
-					const advancedCountElement = document.querySelector('#rollable-talent-2 .Advanced:nth-child(2)');
-					if (rareCountElement) rareCountElement.textContent = rareCount;
-					if (advancedCountElement) advancedCountElement.textContent = advancedCount;
+
 				}
 			});
 		</script>
@@ -1313,7 +1304,62 @@
                     <div><b class="svelte-g2d5k9">Export</b> as a code</div>
                 </button>  
             </div>
+            <script>
+                document.getElementById('exportcode').addEventListener('click', function() {
+                    const statsMapping = {
+                        st: 'Strength',
+                        pe: 'Precision',
+                        fo: 'Fortitude',
+                        ag: 'Agility',
+                        in: 'Intelligence',
+                        wi: 'Willpower',
+                        ch: 'Charisma',
+                        he: 'Heavy Wep.',
+                        me: 'Medium Wep.',
+                        li: 'Light Wep.',
+                        fl: 'Flamecharm',
+                        fr: 'Frostdraw',
+                        th: 'Thundercall',
+                        ga: 'Galebreathe',
+                        sh: 'Shadowcast',
+                        ir: 'Ironsing',
+                        bl: 'Bloodrend',
+                        eb: 'Earthbend',
+                        ra: 'Race',
+                        oa: 'Oath',
+                        mu: 'Murmur',
+                        be: 'Bell'
+                    };
             
+                    // Collect the stats from the inputs
+                    const stats = {};
+                    Object.keys(statsMapping).forEach(key => {
+                        // Look for the input based on the statname attribute in the mapping
+                        const input = document.querySelector(`input[statname="${statsMapping[key]}"]`);
+                        const select = document.querySelector(`select[statname="${statsMapping[key]}"]`); // Added support for <select> elements
+            
+                        if (input) {
+                            stats[key] = input.value || 0;
+                        } else if (select) {
+                            stats[key] = select.value || 0;
+                        } else {
+                            stats[key] = 0; // Default to 0 if no input or select found
+                        }
+                    });
+            
+                    // Convert stats into a string in the format "key/value"
+                    const statsString = Object.entries(stats)
+                        .map(([key, value]) => `${key}/${value}`)
+                        .join('/');
+            
+                    // Copy to clipboard
+                    navigator.clipboard.writeText(statsString).then(function() {
+                        alert('Build copied to clipboard!');
+                    }).catch(function(err) {
+                        console.error('Could not copy build to clipboard: ', err);
+                    });
+                });
+            </script>
 			<script>
 				document.addEventListener('DOMContentLoaded', function () {
 					// Stats mapping from the export script
@@ -1903,6 +1949,7 @@
 								talentDiv.style.userSelect = 'none';
 								talentDiv.style.touchAction = 'auto';
 								talentDiv.dataset.talentName = talent.name;
+								
 			
 								// Debug log to check icon value
 								console.log(`Talent: ${talent.name}, Icon: ${talent.icon}`);
@@ -1910,7 +1957,7 @@
 								talentDiv.innerHTML = `
 									${talent.name}
 									<div class="svelte-hwcpcr" style="display: flex; gap: 4px;">
-										<img class="icon svelte-hwcpcr" title="${talent.desc}" width="14" height="14" alt="new" src="${talent.icon}">
+										<img class="icon svelte-hwcpcr" title="${talent.desc}" width="14" height="14" alt="new" src="https://deepwoken.co/newicon.png">
 									</div>
 								`;
 			
@@ -1984,7 +2031,7 @@
 								talentDiv.innerHTML = `
 									${talent.name}
 									<div class="svelte-hwcpcr" style="display: flex; gap: 4px;">
-										<img class="icon svelte-hwcpcr" title="${talent.desc}" width="14" height="14" alt="new" src="${talent.icon}">
+										<img class="icon svelte-hwcpcr" title="${talent.desc}" width="14" height="14" alt="new" src="https://deepwoken.co/newicon.png">
 									</div>
 								`;
 			
@@ -2003,21 +2050,7 @@
 							obtainedTalentsContainer.appendChild(fieldset);
 						});
 			
-						const obtainedCount = Object.keys(currentTalents).length;
-						const obtainedCountElement = document.querySelector('#rollable-talent-2 .svelte-hwcpcr:nth-child(2) b:first-child');
-						if (obtainedCountElement) obtainedCountElement.textContent = obtainedCount;
-			
-						const rareCount = Object.entries(currentTalents).filter(([name]) => talentsData[name]?.InnateRarity === "Rare").length;
-						const advancedCount = Object.entries(currentTalents).filter(([name]) => talentsData[name]?.InnateRarity === "Legendary").length;
-						const rareCountElement = document.querySelector('#rollable-talent-2 .Rare:nth-child(2)');
-						const advancedCountElement = document.querySelector('#rollable-talent-2 .Advanced:nth-child(2)');
-			
-						console.log("Obtained count:", obtainedCount);
-						console.log("Rare count:", rareCount);
-						console.log("Advanced count:", advancedCount);
-			
-						if (rareCountElement) rareCountElement.textContent = rareCount;
-						if (advancedCountElement) advancedCountElement.textContent = advancedCount;
+
 					}
 				});
 			</script>
