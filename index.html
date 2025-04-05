@@ -410,692 +410,285 @@
 			<div class="talent svelte-hwcpcr" data-svelte-h="svelte-1yuze5x">No talents :(</div>
 		</div>
 		<script>
-			document.addEventListener('DOMContentLoaded', function () {
-				// Stats mapping from the export script
-				talentData.Icon ="https://deepwoken.co/newicon.png"
-				const statsMapping = {
-					st: 'Strength',
-					pe: 'Precision',
-					fo: 'Fortitude',
-					ag: 'Agility',
-					in: 'Intelligence',
-					wi: 'Willpower',
-					ch: 'Charisma',
-					he: 'Heavy Wep.',
-					me: 'Medium Wep.',
-					li: 'Light Wep.',
-					fl: 'Flamecharm',
-					fr: 'Frostdraw',
-					th: 'Thundercall',
-					ga: 'Galebreathe',
-					sh: 'Shadowcast',
-					ir: 'Ironsing',
-					bl: 'Bloodrend',
-					eb: 'Earthbend',
-					ra: 'Race',
-					oa: 'Oath',
-					mu: 'Murmur',
-					be: 'Bell'
-				};
-		
-				// Map shorthand keys to Lua-style Total[Stat] keys
-				const luaStatsMapping = {
-					st: 'TotalStrength',
-					pe: 'TotalPrecision',
-					fo: 'TotalFortitude',
-					ag: 'TotalAgility',
-					in: 'TotalIntelligence',
-					wi: 'TotalWillpower',
-					ch: 'TotalCharisma',
-					fl: 'TotalElementFire',
-					fr: 'TotalElementIce',
-					th: 'TotalElementLightning',
-					ga: 'TotalElementWind',
-					sh: 'TotalElementShadow',
-					ir: 'TotalElementIron',
-					bl: 'TotalElementBlood',
-					eb: 'TotalElementEarth'
-					// Add more mappings if needed (e.g., for Level, Mantras)
-				};
-		
-				// Function to collect and update player stats
-				function updatePlayerStats() {
-					const stats = {};
-					Object.keys(statsMapping).forEach(key => {
-						const input = document.querySelector(`input[statname="${statsMapping[key]}"]`);
-						const select = document.querySelector(`select[statname="${statsMapping[key]}"]`);
-		
-						if (input) {
-							stats[key] = parseInt(input.value) || 0;
-						} else if (select) {
-							stats[key] = select.value || 0;
-						} else {
-							stats[key] = 0; // Default to 0 if no input or select found
-						}
-					});
-		
-					const playerStats = {};
-					Object.keys(stats).forEach(key => {
-						if (luaStatsMapping[key]) {
-							playerStats[luaStatsMapping[key]] = stats[key];
-						}
-					});
-		
-					// Add Level and Mantras (if available on the page)
-					const levelInput = document.querySelector('input[statname="Level"]');
-					playerStats.Level = levelInput ? parseInt(levelInput.value) || 0 : 0;
-		
-					const mantrasInput = document.querySelector('input[statname="Mantras"]') || document.querySelector('select[statname="Mantras"]');
-					playerStats.Mantras = mantrasInput ? mantrasInput.value : "";
-		
-					return playerStats;
-				}
-		
-				// Simulated current talents (replace with actual selected talents, e.g., from a store)
-				let currentTalents = {
-					"Risky Moves": true,
-				};
-		
-				// Fetch the JSON file and populate initially
-				fetch('talents.json')
-					.then(response => response.json())
-					.then(data => {
-						const playerStats = updatePlayerStats();
-						populateDropdowns(data.TalentsInfo, currentTalents, playerStats);
-						populateObtainedTalents(currentTalents, data.TalentsInfo);
-		
-						// Add event listeners to update talents when stats change
-						Object.values(statsMapping).forEach(statName => {
-							const input = document.querySelector(`input[statname="${statName}"]`);
-							const select = document.querySelector(`select[statname="${statName}"]`);
-							if (input) {
-								input.addEventListener('input', () => {
-									const updatedStats = updatePlayerStats();
-									populateDropdowns(data.TalentsInfo, currentTalents, updatedStats);
-								});
-							} else if (select) {
-								select.addEventListener('change', () => {
-									const updatedStats = updatePlayerStats();
-									populateDropdowns(data.TalentsInfo, currentTalents, updatedStats);
-								});
-							}
-						});
-		
-						// Add event listener for Level and Mantras if they exist
-						const levelInput = document.querySelector('input[statname="Level"]');
-						if (levelInput) {
-							levelInput.addEventListener('input', () => {
-								const updatedStats = updatePlayerStats();
-								populateDropdowns(data.TalentsInfo, currentTalents, updatedStats);
-							});
-						}
-						const mantrasInput = document.querySelector('input[statname="Mantras"]') || document.querySelector('select[statname="Mantras"]');
-						if (mantrasInput) {
-							mantrasInput.addEventListener('input', () => {
-								const updatedStats = updatePlayerStats();
-								populateDropdowns(data.TalentsInfo, currentTalents, updatedStats);
-							});
-							if (mantrasInput.tagName === 'SELECT') {
-								mantrasInput.addEventListener('change', () => {
-									const updatedStats = updatePlayerStats();
-									populateDropdowns(data.TalentsInfo, currentTalents, updatedStats);
-								});
-							}
-						}
-					})
-					.catch(error => console.error('Error loading talents:', error));
-		
-				function populateDropdowns(talents, currentTalents, playerStats) {
-					// Group talents by rarity and class
-					const groupedTalents = {
-						Advanced: {},
-						Rare: {},
-						Common: {}
-					};
-		
-					// Helper function to check if a mantra exists
-					function hasMantra(mantras, mantraName) {
-						return mantras && typeof mantras === 'string' ? mantras.includes(mantraName) : false;
-					}
-		
-					// Filter and group talents based on requirements
-					// Only enforce "must have" prerequisites and stat/mantra requirements
-					// Ignore "cannot have" conditions
-					for (const [talentName, talentData] of Object.entries(talents)) {
-						let isEligible = true;
-		
-						// Apply Lua logic to determine eligibility
-						if (talentName === "Ghost" && !currentTalents["Risky Moves"]) {
-							isEligible = false;
-						} else if (talentName === "Scatter" && !currentTalents["Electrocution"]) {
-							isEligible = false;
-						} else if (talentName === "Emperor Flame" && !currentTalents["The Final Act"]) {
-							isEligible = false;
-						} else if (talentName === "Short Circuit" && !currentTalents["Electrocution"]) {
-							isEligible = false;
-						} else if (talentName === "Decaying Posture" && !currentTalents["Decay Path: Oxidize"]) {
-							isEligible = false;
-						} else if (talentName === "Oxidizing Blitz" && !currentTalents["Decay Path: Oxidize"]) {
-							isEligible = false;
-						} else if (talentName === "Unipolar Conductivity" && !currentTalents["Unipolar Path: Teslafication"]) {
-							isEligible = false;
-						} else if (talentName === "Melted Wire" && !currentTalents["Unipolar Path: Teslafication"]) {
-							isEligible = false;
-						} else if (talentName === "Raiton's Charge" && !currentTalents["Raiton Path: Enlightened"]) {
-							isEligible = false;
-						} else if (talentName === "Overcharge" && !currentTalents["Unipolar Path: Teslafication"]) {
-							isEligible = false;
-						} else if (talentName === "Molten Defense" && !currentTalents["Eruption Path: Lava Serpent"]) {
-							isEligible = false;
-						} else if (talentName === "Flash Point" && !currentTalents["Eruption Path: Lava Serpent"]) {
-							isEligible = false;
-						} else if (talentName === "The Floor is Lava" && !currentTalents["Eruption Path: Lava Serpent"]) {
-							isEligible = false;
-						} else if (talentName === "Double Trouble" && !currentTalents["Eruption Path: Lava Serpent"]) {
-							isEligible = false;
-						} else if (talentName === "Tough Love" && !currentTalents["Charismatic Cast"]) {
-							isEligible = false;
-						} else if (talentName === "Magical Resolve" && !currentTalents["Battle Tendency"]) {
-							isEligible = false;
-						} else if (talentName === "Turtle Shell" && !currentTalents["Knight's Rally"]) {
-							isEligible = false;
-						} else if (talentName === "Maiming Claws" && !currentTalents["Down Comes the Claw"]) {
-							isEligible = false;
-						} else if (talentName === "Crystal Shrapnel" && !currentTalents["Glass Path: Crystallization"]) {
-							isEligible = false;
-						} else if (talentName === "Volcanic Glass" && (!currentTalents["Glass Path: Crystallization"] || !currentTalents["Eruption Path: Lava Serpent"])) {
-							isEligible = false;
-						} else if (talentName === "Reclaimed Glass" && !currentTalents["Crystal Shrapnel"]) {
-							isEligible = false;
-						} else if (talentName === "Temperature Shock" && !currentTalents["Master Frostdrawer (Crystallization)"]) {
-							isEligible = false;
-						} else if (talentName === "Hell's Partisan" && !currentTalents["Warding Radiance"]) {
-							isEligible = false;
-						} else if (talentName === "Rushing Demise" && !currentTalents["Manipulation Path: Agile Misery"]) {
-							isEligible = false;
-						} else if (talentName === "Protective Offense" && !currentTalents["Manipulation Path: Agile Misery"]) {
-							isEligible = false;
-						} else if (talentName === "Venomous Chain" && !currentTalents["Manipulation Path: Spirit Lantern"]) {
-							isEligible = false;
-						} else if (talentName === "Heavy Disease" && !currentTalents["Manipulation Path: Spirit Lantern"]) {
-							isEligible = false;
-						} else if (talentName === "Peaking Control" && !currentTalents["Simple Manipulation: Unstable Blood"]) {
-							isEligible = false;
-						} else if (talentName === "Piercing Totality" && !currentTalents["Simple Manipulation: Unstable Blood"]) {
-							isEligible = false;
-						} else if (talentName === "Split-Second Injection" && !currentTalents["Bleeding Fighter"]) {
-							isEligible = false;
-						} else if (talentName === "Haunted Path: Specter" && !(currentTalents["Master Galebreather (Specter)"] && currentTalents["Haunted Gale"])) {
-							isEligible = false;
-						} else if (talentName === "Spectral Shift" && !(currentTalents["Master Galebreather (Specter)"] && currentTalents["Haunted Gale"])) {
-							isEligible = false;
-						} else if (talentName === "Exoskeleton" && playerStats.TotalFortitude < 40) {
-							isEligible = false;
-						} else if (talentName === "Magical Resolve" && playerStats.TotalWillpower < 40) {
-							isEligible = false;
-						} else if (talentName === "Conditioned Runner" && (playerStats.TotalAgility < 25 || playerStats.TotalFortitude < 25)) {
-							isEligible = false;
-						} else if (talentName === "Pursuit" && (playerStats.TotalAgility < 90 || !hasMantra(playerStats.Mantras, "Revenge"))) {
-							isEligible = false;
-						} else if (talentName === "Cheap Shot" && playerStats.TotalAgility < 65) {
-							isEligible = false;
-						} else if (talentName === "Down Comes the Claw" && playerStats.TotalAgility < 75) {
-							isEligible = false;
-						} else if (talentName === "Maiming Claws" && playerStats.TotalAgility < 100) {
-							isEligible = false;
-						} else if (talentName === "Tap Dancer" && playerStats.TotalAgility < 60) {
-							isEligible = false;
-						} else if (talentName === "Reinforced Armor" && playerStats.TotalFortitude < 90) {
-							isEligible = false;
-						} else if (talentName === "Knight's Rally" && (playerStats.TotalFortitude < 30 || playerStats.TotalWillpower < 10)) {
-							isEligible = false;
-						} else if (talentName === "Turtle Shell" && playerStats.TotalFortitude < 50) {
-							isEligible = false;
-						} else if (talentName === "Piercing Blow" && playerStats.TotalStrength < 80) {
-							isEligible = false;
-						} else if (talentName === "Shield Breaker" && playerStats.TotalStrength < 60) {
-							isEligible = false;
-						} else if (talentName === "Armorclad" && playerStats.TotalFortitude < 100) {
-							isEligible = false;
-						} else if (talentName === "Armorclad's Left" && playerStats.TotalFortitude < 100) {
-							isEligible = false;
-						} else if (talentName === "Underdog" && playerStats.TotalWillpower < 50) {
-							isEligible = false;
-						} else if (talentName === "Shared Misery" && playerStats.TotalWillpower < 90) {
-							isEligible = false;
-						} else if (talentName === "All The Dead Gods" && (playerStats.TotalIntelligence < 40 || playerStats.TotalWillpower < 65)) {
-							isEligible = false;
-						} else if (talentName === "Deflecting Handyman" && playerStats.TotalPrecision < 20) {
-							isEligible = false;
-						} else if (talentName === "Dead Eye" && playerStats.TotalPrecision < 40) {
-							isEligible = false;
-						} else if (talentName === "Fatality" && playerStats.TotalPrecision < 80) {
-							isEligible = false;
-						} else if (talentName === "Sturdy Control" && (playerStats.TotalPrecision < 40 || playerStats.TotalFortitude < 40)) {
-							isEligible = false;
-						} else if (talentName === "Master of His Craft" && (playerStats.TotalPrecision < 10 || playerStats.TotalIntelligence < 10)) {
-							isEligible = false;
-						} else if (talentName === "Pinpoint Accuracy" && playerStats.TotalPrecision < 80) {
-							isEligible = false;
-						} else if (talentName === "Successive Strikes" && playerStats.TotalPrecision < 60) {
-							isEligible = false;
-						} else if (talentName === "Deadly Blow" && playerStats.TotalPrecision < 50) {
-							isEligible = false;
-						} else if (talentName === "Stress Resistant" && (playerStats.TotalPrecision < 25 || playerStats.TotalWillpower < 40)) {
-							isEligible = false;
-						} else if (talentName === "Close Quarters" && playerStats.TotalPrecision < 75) {
-							isEligible = false;
-						} else if (talentName === "Upcoming Opportunity" && playerStats.TotalPrecision < 90) {
-							isEligible = false;
-						} else if (talentName === "Professional's Standard" && (playerStats.TotalPrecision < 50 || playerStats.TotalCharisma < 25)) {
-							isEligible = false;
-						} else if (talentName === "Breaking Stereotype" && (playerStats.TotalPrecision < 50 || playerStats.TotalStrength < 50)) {
-							isEligible = false;
-						} else if (talentName === "Battle Tendency" && (playerStats.TotalFortitude < 15 || playerStats.TotalWillpower < 15)) {
-							isEligible = false;
-						} else if (talentName === "Braced Collapse" && playerStats.TotalFortitude < 25) {
-							isEligible = false;
-						} else if (talentName === "Duelist's Dance" && playerStats.TotalStrength < 20) {
-							isEligible = false;
-						} else if (talentName === "Unwavering Resolve" && playerStats.TotalStrength < 40) {
-							isEligible = false;
-						} else if (talentName === "Harsh Response" && playerStats.TotalStrength < 25) {
-							isEligible = false;
-						} else if (talentName === "Steady Nerves" && (playerStats.TotalStrength < 15 || playerStats.TotalAgility < 40)) {
-							isEligible = false;
-						} else if (talentName === "Lightspeed Reflexes" && (playerStats.TotalAgility < 20 || playerStats.TotalIntelligence < 20)) {
-							isEligible = false;
-						} else if (talentName === "Brick Wall" && (playerStats.TotalWillpower < 100 || playerStats.TotalFortitude < 100)) {
-							isEligible = false;
-						} else if (talentName === "Pleeksty's Faith" && (playerStats.TotalCharisma < 15 || playerStats.TotalElementFire < 25 || playerStats.TotalWillpower < 15)) {
-							isEligible = false;
-						} else if (talentName === "Dazing Finisher" && playerStats.TotalCharisma < 55) {
-							isEligible = false;
-						} else if (talentName === "Charismatic Cast" && playerStats.TotalCharisma < 25) {
-							isEligible = false;
-						} else if (talentName === "Matador" && (playerStats.TotalStrength < 20 || playerStats.TotalAgility < 5)) {
-							isEligible = false;
-						} else if (talentName === "Tough Love" && playerStats.TotalCharisma < 25) {
-							isEligible = false;
-						} else if (talentName === "Cold Blood" && (playerStats.TotalFortitude < 50 || playerStats.TotalElementBlood < 20)) {
-							isEligible = false;
-						} else if (talentName === "Manipulation Path: Agile Misery" && (playerStats.TotalElementBlood < 50 || currentTalents["Manipulation Path: Spirit Lantern"] || currentTalents["Simple Manipulation: Unstable Blood"])) {
-							isEligible = false;
-						} else if (talentName === "Rushing Demise" && playerStats.TotalElementBlood < 75) {
-							isEligible = false;
-						} else if (talentName === "Protective Offense" && playerStats.TotalElementBlood < 100) {
-							isEligible = false;
-						} else if (talentName === "Manipulation Path: Spirit Lantern" && (playerStats.TotalElementBlood < 50 || currentTalents["Manipulation Path: Agile Misery"] || currentTalents["Simple Manipulation: Unstable Blood"])) {
-							isEligible = false;
-						} else if (talentName === "Venomous Chain" && playerStats.TotalElementBlood < 75) {
-							isEligible = false;
-						} else if (talentName === "Heavy Disease" && playerStats.TotalElementBlood < 100) {
-							isEligible = false;
-						} else if (talentName === "Simple Manipulation: Unstable Blood" && (playerStats.TotalElementBlood < 50 || currentTalents["Manipulation Path: Agile Misery"] || currentTalents["Manipulation Path: Spirit Lantern"])) {
-							isEligible = false;
-						} else if (talentName === "Peaking Control" && playerStats.TotalElementBlood < 75) {
-							isEligible = false;
-						} else if (talentName === "Piercing Totality" && playerStats.TotalElementBlood < 100) {
-							isEligible = false;
-						} else if (talentName === "Blood Syphon" && (playerStats.TotalElementBlood < 40 || playerStats.TotalWillpower < 40)) {
-							isEligible = false;
-						} else if (talentName === "Not So Cheap Trick" && playerStats.TotalElementBlood < 25) {
-							isEligible = false;
-						} else if (talentName === "Harvest Season" && playerStats.TotalElementBlood < 25) {
-							isEligible = false;
-						} else if (talentName === "Payback" && (playerStats.TotalElementBlood < 40 || playerStats.TotalStrength < 25)) {
-							isEligible = false;
-						} else if (talentName === "Emerging Transfusion" && (playerStats.TotalElementBlood < 50 || playerStats.TotalStrength < 50)) {
-							isEligible = false;
-						} else if (talentName === "Sucker Strike" && playerStats.TotalElementBlood < 80) {
-							isEligible = false;
-						} else if (talentName === "Lose Your Mind" && playerStats.TotalStrength < 30) {
-							isEligible = false;
-						} else if (talentName === "Million Ton Piercer" && playerStats.TotalStrength < 90) {
-							isEligible = false;
-						} else if (talentName === "Ether Overdrive" && playerStats.TotalIntelligence < 90) {
-							isEligible = false;
-						} else if (talentName === "Foolish Outburst" && playerStats.TotalIntelligence < 50) {
-							isEligible = false;
-						} else if (talentName === "Dreambreaker" && playerStats.TotalStrength < 100) {
-							isEligible = false;
-						} else if (talentName === "Collapsed Lung" && playerStats.TotalStrength < 100) {
-							isEligible = false;
-						} else if (talentName === "Dreambreaker's Left" && playerStats.TotalStrength < 100) {
-							isEligible = false;
-						} else if (talentName === "Piercing Will" && playerStats.TotalWillpower < 80) {
-							isEligible = false;
-						} else if (talentName === "Unfazed" && playerStats.TotalWillpower < 50) {
-							isEligible = false;
-						} else if (talentName === "Grasp on Reality" && (playerStats.TotalWillpower < 5 || playerStats.TotalFortitude < 25)) {
-							isEligible = false;
-						} else if (talentName === "Disbelief" && playerStats.TotalWillpower < 25) {
-							isEligible = false;
-						} else if (talentName === "Speed Demon" && playerStats.TotalAgility < 25) {
-							isEligible = false;
-						} else if (talentName === "Blade Dancer" && playerStats.TotalAgility < 25) {
-							isEligible = false;
-						} else if (talentName === "Spine Cutter" && (playerStats.TotalStrength < 20 || playerStats.TotalAgility < 25)) {
-							isEligible = false;
-						} else if (talentName === "Murmer: Ardour" && (playerStats.TotalWillpower < 40 || playerStats.TotalStrength < 20)) {
-							isEligible = false;
-						} else if (talentName === "To the finish" && playerStats.TotalFortitude < 50) {
-							isEligible = false;
-						} else if (talentName === "Ether Absorption" && playerStats.TotalIntelligence < 15) {
-							isEligible = false;
-						} else if (talentName === "Eureka" && playerStats.TotalIntelligence < 30) {
-							isEligible = false;
-						} else if (talentName === "Overflowing Dam" && playerStats.TotalIntelligence < 40) {
-							isEligible = false;
-						} else if (talentName === "Twelve Steps Ahead" && playerStats.TotalIntelligence < 80) {
-							isEligible = false;
-						} else if (talentName === "Lord's Tithe" && (playerStats.TotalElementShadow < 40 || !hasMantra(playerStats.Mantras, "Reinforce"))) {
-							isEligible = false;
-						} else if (talentName === "Perfect Flash" && playerStats.TotalIntelligence < 20) {
-							isEligible = false;
-						} else if (talentName === "Charming Master" && playerStats.TotalCharisma < 90) {
-							isEligible = false;
-						} else if (talentName === "Master Flamecharmer" && playerStats.TotalElementFire < 50) {
-							isEligible = false;
-						} else if (talentName === "Master Bloodrender" && playerStats.TotalElementBlood < 50) {
-							isEligible = false;
-						} else if (talentName === "Master Earthbender" && playerStats.TotalElementEarth < 50) {
-							isEligible = false;
-						} else if (talentName === "Natural Disaster" && playerStats.TotalElementEarth < 50) {
-							isEligible = false;
-						} else if (talentName === "Memento Mori" && (playerStats.TotalElementEarth < 50 || playerStats.TotalWillpower < 20)) {
-							isEligible = false;
-						} else if (talentName === "Annihilator" && (playerStats.TotalElementEarth < 50 || playerStats.TotalStrength < 50)) {
-							isEligible = false;
-						} else if (talentName === "Battlefield Strategist" && playerStats.TotalElementEarth < 40) {
-							isEligible = false;
-						} else if (talentName === "Impermeable" && playerStats.TotalElementEarth < 80) {
-							isEligible = false;
-						} else if (talentName === "Solidifier" && playerStats.TotalElementEarth < 100) {
-							isEligible = false;
-						} else if (talentName === "Master Flamecharmer (Eruption)" && playerStats.TotalElementFire < 50) {
-							isEligible = false;
-						} else if (talentName === "Eruption Path: Lava Serpent" && playerStats.TotalElementFire < 50) {
-							isEligible = false;
-						} else if (talentName === "Molten Defense" && playerStats.TotalElementFire < 75) {
-							isEligible = false;
-						} else if (talentName === "Meteor Impact" && playerStats.TotalElementFire < 25) {
-							isEligible = false;
-						} else if (talentName === "Flash Point" && playerStats.TotalElementFire < 80) {
-							isEligible = false;
-						} else if (talentName === "Double Trouble" && playerStats.TotalElementFire < 100) {
-							isEligible = false;
-						} else if (talentName === "The Final Act" && playerStats.TotalElementFire < 75) {
-							isEligible = false;
-						} else if (talentName === "Emperor Flame" && playerStats.TotalElementFire < 80) {
-							isEligible = false;
-						} else if (talentName === "Flamewalker" && (playerStats.TotalElementFire < 40 || playerStats.TotalAgility < 25)) {
-							isEligible = false;
-						} else if (talentName === "Warding Radiance" && (playerStats.TotalAgility < 20 || playerStats.TotalElementFire < 30)) {
-							isEligible = false;
-						} else if (talentName === "Azure Flames" && (playerStats.TotalWillpower < 40 || playerStats.TotalElementFire < 75)) {
-							isEligible = false;
-						} else if (talentName === "Explosive Flourish" && playerStats.TotalElementFire < 50) {
-							isEligible = false;
-						} else if (talentName === "Flaming Flourish" && playerStats.TotalElementFire < 25) {
-							isEligible = false;
-						} else if (talentName === "Master Frostdrawer" && playerStats.TotalElementIce < 50) {
-							isEligible = false;
-						} else if (talentName === "Master Frostdrawer (Crystallization)" && playerStats.TotalElementIce < 50) {
-							isEligible = false;
-						} else if (talentName === "Glass Path: Crystallization" && playerStats.TotalElementIce < 40) {
-							isEligible = false;
-						} else if (talentName === "Crystal Shrapnel" && playerStats.TotalElementIce < 60) {
-							isEligible = false;
-						} else if (talentName === "Volcanic Glass" && playerStats.TotalElementIce < 40) {
-							isEligible = false;
-						} else if (talentName === "Reclaimed Glass" && playerStats.TotalElementIce < 65) {
-							isEligible = false;
-						} else if (talentName === "Temperature Shock" && (playerStats.TotalElementIce < 40 || playerStats.TotalElementFire < 40)) {
-							isEligible = false;
-						} else if (talentName === "Cold Heart" && playerStats.TotalElementIce < 75) {
-							isEligible = false;
-						} else if (talentName === "Cryostasis" && playerStats.TotalElementIce < 80) {
-							isEligible = false;
-						} else if (talentName === "Chilling Flourish" && playerStats.TotalElementIce < 50) {
-							isEligible = false;
-						} else if (talentName === "Unyielding Frost" && playerStats.TotalElementIce < 75) {
-							isEligible = false;
-						} else if (talentName === "Master Galebreather" && playerStats.TotalElementWind < 50) {
-							isEligible = false;
-						} else if (talentName === "Master Galebreather (Ember)" && playerStats.TotalElementWind < 50) {
-							isEligible = false;
-						} else if (talentName === "Scorched Path: Ember" && (playerStats.TotalElementFire < 55 || playerStats.TotalElementWind < 55)) {
-							isEligible = false;
-						} else if (talentName === "Burning Lungs" && (playerStats.TotalElementWind < 65 || playerStats.TotalElementFire < 65)) {
-							isEligible = false;
-						} else if (talentName === "Emberlink" && (playerStats.TotalElementWind < 101 || playerStats.TotalElementFire < 101)) {
-							isEligible = false;
-						} else if (talentName === "Wind Step" && playerStats.TotalElementWind < 40) {
-							isEligible = false;
-						} else if (talentName === "Air Pressure" && (playerStats.TotalElementWind < 50 || playerStats.TotalAgility < 20)) {
-							isEligible = false;
-						} else if (talentName === "Master Galebreather (Specter)" && playerStats.TotalElementWind < 50) {
-							isEligible = false;
-						} else if (talentName === "Haunted Gale" && playerStats.TotalElementWind < 40) {
-							isEligible = false;
-						} else if (talentName === "Haunted Path: Specter" && playerStats.TotalElementWind < 50) {
-							isEligible = false;
-						} else if (talentName === "Spectral Shift" && playerStats.TotalElementWind < 75) {
-							isEligible = false;
-						} else if (talentName === "A World Without Song" && playerStats.TotalElementWind < 75) {
-							isEligible = false;
-						} else if (talentName === "Suffocating Flourish" && playerStats.TotalElementWind < 50) {
-							isEligible = false;
-						} else if (talentName === "Master Thundercaller" && playerStats.TotalElementLightning < 50) {
-							isEligible = false;
-						} else if (talentName === "Electrocution" && playerStats.TotalElementLightning < 50) {
-							isEligible = false;
-						} else if (talentName === "Raiton Path: Enlightened" && playerStats.TotalElementLightning < 50) {
-							isEligible = false;
-						} else if (talentName === "Unipolar Path: Teslafication" && (playerStats.TotalElementLightning < 50 || playerStats.TotalElementIron < 50)) {
-							isEligible = false;
-						} else if (talentName === "Wraith Path: Umbra" && (playerStats.TotalElementFire < 50 || playerStats.TotalElementShadow < 50)) {
-							isEligible = false;
-						} else if (talentName === "Unipolar Conductivity" && playerStats.TotalElementIron < 75) {
-							isEligible = false;
-						} else if (talentName === "Decaying Posture" && playerStats.TotalElementIron < 75) {
-							isEligible = false;
-						} else if (talentName === "Oxidizing Blitz" && playerStats.TotalElementIron < 100) {
-							isEligible = false;
-						} else if (talentName === "Decay Path: Oxidize" && playerStats.TotalElementIron < 50) {
-							isEligible = false;
-						} else if (talentName === "Melted Wire" && playerStats.TotalElementLightning < 80) {
-							isEligible = false;
-						} else if (talentName === "Raiton's Charge" && playerStats.TotalElementLightning < 75) {
-							isEligible = false;
-						} else if (talentName === "Short Circuit" && playerStats.TotalElementLightning < 75) {
-							isEligible = false;
-						} else if (talentName === "Scatter" && playerStats.TotalElementLightning < 50) {
-							isEligible = false;
-						} else if (talentName === "Overload" && playerStats.TotalElementLightning < 100) {
-							isEligible = false;
-						} else if (talentName === "Master Shadowcaster" && playerStats.TotalElementShadow < 50) {
-							isEligible = false;
-						} else if (talentName === "There Shall Be No Light" && playerStats.TotalElementShadow < 100) {
-							isEligible = false;
-						} else if (talentName === "Common State of Inner Violence" && playerStats.TotalElementShadow < 75) {
-							isEligible = false;
-						} else if (talentName === "Empty Shell" && playerStats.TotalElementShadow < 50) {
-							isEligible = false;
-						} else if (talentName === "Dark Synergy" && playerStats.TotalElementShadow < 25) {
-							isEligible = false;
-						} else if (talentName === "Master Ironsinger" && playerStats.TotalElementIron < 50) {
-							isEligible = false;
-						} else if (talentName === "Armor Synergy" && playerStats.TotalElementIron < 50) {
-							isEligible = false;
-						} else if (talentName === "An Ironsinger's Instinct" && playerStats.TotalElementIron < 75) {
-							isEligible = false;
-						} else if (talentName === "Metal Drain" && playerStats.TotalElementIron < 80) {
-							isEligible = false;
-						} else if (talentName === "Metal Eater" && playerStats.TotalElementIron < 80) {
-							isEligible = false;
-						} else if (talentName === "Alloyblood" && playerStats.TotalElementIron < 100) {
-							isEligible = false;
-						} else if (talentName === "Speed Emission" && playerStats.TotalAgility < 25) {
-							isEligible = false;
-						} else if (talentName === "Armor Conserver" && playerStats.Level < 8) {
-							isEligible = false;
-						} else if (talentName === "Frozen Pin-Cushion" && (playerStats.TotalElementIce < 60 || !hasMantra(playerStats.Mantras, "Ice Daggers"))) {
-							isEligible = false;
-						} else if (talentName === "Flash Pressure" && !hasMantra(playerStats.Mantras, "Breeze Blitz")) {
-							isEligible = false;
-						} else if (talentName === "Blood Path: True Frost" && (playerStats.TotalElementBlood < 20 || playerStats.TotalElementIce < 10)) {
-							isEligible = false;
-						} else if (talentName === "Agile Path: Pressured Blood" && playerStats.TotalElementBlood < 15) {
-							isEligible = false;
-						} else if (talentName === "Bleeding Fighter" && (playerStats.TotalElementBlood < 999 || playerStats.TotalStrength < 999)) {
-							isEligible = false;
-						}
-		
-						// If eligible and not already selected, add to groupedTalents
-						if (isEligible && !currentTalents[talentName]) {
-							const rarity = talentData.InnateRarity === "Legendary" ? "Advanced" : talentData.InnateRarity || "Common";
-							const className = talentData.Class || "Miscellaneous";
-		
-							if (!groupedTalents[rarity][className]) {
-								groupedTalents[rarity][className] = [];
-							}
-		
-							groupedTalents[rarity][className].push({
-								name: talentName,
-								desc: talentData.Desc,
-								icon: talentData.Icon ="https://deepwoken.co/newicon.png" // Default icon if none provided
-							});
-						}
-					}
-		
-					// Populate each dropdown
-					populateDropdown('Advanced-dropdown', groupedTalents.Advanced, 'Advanced');
-					populateDropdown('Rare-dropdown', groupedTalents.Rare, 'Rare');
-					populateDropdown('Common-dropdown', groupedTalents.Common, 'Common');
-				}
-		
-				function populateDropdown(dropdownId, talentsByClass, rarity) {
-					const dropdown = document.getElementById(dropdownId);
-					if (!dropdown) return;
-		
-					// Clear existing content
-					dropdown.innerHTML = '';
-		
-					// Populate fieldsets for each class
-					for (const [className, talents] of Object.entries(talentsByClass)) {
-						const fieldset = document.createElement('fieldset');
-						fieldset.className = 'svelte-hwcpcr';
-		
-						const legend = document.createElement('legend');
-						legend.className = 'svelte-hwcpcr';
-						legend.textContent = className;
-						fieldset.appendChild(legend);
-		
-						// Add talents to the fieldset
-						talents.forEach(talent => {
-							const talentDiv = document.createElement('div');
-							talentDiv.className = `talent ${rarity} shrine-false locked-false svelte-hwcpcr`;
-							talentDiv.setAttribute('role', 'button');
-							talentDiv.setAttribute('tabindex', '0');
-							talentDiv.style.userSelect = 'none';
-							talentDiv.style.touchAction = 'auto';
-							talentDiv.dataset.talentName = talent.name; // Store talent name for reference
-		
-							// Talent name and icon
-							talentDiv.innerHTML = `
-							  ${talent.name}
-							  <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">
-								<img class="icon svelte-hwcpcr" title="${talent.desc}" width="14" height="14" alt="new" src="https://deepwoken.co/newicon.png">
-							  </div>
-							`;
-		
-							// Add click event to move talent to obtained talents
-							talentDiv.addEventListener('click', () => {
-								if (!currentTalents[talent.name]) {
-									currentTalents[talent.name] = true;
-									populateObtainedTalents(currentTalents, talents);
-									populateDropdowns(talents, currentTalents, updatePlayerStats()); // Pass original talents data
-								}
-							});
-		
-							fieldset.appendChild(talentDiv);
-						});
-		
-						dropdown.appendChild(fieldset);
-					}
-		
-					// If no talents, show "No talents :("
-					if (dropdown.innerHTML.trim() === '') {
-						const noTalentsDiv = document.createElement('div');
-						noTalentsDiv.className = 'talent svelte-hwcpcr';
-						noTalentsDiv.textContent = 'No talents :(';
-						dropdown.appendChild(noTalentsDiv);
-					}
-				}
-		
-				function populateObtainedTalents(currentTalents, talentsData) {
-					const obtainedTalentsContainer = document.querySelector('#rollable-talent-2 .talents-container');
-					if (!obtainedTalentsContainer) return;
-		
-					// Clear existing content
-					obtainedTalentsContainer.innerHTML = '';
-		
-					// Group obtained talents by class
-					const groupedObtainedTalents = {};
-					for (const [talentName] of Object.entries(currentTalents)) {
-						if (talentsData[talentName]) {
-							const className = talentsData[talentName].Class || "Miscellaneous";
-							if (!groupedObtainedTalents[className]) {
-								groupedObtainedTalents[className] = [];
-							}
-							groupedObtainedTalents[className].push({
-								name: talentName,
-								desc: talentsData[talentName].Desc,
-								icon: talentsData[talentName].Icon = "https://deepwoken.co/newicon.png"
-							});
-						}
-					}
-		
-					// Sort classes alphabetically
-					const sortedClasses = Object.keys(groupedObtainedTalents).sort();
-		
-					// Populate fieldsets for each class
-					sortedClasses.forEach(className => {
-						const fieldset = document.createElement('fieldset');
-						fieldset.className = 'svelte-hwcpcr';
-		
-						const legend = document.createElement('legend');
-						legend.className = 'svelte-hwcpcr';
-						legend.textContent = className;
-						fieldset.appendChild(legend);
-		
-						// Add talents to the fieldset
-						groupedObtainedTalents[className].forEach(talent => {
-							const talentDiv = document.createElement('div');
-							talentDiv.className = `talent svelte-hwcpcr`;
-							talentDiv.style.userSelect = 'none';
-							talentDiv.style.touchAction = 'auto';
-		
-							// Talent name and icon
-							talentDiv.innerHTML = `
-							  ${talent.name}
-							  <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">
-								<img class="icon svelte-hwcpcr" title="${talent.desc}" width="14" height="14" alt="new" src="https://deepwoken.co/newicon.png">
-							  </div>
-							`;
-		
-							fieldset.appendChild(talentDiv);
-						});
-		
-						obtainedTalentsContainer.appendChild(fieldset);
-					});
-		
-					// Update the obtained talents count
+document.addEventListener('DOMContentLoaded', function () {
+    // Stats mapping from the export script
+    const statsMapping = {
+        st: 'Strength',
+        pe: 'Precision',
+        fo: 'Fortitude',
+        ag: 'Agility',
+        in: 'Intelligence',
+        wi: 'Willpower',
+        ch: 'Charisma',
+        he: 'Heavy Wep.',
+        me: 'Medium Wep.',
+        li: 'Light Wep.',
+        fl: 'Flamecharm',
+        fr: 'Frostdraw',
+        th: 'Thundercall',
+        ga: 'Galebreathe',
+        sh: 'Shadowcast',
+        ir: 'Ironsing',
+        bl: 'Bloodrend',
+        eb: 'Earthbend',
+        ra: 'Race',
+        oa: 'Oath',
+        mu: 'Murmur',
+        be: 'Bell'
+    };
 
-				}
-			});
+    const luaStatsMapping = {
+        st: 'TotalStrength',
+        pe: 'TotalPrecision',
+        fo: 'TotalFortitude',
+        ag: 'TotalAgility',
+        in: 'TotalIntelligence',
+        wi: 'TotalWillpower',
+        ch: 'TotalCharisma',
+        fl: 'TotalElementFire',
+        fr: 'TotalElementIce',
+        th: 'TotalElementLightning',
+        ga: 'TotalElementWind',
+        sh: 'TotalElementShadow',
+        ir: 'TotalElementIron',
+        bl: 'TotalElementBlood',
+        eb: 'TotalElementEarth'
+    };
+
+    function updatePlayerStats() {
+        const stats = {};
+        Object.keys(statsMapping).forEach(key => {
+            const input = document.querySelector(`input[statname="${statsMapping[key]}"]`);
+            const select = document.querySelector(`select[statname="${statsMapping[key]}"]`);
+            stats[key] = input ? parseInt(input.value) || 0 : select ? select.value || 0 : 0;
+        });
+
+        const playerStats = {};
+        Object.keys(stats).forEach(key => {
+            if (luaStatsMapping[key]) playerStats[luaStatsMapping[key]] = stats[key];
+        });
+
+        const levelInput = document.querySelector('input[statname="Level"]');
+        playerStats.Level = levelInput ? parseInt(levelInput.value) || 0 : 0;
+
+        const mantrasInput = document.querySelector('input[statname="Mantras"]') || document.querySelector('select[statname="Mantras"]');
+        playerStats.Mantras = mantrasInput ? mantrasInput.value : "";
+
+        return playerStats;
+    }
+
+    let currentTalents = { "Risky Moves": true };
+
+    fetch('talents.json')
+        .then(response => response.json())
+        .then(data => {
+            const playerStats = updatePlayerStats();
+            populateDropdowns(data.TalentsInfo, currentTalents, playerStats);
+            populateObtainedTalents(currentTalents, data.TalentsInfo);
+
+            Object.values(statsMapping).forEach(statName => {
+                const input = document.querySelector(`input[statname="${statName}"]`);
+                const select = document.querySelector(`select[statname="${statName}"]`);
+                if (input) {
+                    input.addEventListener('input', () => {
+                        const updatedStats = updatePlayerStats();
+                        populateDropdowns(data.TalentsInfo, currentTalents, updatedStats);
+                    });
+                } else if (select) {
+                    select.addEventListener('change', () => {
+                        const updatedStats = updatePlayerStats();
+                        populateDropdowns(data.TalentsInfo, currentTalents, updatedStats);
+                    });
+                }
+            });
+
+            const levelInput = document.querySelector('input[statname="Level"]');
+            if (levelInput) {
+                levelInput.addEventListener('input', () => {
+                    const updatedStats = updatePlayerStats();
+                    populateDropdowns(data.TalentsInfo, currentTalents, updatedStats);
+                });
+            }
+
+            const mantrasInput = document.querySelector('input[statname="Mantras"]') || document.querySelector('select[statname="Mantras"]');
+            if (mantrasInput) {
+                mantrasInput.addEventListener('input', () => {
+                    const updatedStats = updatePlayerStats();
+                    populateDropdowns(data.TalentsInfo, currentTalents, updatedStats);
+                });
+                if (mantrasInput.tagName === 'SELECT') {
+                    mantrasInput.addEventListener('change', () => {
+                        const updatedStats = updatePlayerStats();
+                        populateDropdowns(data.TalentsInfo, currentTalents, updatedStats);
+                    });
+                }
+            }
+        })
+        .catch(error => console.error('Error loading talents:', error));
+
+    function populateDropdowns(talents, currentTalents, playerStats) {
+        const groupedTalents = { Advanced: {}, Rare: {}, Common: {} };
+
+        function hasMantra(mantras, mantraName) {
+            return mantras && typeof mantras === 'string' ? mantras.includes(mantraName) : false;
+        }
+
+        for (const [talentName, talentData] of Object.entries(talents)) {
+            let isEligible = true;
+
+            // Existing prerequisite and stat checks
+            if (talentName === "Ghost" && !currentTalents["Risky Moves"]) {
+                isEligible = false;
+            } else if (talentName === "Lord's Tithe" && (playerStats.TotalElementShadow < 40 || !hasMantra(playerStats.Mantras, "Reinforce"))) {
+                isEligible = false;
+            } else if (talentName === "Exoskeleton" && playerStats.TotalFortitude < 40) {
+                isEligible = false;
+            } // ... (keep all other existing checks as they are)
+
+            // Add mutual exclusivity check using CannotHave from JSON
+            if (talentData.CannotHave) {
+                for (const cannotHaveTalent of talentData.CannotHave) {
+                    if (currentTalents[cannotHaveTalent]) {
+                        isEligible = false;
+                        break;
+                    }
+                }
+            }
+
+            // Specific mutual exclusivity for "Observation" and "Risky Moves" if CannotHave is not in JSON
+            if (talentName === "Observation" && currentTalents["Risky Moves"]) {
+                isEligible = false;
+            } else if (talentName === "Risky Moves" && currentTalents["Observation"]) {
+                isEligible = false;
+            }
+
+            if (isEligible && !currentTalents[talentName]) {
+                const rarity = talentData.InnateRarity === "Legendary" ? "Advanced" : talentData.InnateRarity || "Common";
+                const className = talentData.Class || "Miscellaneous";
+
+                if (!groupedTalents[rarity][className]) {
+                    groupedTalents[rarity][className] = [];
+                }
+
+                groupedTalents[rarity][className].push({
+                    name: talentName,
+                    desc: talentData.Desc,
+                    icon: talentData.Icon || "https://deepwoken.co/newicon.png"
+                });
+            }
+        }
+
+        populateDropdown('Advanced-dropdown', groupedTalents.Advanced, 'Advanced');
+        populateDropdown('Rare-dropdown', groupedTalents.Rare, 'Rare');
+        populateDropdown('Common-dropdown', groupedTalents.Common, 'Common');
+    }
+
+    function populateDropdown(dropdownId, talentsByClass, rarity) {
+        const dropdown = document.getElementById(dropdownId);
+        if (!dropdown) return;
+
+        dropdown.innerHTML = '';
+
+        for (const [className, talents] of Object.entries(talentsByClass)) {
+            const fieldset = document.createElement('fieldset');
+            fieldset.className = 'svelte-hwcpcr';
+
+            const legend = document.createElement('legend');
+            legend.className = 'svelte-hwcpcr';
+            legend.textContent = className;
+            fieldset.appendChild(legend);
+
+            talents.forEach(talent => {
+                const talentDiv = document.createElement('div');
+                talentDiv.className = `talent ${rarity} shrine-false locked-false svelte-hwcpcr`;
+                talentDiv.setAttribute('role', 'button');
+                talentDiv.setAttribute('tabindex', '0');
+                talentDiv.style.userSelect = 'none';
+                talentDiv.style.touchAction = 'auto';
+                talentDiv.dataset.talentName = talent.name;
+
+                talentDiv.innerHTML = `
+                    ${talent.name}
+                    <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">
+                        <img class="icon svelte-hwcpcr" title="${talent.desc}" width="14" height="14" alt="new" src="https://deepwoken.co/newicon.png">
+                    </div>
+                `;
+
+                talentDiv.addEventListener('click', () => {
+                    if (!currentTalents[talent.name]) {
+                        currentTalents[talent.name] = true;
+                        populateObtainedTalents(currentTalents, window.talentsData);
+                        populateDropdowns(window.talentsData, currentTalents, updatePlayerStats());
+                    }
+                });
+
+                fieldset.appendChild(talentDiv);
+            });
+
+            dropdown.appendChild(fieldset);
+        }
+
+        if (dropdown.innerHTML.trim() === '') {
+            const noTalentsDiv = document.createElement('div');
+            noTalentsDiv.className = 'talent svelte-hwcpcr';
+            noTalentsDiv.textContent = 'No talents :(';
+            dropdown.appendChild(noTalentsDiv);
+        }
+    }
+
+    function populateObtainedTalents(currentTalents, talentsData) {
+        const obtainedTalentsContainer = document.querySelector('#rollable-talent-2 .talents-container');
+        if (!obtainedTalentsContainer) return;
+
+        obtainedTalentsContainer.innerHTML = '';
+        window.talentsData = talentsData; // Store talentsData globally for click events
+
+        const groupedObtainedTalents = {};
+        for (const [talentName] of Object.entries(currentTalents)) {
+            if (talentsData[talentName]) {
+                const className = talentsData[talentName].Class || "Miscellaneous";
+                const rarity = talentsData[talentName].InnateRarity === "Legendary" ? "Advanced" : talentsData[talentName].InnateRarity || "Common";
+                if (!groupedObtainedTalents[className]) {
+                    groupedObtainedTalents[className] = [];
+                }
+                groupedObtainedTalents[className].push({
+                    name: talentName,
+                    desc: talentsData[talentName].Desc,
+                    icon: talentsData[talentName].Icon || "https://deepwoken.co/newicon.png"
+                });
+            }
+        }
+
+        const sortedClasses = Object.keys(groupedObtainedTalents).sort();
+        sortedClasses.forEach(className => {
+            const fieldset = document.createElement('fieldset');
+            fieldset.className = 'svelte-hwcpcr';
+
+            const legend = document.createElement('legend');
+            legend.className = 'svelte-hwcpcr';
+            legend.textContent = className;
+            fieldset.appendChild(legend);
+
+            groupedObtainedTalents[className].forEach(talent => {
+                const talentDiv = document.createElement('div');
+                talentDiv.className = `talent ${rarity} svelte-hwcpcr`;
+                talentDiv.style.userSelect = 'none';
+                talentDiv.style.touchAction = 'auto';
+
+                talentDiv.innerHTML = `
+                    ${talent.name}
+                    <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">
+                        <img class="icon svelte-hwcpcr" title="${talent.desc}" width="14" height="14" alt="new" src="https://deepwoken.co/newicon.png">
+                    </div>
+                `;
+
+                fieldset.appendChild(talentDiv);
+            });
+
+            obtainedTalentsContainer.appendChild(fieldset);
+        });
+    }
+});
 		</script>
     </div>
     <div class="grid-item obtained-talents svelte-hwcpcr" id="rollable-talent-2">
@@ -1287,7 +880,7 @@
 			   </div>
 			   <div class="stat-item svelte-g2d5k9">
 				  <b class="svelte-g2d5k9">Earthbend</b> 
-				  <div class="stat-number svelte-g2d5k9"> <input class="stat-input input svelte-g2d5k9" value="0" statname="Bloodrend" stattype="attunement"></div>
+				  <div class="stat-number svelte-g2d5k9"> <input class="stat-input input svelte-g2d5k9" value="0" statname="Earthbend" stattype="attunement"></div>
 			   </div>
 			</div>
 		 </div>
@@ -1304,861 +897,704 @@
                     <div><b class="svelte-g2d5k9">Export</b> as a code</div>
                 </button>  
             </div>
-            <script>
-                document.getElementById('exportcode').addEventListener('click', function() {
-                    const statsMapping = {
-                        st: 'Strength',
-                        pe: 'Precision',
-                        fo: 'Fortitude',
-                        ag: 'Agility',
-                        in: 'Intelligence',
-                        wi: 'Willpower',
-                        ch: 'Charisma',
-                        he: 'Heavy Wep.',
-                        me: 'Medium Wep.',
-                        li: 'Light Wep.',
-                        fl: 'Flamecharm',
-                        fr: 'Frostdraw',
-                        th: 'Thundercall',
-                        ga: 'Galebreathe',
-                        sh: 'Shadowcast',
-                        ir: 'Ironsing',
-                        bl: 'Bloodrend',
-                        eb: 'Earthbend',
-                        ra: 'Race',
-                        oa: 'Oath',
-                        mu: 'Murmur',
-                        be: 'Bell'
-                    };
-            
-                    // Collect the stats from the inputs
-                    const stats = {};
-                    Object.keys(statsMapping).forEach(key => {
-                        // Look for the input based on the statname attribute in the mapping
-                        const input = document.querySelector(`input[statname="${statsMapping[key]}"]`);
-                        const select = document.querySelector(`select[statname="${statsMapping[key]}"]`); // Added support for <select> elements
-            
-                        if (input) {
-                            stats[key] = input.value || 0;
-                        } else if (select) {
-                            stats[key] = select.value || 0;
-                        } else {
-                            stats[key] = 0; // Default to 0 if no input or select found
-                        }
-                    });
-            
-                    // Convert stats into a string in the format "key/value"
-                    const statsString = Object.entries(stats)
-                        .map(([key, value]) => `${key}/${value}`)
-                        .join('/');
-            
-                    // Copy to clipboard
-                    navigator.clipboard.writeText(statsString).then(function() {
-                        alert('Build copied to clipboard!');
-                    }).catch(function(err) {
-                        console.error('Could not copy build to clipboard: ', err);
-                    });
-                });
-            </script>
-			<script>
-				document.addEventListener('DOMContentLoaded', function () {
-					// Stats mapping from the export script
-					const statsMapping = {
-						st: 'Strength',
-						pe: 'Precision',
-						fo: 'Fortitude',
-						ag: 'Agility',
-						in: 'Intelligence',
-						wi: 'Willpower',
-						ch: 'Charisma',
-						he: 'Heavy Wep.',
-						me: 'Medium Wep.',
-						li: 'Light Wep.',
-						fl: 'Flamecharm',
-						fr: 'Frostdraw',
-						th: 'Thundercall',
-						ga: 'Galebreathe',
-						sh: 'Shadowcast',
-						ir: 'Ironsing',
-						bl: 'Bloodrend',
-						eb: 'Earthbend',
-						ra: 'Race',
-						oa: 'Oath',
-						mu: 'Murmur',
-						be: 'Bell'
-					};
-			
-					// Map shorthand keys to Lua-style Total[Stat] keys
-					const luaStatsMapping = {
-						st: 'TotalStrength',
-						pe: 'TotalPrecision',
-						fo: 'TotalFortitude',
-						ag: 'TotalAgility',
-						in: 'TotalIntelligence',
-						wi: 'TotalWillpower',
-						ch: 'TotalCharisma',
-						fl: 'TotalElementFire',
-						fr: 'TotalElementIce',
-						th: 'TotalElementLightning',
-						ga: 'TotalElementWind',
-						sh: 'TotalElementShadow',
-						ir: 'TotalElementIron',
-						bl: 'TotalElementBlood',
-						eb: 'TotalElementEarth'
-					};
-			
-					// Function to collect and update player stats
-					function updatePlayerStats() {
-						const stats = {};
-						Object.keys(statsMapping).forEach(key => {
-							const input = document.querySelector(`input[statname="${statsMapping[key]}"]`);
-							const select = document.querySelector(`select[statname="${statsMapping[key]}"]`);
-			
-							if (input) {
-								stats[key] = parseInt(input.value) || 0;
-							} else if (select) {
-								stats[key] = select.value || 0;
-							} else {
-								stats[key] = 0; // Default to 0 if no input or select found
-							}
-						});
-			
-						const playerStats = {};
-						Object.keys(stats).forEach(key => {
-							if (luaStatsMapping[key]) {
-								playerStats[luaStatsMapping[key]] = stats[key];
-							}
-						});
-			
-						const levelInput = document.querySelector('input[statname="Level"]');
-						playerStats.Level = levelInput ? parseInt(levelInput.value) || 0 : 0;
-			
-						const mantrasInput = document.querySelector('input[statname="Mantras"]') || document.querySelector('select[statname="Mantras"]');
-						playerStats.Mantras = mantrasInput ? mantrasInput.value : "";
-			
-						return playerStats;
-					}
-			
-					// Simulated current talents
-					let currentTalents = {
-						"Risky Moves": true,
-					};
-			
-					// Store the full talents data globally
-					let talentsData = null;
-			
-					// Fetch the JSON file and populate initially
-					fetch('talents.json')
-						.then(response => response.json())
-						.then(data => {
-							talentsData = data.TalentsInfo; // Store the full talents data
-							const playerStats = updatePlayerStats();
-							populateDropdowns(talentsData, currentTalents, playerStats);
-							populateObtainedTalents(currentTalents, talentsData);
-			
-							// Add event listeners to update talents when stats change
-							Object.values(statsMapping).forEach(statName => {
-								const input = document.querySelector(`input[statname="${statName}"]`);
-								const select = document.querySelector(`select[statname="${statName}"]`);
-								if (input) {
-									input.addEventListener('input', () => {
-										const updatedStats = updatePlayerStats();
-										populateDropdowns(talentsData, currentTalents, updatedStats);
-									});
-								} else if (select) {
-									select.addEventListener('change', () => {
-										const updatedStats = updatePlayerStats();
-										populateDropdowns(talentsData, currentTalents, updatedStats);
-									});
-								}
-							});
-			
-							const levelInput = document.querySelector('input[statname="Level"]');
-							if (levelInput) {
-								levelInput.addEventListener('input', () => {
-									const updatedStats = updatePlayerStats();
-									populateDropdowns(talentsData, currentTalents, updatedStats);
-								});
-							}
-							const mantrasInput = document.querySelector('input[statname="Mantras"]') || document.querySelector('select[statname="Mantras"]');
-							if (mantrasInput) {
-								mantrasInput.addEventListener('input', () => {
-									const updatedStats = updatePlayerStats();
-									populateDropdowns(talentsData, currentTalents, updatedStats);
-								});
-								if (mantrasInput.tagName === 'SELECT') {
-									mantrasInput.addEventListener('change', () => {
-										const updatedStats = updatePlayerStats();
-										populateDropdowns(talentsData, currentTalents, updatedStats);
-									});
-								}
-							}
-						})
-						.catch(error => console.error('Error loading talents:', error));
-			
-					function populateDropdowns(talents, currentTalents, playerStats) {
-						const groupedTalents = {
-							Advanced: {},
-							Rare: {},
-							Common: {}
-						};
-			
-						function hasMantra(mantras, mantraName) {
-							return mantras && typeof mantras === 'string' ? mantras.includes(mantraName) : false;
-						}
-			
-						for (const [talentName, talentData] of Object.entries(talents)) {
-							let isEligible = true;
-			
-							if (!talents[talentName]) {
-								console.warn("⚠️ Invalid talent detected:", talentName);
-								continue;
-							}
-			
-							// Apply Lua logic to determine eligibility
-							if (talentName === "Ghost" && !currentTalents["Risky Moves"]) {
-								isEligible = false;
-							} else if (talentName === "Scatter" && !currentTalents["Electrocution"]) {
-								isEligible = false;
-							} else if (talentName === "Emperor Flame" && !currentTalents["The Final Act"]) {
-								isEligible = false;
-							} else if (talentName === "Short Circuit" && !currentTalents["Electrocution"]) {
-								isEligible = false;
-							} else if (talentName === "Decaying Posture" && !currentTalents["Decay Path: Oxidize"]) {
-								isEligible = false;
-							} else if (talentName === "Oxidizing Blitz" && !currentTalents["Decay Path: Oxidize"]) {
-								isEligible = false;
-							} else if (talentName === "Unipolar Conductivity" && !currentTalents["Unipolar Path: Teslafication"]) {
-								isEligible = false;
-							} else if (talentName === "Melted Wire" && !currentTalents["Unipolar Path: Teslafication"]) {
-								isEligible = false;
-							} else if (talentName === "Raiton's Charge" && !currentTalents["Raiton Path: Enlightened"]) {
-								isEligible = false;
-							} else if (talentName === "Overcharge" && !currentTalents["Unipolar Path: Teslafication"]) {
-								isEligible = false;
-							} else if (talentName === "Molten Defense" && !currentTalents["Eruption Path: Lava Serpent"]) {
-								isEligible = false;
-							} else if (talentName === "Flash Point" && !currentTalents["Eruption Path: Lava Serpent"]) {
-								isEligible = false;
-							} else if (talentName === "The Floor is Lava" && !currentTalents["Eruption Path: Lava Serpent"]) {
-								isEligible = false;
-							} else if (talentName === "Double Trouble" && !currentTalents["Eruption Path: Lava Serpent"]) {
-								isEligible = false;
-							} else if (talentName === "Tough Love" && !currentTalents["Charismatic Cast"]) {
-								isEligible = false;
-							} else if (talentName === "Magical Resolve" && !currentTalents["Battle Tendency"]) {
-								isEligible = false;
-							} else if (talentName === "Turtle Shell" && !currentTalents["Knight's Rally"]) {
-								isEligible = false;
-							} else if (talentName === "Maiming Claws" && !currentTalents["Down Comes the Claw"]) {
-								isEligible = false;
-							} else if (talentName === "Crystal Shrapnel" && !currentTalents["Glass Path: Crystallization"]) {
-								isEligible = false;
-							} else if (talentName === "Volcanic Glass" && (!currentTalents["Glass Path: Crystallization"] || !currentTalents["Eruption Path: Lava Serpent"])) {
-								isEligible = false;
-							} else if (talentName === "Reclaimed Glass" && !currentTalents["Crystal Shrapnel"]) {
-								isEligible = false;
-							} else if (talentName === "Temperature Shock" && !currentTalents["Master Frostdrawer (Crystallization)"]) {
-								isEligible = false;
-							} else if (talentName === "Hell's Partisan" && !currentTalents["Warding Radiance"]) {
-								isEligible = false;
-							} else if (talentName === "Rushing Demise" && !currentTalents["Manipulation Path: Agile Misery"]) {
-								isEligible = false;
-							} else if (talentName === "Protective Offense" && !currentTalents["Manipulation Path: Agile Misery"]) {
-								isEligible = false;
-							} else if (talentName === "Venomous Chain" && !currentTalents["Manipulation Path: Spirit Lantern"]) {
-								isEligible = false;
-							} else if (talentName === "Heavy Disease" && !currentTalents["Manipulation Path: Spirit Lantern"]) {
-								isEligible = false;
-							} else if (talentName === "Peaking Control" && !currentTalents["Simple Manipulation: Unstable Blood"]) {
-								isEligible = false;
-							} else if (talentName === "Piercing Totality" && !currentTalents["Simple Manipulation: Unstable Blood"]) {
-								isEligible = false;
-							} else if (talentName === "Split-Second Injection" && !currentTalents["Bleeding Fighter"]) {
-								isEligible = false;
-							} else if (talentName === "Haunted Path: Specter" && !(currentTalents["Master Galebreather (Specter)"] && currentTalents["Haunted Gale"])) {
-								isEligible = false;
-							} else if (talentName === "Spectral Shift" && !(currentTalents["Master Galebreather (Specter)"] && currentTalents["Haunted Gale"])) {
-								isEligible = false;
-							} else if (talentName === "Exoskeleton" && playerStats.TotalFortitude < 40) {
-								isEligible = false;
-							} else if (talentName === "Magical Resolve" && playerStats.TotalWillpower < 40) {
-								isEligible = false;
-							} else if (talentName === "Conditioned Runner" && (playerStats.TotalAgility < 25 || playerStats.TotalFortitude < 25)) {
-								isEligible = false;
-							} else if (talentName === "Pursuit" && (playerStats.TotalAgility < 90 || !hasMantra(playerStats.Mantras, "Revenge"))) {
-								isEligible = false;
-							} else if (talentName === "Cheap Shot" && playerStats.TotalAgility < 65) {
-								isEligible = false;
-							} else if (talentName === "Down Comes the Claw" && playerStats.TotalAgility < 75) {
-								isEligible = false;
-							} else if (talentName === "Maiming Claws" && playerStats.TotalAgility < 100) {
-								isEligible = false;
-							} else if (talentName === "Tap Dancer" && playerStats.TotalAgility < 60) {
-								isEligible = false;
-							} else if (talentName === "Reinforced Armor" && playerStats.TotalFortitude < 90) {
-								isEligible = false;
-							} else if (talentName === "Knight's Rally" && (playerStats.TotalFortitude < 30 || playerStats.TotalWillpower < 10)) {
-								isEligible = false;
-							} else if (talentName === "Turtle Shell" && playerStats.TotalFortitude < 50) {
-								isEligible = false;
-							} else if (talentName === "Piercing Blow" && playerStats.TotalStrength < 80) {
-								isEligible = false;
-							} else if (talentName === "Shield Breaker" && playerStats.TotalStrength < 60) {
-								isEligible = false;
-							} else if (talentName === "Armorclad" && playerStats.TotalFortitude < 100) {
-								isEligible = false;
-							} else if (talentName === "Armorclad's Left" && playerStats.TotalFortitude < 100) {
-								isEligible = false;
-							} else if (talentName === "Underdog" && playerStats.TotalWillpower < 50) {
-								isEligible = false;
-							} else if (talentName === "Shared Misery" && playerStats.TotalWillpower < 90) {
-								isEligible = false;
-							} else if (talentName === "All The Dead Gods" && (playerStats.TotalIntelligence < 40 || playerStats.TotalWillpower < 65)) {
-								isEligible = false;
-							} else if (talentName === "Deflecting Handyman" && playerStats.TotalPrecision < 20) {
-								isEligible = false;
-							} else if (talentName === "Dead Eye" && playerStats.TotalPrecision < 40) {
-								isEligible = false;
-							} else if (talentName === "Fatality" && playerStats.TotalPrecision < 80) {
-								isEligible = false;
-							} else if (talentName === "Sturdy Control" && (playerStats.TotalPrecision < 40 || playerStats.TotalFortitude < 40)) {
-								isEligible = false;
-							} else if (talentName === "Master of His Craft" && (playerStats.TotalPrecision < 10 || playerStats.TotalIntelligence < 10)) {
-								isEligible = false;
-							} else if (talentName === "Pinpoint Accuracy" && playerStats.TotalPrecision < 80) {
-								isEligible = false;
-							} else if (talentName === "Successive Strikes" && playerStats.TotalPrecision < 60) {
-								isEligible = false;
-							} else if (talentName === "Deadly Blow" && playerStats.TotalPrecision < 50) {
-								isEligible = false;
-							} else if (talentName === "Stress Resistant" && (playerStats.TotalPrecision < 25 || playerStats.TotalWillpower < 40)) {
-								isEligible = false;
-							} else if (talentName === "Close Quarters" && playerStats.TotalPrecision < 75) {
-								isEligible = false;
-							} else if (talentName === "Upcoming Opportunity" && playerStats.TotalPrecision < 90) {
-								isEligible = false;
-							} else if (talentName === "Professional's Standard" && (playerStats.TotalPrecision < 50 || playerStats.TotalCharisma < 25)) {
-								isEligible = false;
-							} else if (talentName === "Breaking Stereotype" && (playerStats.TotalPrecision < 50 || playerStats.TotalStrength < 50)) {
-								isEligible = false;
-							} else if (talentName === "Battle Tendency" && (playerStats.TotalFortitude < 15 || playerStats.TotalWillpower < 15)) {
-								isEligible = false;
-							} else if (talentName === "Braced Collapse" && playerStats.TotalFortitude < 25) {
-								isEligible = false;
-							} else if (talentName === "Duelist's Dance" && playerStats.TotalStrength < 20) {
-								isEligible = false;
-							} else if (talentName === "Unwavering Resolve" && playerStats.TotalStrength < 40) {
-								isEligible = false;
-							} else if (talentName === "Harsh Response" && playerStats.TotalStrength < 25) {
-								isEligible = false;
-							} else if (talentName === "Steady Nerves" && (playerStats.TotalStrength < 15 || playerStats.TotalAgility < 40)) {
-								isEligible = false;
-							} else if (talentName === "Lightspeed Reflexes" && (playerStats.TotalAgility < 20 || playerStats.TotalIntelligence < 20)) {
-								isEligible = false;
-							} else if (talentName === "Brick Wall" && (playerStats.TotalWillpower < 100 || playerStats.TotalFortitude < 100)) {
-								isEligible = false;
-							} else if (talentName === "Pleeksty's Faith" && (playerStats.TotalCharisma < 15 || playerStats.TotalElementFire < 25 || playerStats.TotalWillpower < 15)) {
-								isEligible = false;
-							} else if (talentName === "Dazing Finisher" && playerStats.TotalCharisma < 55) {
-								isEligible = false;
-							} else if (talentName === "Charismatic Cast" && playerStats.TotalCharisma < 25) {
-								isEligible = false;
-							} else if (talentName === "Matador" && (playerStats.TotalStrength < 20 || playerStats.TotalAgility < 5)) {
-								isEligible = false;
-							} else if (talentName === "Tough Love" && playerStats.TotalCharisma < 25) {
-								isEligible = false;
-							} else if (talentName === "Cold Blood" && (playerStats.TotalFortitude < 50 || playerStats.TotalElementBlood < 20)) {
-								isEligible = false;
-							} else if (talentName === "Manipulation Path: Agile Misery" && (playerStats.TotalElementBlood < 50 || currentTalents["Manipulation Path: Spirit Lantern"] || currentTalents["Simple Manipulation: Unstable Blood"])) {
-								isEligible = false;
-							} else if (talentName === "Rushing Demise" && playerStats.TotalElementBlood < 75) {
-								isEligible = false;
-							} else if (talentName === "Protective Offense" && playerStats.TotalElementBlood < 100) {
-								isEligible = false;
-							} else if (talentName === "Manipulation Path: Spirit Lantern" && (playerStats.TotalElementBlood < 50 || currentTalents["Manipulation Path: Agile Misery"] || currentTalents["Simple Manipulation: Unstable Blood"])) {
-								isEligible = false;
-							} else if (talentName === "Venomous Chain" && playerStats.TotalElementBlood < 75) {
-								isEligible = false;
-							} else if (talentName === "Heavy Disease" && playerStats.TotalElementBlood < 100) {
-								isEligible = false;
-							} else if (talentName === "Simple Manipulation: Unstable Blood" && (playerStats.TotalElementBlood < 50 || currentTalents["Manipulation Path: Agile Misery"] || currentTalents["Manipulation Path: Spirit Lantern"])) {
-								isEligible = false;
-							} else if (talentName === "Peaking Control" && playerStats.TotalElementBlood < 75) {
-								isEligible = false;
-							} else if (talentName === "Piercing Totality" && playerStats.TotalElementBlood < 100) {
-								isEligible = false;
-							} else if (talentName === "Blood Syphon" && (playerStats.TotalElementBlood < 40 || playerStats.TotalWillpower < 40)) {
-								isEligible = false;
-							} else if (talentName === "Not So Cheap Trick" && playerStats.TotalElementBlood < 25) {
-								isEligible = false;
-							} else if (talentName === "Harvest Season" && playerStats.TotalElementBlood < 25) {
-								isEligible = false;
-							} else if (talentName === "Payback" && (playerStats.TotalElementBlood < 40 || playerStats.TotalStrength < 25)) {
-								isEligible = false;
-							} else if (talentName === "Emerging Transfusion" && (playerStats.TotalElementBlood < 50 || playerStats.TotalStrength < 50)) {
-								isEligible = false;
-							} else if (talentName === "Sucker Strike" && playerStats.TotalElementBlood < 80) {
-								isEligible = false;
-							} else if (talentName === "Lose Your Mind" && playerStats.TotalStrength < 30) {
-								isEligible = false;
-							} else if (talentName === "Million Ton Piercer" && playerStats.TotalStrength < 90) {
-								isEligible = false;
-							} else if (talentName === "Ether Overdrive" && playerStats.TotalIntelligence < 90) {
-								isEligible = false;
-							} else if (talentName === "Foolish Outburst" && playerStats.TotalIntelligence < 50) {
-								isEligible = false;
-							} else if (talentName === "Dreambreaker" && playerStats.TotalStrength < 100) {
-								isEligible = false;
-							} else if (talentName === "Collapsed Lung" && playerStats.TotalStrength < 100) {
-								isEligible = false;
-							} else if (talentName === "Dreambreaker's Left" && playerStats.TotalStrength < 100) {
-								isEligible = false;
-							} else if (talentName === "Piercing Will" && playerStats.TotalWillpower < 80) {
-								isEligible = false;
-							} else if (talentName === "Unfazed" && playerStats.TotalWillpower < 50) {
-								isEligible = false;
-							} else if (talentName === "Grasp on Reality" && (playerStats.TotalWillpower < 5 || playerStats.TotalFortitude < 25)) {
-								isEligible = false;
-							} else if (talentName === "Disbelief" && playerStats.TotalWillpower < 25) {
-								isEligible = false;
-							} else if (talentName === "Speed Demon" && playerStats.TotalAgility < 25) {
-								isEligible = false;
-							} else if (talentName === "Blade Dancer" && playerStats.TotalAgility < 25) {
-								isEligible = false;
-							} else if (talentName === "Spine Cutter" && (playerStats.TotalStrength < 20 || playerStats.TotalAgility < 25)) {
-								isEligible = false;
-							} else if (talentName === "Murmer: Ardour" && (playerStats.TotalWillpower < 40 || playerStats.TotalStrength < 20)) {
-								isEligible = false;
-							} else if (talentName === "To the finish" && playerStats.TotalFortitude < 50) {
-								isEligible = false;
-							} else if (talentName === "Ether Absorption" && playerStats.TotalIntelligence < 15) {
-								isEligible = false;
-							} else if (talentName === "Eureka" && playerStats.TotalIntelligence < 30) {
-								isEligible = false;
-							} else if (talentName === "Overflowing Dam" && playerStats.TotalIntelligence < 40) {
-								isEligible = false;
-							} else if (talentName === "Twelve Steps Ahead" && playerStats.TotalIntelligence < 80) {
-								isEligible = false;
-							} else if (talentName === "Lord's Tithe" && (playerStats.TotalElementShadow < 40 || !hasMantra(playerStats.Mantras, "Reinforce"))) {
-								isEligible = false;
-							} else if (talentName === "Perfect Flash" && playerStats.TotalIntelligence < 20) {
-								isEligible = false;
-							} else if (talentName === "Charming Master" && playerStats.TotalCharisma < 90) {
-								isEligible = false;
-							} else if (talentName === "Master Flamecharmer" && playerStats.TotalElementFire < 50) {
-								isEligible = false;
-							} else if (talentName === "Master Bloodrender" && playerStats.TotalElementBlood < 50) {
-								isEligible = false;
-							} else if (talentName === "Master Earthbender" && playerStats.TotalElementEarth < 50) {
-								isEligible = false;
-							} else if (talentName === "Natural Disaster" && playerStats.TotalElementEarth < 50) {
-								isEligible = false;
-							} else if (talentName === "Memento Mori" && (playerStats.TotalElementEarth < 50 || playerStats.TotalWillpower < 20)) {
-								isEligible = false;
-							} else if (talentName === "Annihilator" && (playerStats.TotalElementEarth < 50 || playerStats.TotalStrength < 50)) {
-								isEligible = false;
-							} else if (talentName === "Battlefield Strategist" && playerStats.TotalElementEarth < 40) {
-								isEligible = false;
-							} else if (talentName === "Impermeable" && playerStats.TotalElementEarth < 80) {
-								isEligible = false;
-							} else if (talentName === "Solidifier" && playerStats.TotalElementEarth < 100) {
-								isEligible = false;
-							} else if (talentName === "Master Flamecharmer (Eruption)" && playerStats.TotalElementFire < 50) {
-								isEligible = false;
-							} else if (talentName === "Eruption Path: Lava Serpent" && playerStats.TotalElementFire < 50) {
-								isEligible = false;
-							} else if (talentName === "Molten Defense" && playerStats.TotalElementFire < 75) {
-								isEligible = false;
-							} else if (talentName === "Meteor Impact" && playerStats.TotalElementFire < 25) {
-								isEligible = false;
-							} else if (talentName === "Flash Point" && playerStats.TotalElementFire < 80) {
-								isEligible = false;
-							} else if (talentName === "Double Trouble" && playerStats.TotalElementFire < 100) {
-								isEligible = false;
-							} else if (talentName === "The Final Act" && playerStats.TotalElementFire < 75) {
-								isEligible = false;
-							} else if (talentName === "Emperor Flame" && playerStats.TotalElementFire < 80) {
-								isEligible = false;
-							} else if (talentName === "Flamewalker" && (playerStats.TotalElementFire < 40 || playerStats.TotalAgility < 25)) {
-								isEligible = false;
-							} else if (talentName === "Warding Radiance" && (playerStats.TotalAgility < 20 || playerStats.TotalElementFire < 30)) {
-								isEligible = false;
-							} else if (talentName === "Azure Flames" && (playerStats.TotalWillpower < 40 || playerStats.TotalElementFire < 75)) {
-								isEligible = false;
-							} else if (talentName === "Explosive Flourish" && playerStats.TotalElementFire < 50) {
-								isEligible = false;
-							} else if (talentName === "Flaming Flourish" && playerStats.TotalElementFire < 25) {
-								isEligible = false;
-							} else if (talentName === "Master Frostdrawer" && playerStats.TotalElementIce < 50) {
-								isEligible = false;
-							} else if (talentName === "Master Frostdrawer (Crystallization)" && playerStats.TotalElementIce < 50) {
-								isEligible = false;
-							} else if (talentName === "Glass Path: Crystallization" && playerStats.TotalElementIce < 40) {
-								isEligible = false;
-							} else if (talentName === "Crystal Shrapnel" && playerStats.TotalElementIce < 60) {
-								isEligible = false;
-							} else if (talentName === "Volcanic Glass" && playerStats.TotalElementIce < 40) {
-								isEligible = false;
-							} else if (talentName === "Reclaimed Glass" && playerStats.TotalElementIce < 65) {
-								isEligible = false;
-							} else if (talentName === "Temperature Shock" && (playerStats.TotalElementIce < 40 || playerStats.TotalElementFire < 40)) {
-								isEligible = false;
-							} else if (talentName === "Cold Heart" && playerStats.TotalElementIce < 75) {
-								isEligible = false;
-							} else if (talentName === "Cryostasis" && playerStats.TotalElementIce < 80) {
-								isEligible = false;
-							} else if (talentName === "Chilling Flourish" && playerStats.TotalElementIce < 50) {
-								isEligible = false;
-							} else if (talentName === "Unyielding Frost" && playerStats.TotalElementIce < 75) {
-								isEligible = false;
-							} else if (talentName === "Master Galebreather" && playerStats.TotalElementWind < 50) {
-								isEligible = false;
-							} else if (talentName === "Master Galebreather (Ember)" && playerStats.TotalElementWind < 50) {
-								isEligible = false;
-							} else if (talentName === "Scorched Path: Ember" && (playerStats.TotalElementFire < 55 || playerStats.TotalElementWind < 55)) {
-								isEligible = false;
-							} else if (talentName === "Burning Lungs" && (playerStats.TotalElementWind < 65 || playerStats.TotalElementFire < 65)) {
-								isEligible = false;
-							} else if (talentName === "Emberlink" && (playerStats.TotalElementWind < 101 || playerStats.TotalElementFire < 101)) {
-								isEligible = false;
-							} else if (talentName === "Wind Step" && playerStats.TotalElementWind < 40) {
-								isEligible = false;
-							} else if (talentName === "Air Pressure" && (playerStats.TotalElementWind < 50 || playerStats.TotalAgility < 20)) {
-								isEligible = false;
-							} else if (talentName === "Master Galebreather (Specter)" && playerStats.TotalElementWind < 50) {
-								isEligible = false;
-							} else if (talentName === "Haunted Gale" && playerStats.TotalElementWind < 40) {
-								isEligible = false;
-							} else if (talentName === "Haunted Path: Specter" && playerStats.TotalElementWind < 50) {
-								isEligible = false;
-							} else if (talentName === "Spectral Shift" && playerStats.TotalElementWind < 75) {
-								isEligible = false;
-							} else if (talentName === "A World Without Song" && playerStats.TotalElementWind < 75) {
-								isEligible = false;
-							} else if (talentName === "Suffocating Flourish" && playerStats.TotalElementWind < 50) {
-								isEligible = false;
-							} else if (talentName === "Master Thundercaller" && playerStats.TotalElementLightning < 50) {
-								isEligible = false;
-							} else if (talentName === "Electrocution" && playerStats.TotalElementLightning < 50) {
-								isEligible = false;
-							} else if (talentName === "Raiton Path: Enlightened" && playerStats.TotalElementLightning < 50) {
-								isEligible = false;
-							} else if (talentName === "Unipolar Path: Teslafication" && (playerStats.TotalElementLightning < 50 || playerStats.TotalElementIron < 50)) {
-								isEligible = false;
-							} else if (talentName === "Wraith Path: Umbra" && (playerStats.TotalElementFire < 50 || playerStats.TotalElementShadow < 50)) {
-								isEligible = false;
-							} else if (talentName === "Unipolar Conductivity" && playerStats.TotalElementIron < 75) {
-								isEligible = false;
-							} else if (talentName === "Decaying Posture" && playerStats.TotalElementIron < 75) {
-								isEligible = false;
-							} else if (talentName === "Oxidizing Blitz" && playerStats.TotalElementIron < 100) {
-								isEligible = false;
-							} else if (talentName === "Decay Path: Oxidize" && playerStats.TotalElementIron < 50) {
-								isEligible = false;
-							} else if (talentName === "Melted Wire" && playerStats.TotalElementLightning < 80) {
-								isEligible = false;
-							} else if (talentName === "Raiton's Charge" && playerStats.TotalElementLightning < 75) {
-								isEligible = false;
-							} else if (talentName === "Short Circuit" && playerStats.TotalElementLightning < 75) {
-								isEligible = false;
-							} else if (talentName === "Scatter" && playerStats.TotalElementLightning < 50) {
-								isEligible = false;
-							} else if (talentName === "Overload" && playerStats.TotalElementLightning < 100) {
-								isEligible = false;
-							} else if (talentName === "Master Shadowcaster" && playerStats.TotalElementShadow < 50) {
-								isEligible = false;
-							} else if (talentName === "There Shall Be No Light" && playerStats.TotalElementShadow < 100) {
-								isEligible = false;
-							} else if (talentName === "Common State of Inner Violence" && playerStats.TotalElementShadow < 75) {
-								isEligible = false;
-							} else if (talentName === "Empty Shell" && playerStats.TotalElementShadow < 50) {
-								isEligible = false;
-							} else if (talentName === "Dark Synergy" && playerStats.TotalElementShadow < 25) {
-								isEligible = false;
-							} else if (talentName === "Master Ironsinger" && playerStats.TotalElementIron < 50) {
-								isEligible = false;
-							} else if (talentName === "Armor Synergy" && playerStats.TotalElementIron < 50) {
-								isEligible = false;
-							} else if (talentName === "An Ironsinger's Instinct" && playerStats.TotalElementIron < 75) {
-								isEligible = false;
-							} else if (talentName === "Metal Drain" && playerStats.TotalElementIron < 80) {
-								isEligible = false;
-							} else if (talentName === "Metal Eater" && playerStats.TotalElementIron < 80) {
-								isEligible = false;
-							} else if (talentName === "Alloyblood" && playerStats.TotalElementIron < 100) {
-								isEligible = false;
-							} else if (talentName === "Speed Emission" && playerStats.TotalAgility < 25) {
-								isEligible = false;
-							} else if (talentName === "Armor Conserver" && playerStats.Level < 8) {
-								isEligible = false;
-							} else if (talentName === "Frozen Pin-Cushion" && (playerStats.TotalElementIce < 60 || !hasMantra(playerStats.Mantras, "Ice Daggers"))) {
-								isEligible = false;
-							} else if (talentName === "Flash Pressure" && !hasMantra(playerStats.Mantras, "Breeze Blitz")) {
-								isEligible = false;
-							} else if (talentName === "Blood Path: True Frost" && (playerStats.TotalElementBlood < 20 || playerStats.TotalElementIce < 10)) {
-								isEligible = false;
-							} else if (talentName === "Agile Path: Pressured Blood" && playerStats.TotalElementBlood < 15) {
-								isEligible = false;
-							} else if (talentName === "Bleeding Fighter" && (playerStats.TotalElementBlood < 999 || playerStats.TotalStrength < 999)) {
-								isEligible = false;
-							}
-			
-							if (isEligible && !currentTalents[talentName]) {
-								const rarity = talentData.InnateRarity === "Legendary" ? "Advanced" : talentData.InnateRarity || "Common";
-								const className = talentData.Class || "Miscellaneous";
-			
-								if (!groupedTalents[rarity][className]) {
-									groupedTalents[rarity][className] = [];
-								}
-			
-								groupedTalents[rarity][className].push({
-									name: talentName,
-									desc: talentData.Desc,
-									icon: talentData.Icon || "https://deepwoken.co/newicon.png", // Ensure fallback is applied
-									rarity: rarity
-								});
-							}
-						}
-			
-						populateDropdown('Advanced-dropdown', groupedTalents.Advanced, 'Advanced');
-						populateDropdown('Rare-dropdown', groupedTalents.Rare, 'Rare');
-						populateDropdown('Common-dropdown', groupedTalents.Common, 'Common');
-					}
-			
-					function populateDropdown(dropdownId, talentsByClass, rarity) {
-						const dropdown = document.getElementById(dropdownId);
-						if (!dropdown) return;
-			
-						dropdown.innerHTML = '';
-			
-						for (const [className, talents] of Object.entries(talentsByClass)) {
-							const fieldset = document.createElement('fieldset');
-							fieldset.className = 'svelte-hwcpcr';
-			
-							const legend = document.createElement('legend');
-							legend.className = 'svelte-hwcpcr';
-							legend.textContent = className;
-							fieldset.appendChild(legend);
-			
-							talents.forEach(talent => {
-								const talentDiv = document.createElement('div');
-								talentDiv.className = `talent ${rarity} shrine-false locked-false svelte-hwcpcr`;
-								talentDiv.setAttribute('role', 'button');
-								talentDiv.setAttribute('tabindex', '0');
-								talentDiv.style.userSelect = 'none';
-								talentDiv.style.touchAction = 'auto';
-								talentDiv.dataset.talentName = talent.name;
-								
-			
-								// Debug log to check icon value
-								console.log(`Talent: ${talent.name}, Icon: ${talent.icon}`);
-			
-								talentDiv.innerHTML = `
-									${talent.name}
-									<div class="svelte-hwcpcr" style="display: flex; gap: 4px;">
-										<img class="icon svelte-hwcpcr" title="${talent.desc}" width="14" height="14" alt="new" src="https://deepwoken.co/newicon.png">
-									</div>
-								`;
-			
-								talentDiv.addEventListener('click', () => {
-									if (!currentTalents[talent.name]) {
-										currentTalents[talent.name] = true;
-										console.log("Talent selected:", talent.name);
-										console.log("Current talents:", JSON.stringify(currentTalents, null, 2));
-										populateObtainedTalents(currentTalents, talentsData);
-										populateDropdowns(talentsData, currentTalents, updatePlayerStats());
-									}
-								});
-			
-								fieldset.appendChild(talentDiv);
-							});
-			
-							dropdown.appendChild(fieldset);
-						}
-			
-						if (dropdown.innerHTML.trim() === '') {
-							const noTalentsDiv = document.createElement('div');
-							noTalentsDiv.className = 'talent svelte-hwcpcr';
-							noTalentsDiv.textContent = 'No talents :(';
-							dropdown.appendChild(noTalentsDiv);
-						}
-					}
-			
-					function populateObtainedTalents(currentTalents, talentsData) {
-						const obtainedTalentsContainer = document.querySelector('#rollable-talent-2 .talents-container');
-						if (!obtainedTalentsContainer) return;
-			
-						obtainedTalentsContainer.innerHTML = '';
-			
-						const groupedObtainedTalents = {};
-						for (const [talentName] of Object.entries(currentTalents)) {
-							if (talentsData[talentName]) {
-								const className = talentsData[talentName].Class || "Miscellaneous";
-								const rarity = talentsData[talentName].InnateRarity === "Legendary" ? "Advanced" : talentsData[talentName].InnateRarity || "Common";
-								if (!groupedObtainedTalents[className]) {
-									groupedObtainedTalents[className] = [];
-								}
-								groupedObtainedTalents[className].push({
-									name: talentName,
-									desc: talentsData[talentName].Desc,
-									icon: "https://deepwoken.co/newicon.png", // Always use this URL
-									rarity: rarity
-								});
-							} else {
-								console.warn("⚠️ Talent not found in talentsData:", talentName);
-							}
-						}
-			
-						const sortedClasses = Object.keys(groupedObtainedTalents).sort();
-			
-						sortedClasses.forEach(className => {
-							const fieldset = document.createElement('fieldset');
-							fieldset.className = 'svelte-hwcpcr';
-			
-							const legend = document.createElement('legend');
-							legend.className = 'svelte-hwcpcr';
-							legend.textContent = className;
-							fieldset.appendChild(legend);
-			
-							groupedObtainedTalents[className].forEach(talent => {
-								const talentDiv = document.createElement('div');
-								talentDiv.className = `talent ${talent.rarity} svelte-hwcpcr`; // Match the dropdown's class structure
-								talentDiv.style.userSelect = 'none';
-								talentDiv.style.touchAction = 'auto';
-								talentDiv.dataset.talentName = talent.name;
-			
-								talentDiv.innerHTML = `
-									${talent.name}
-									<div class="svelte-hwcpcr" style="display: flex; gap: 4px;">
-										<img class="icon svelte-hwcpcr" title="${talent.desc}" width="14" height="14" alt="new" src="https://deepwoken.co/newicon.png">
-									</div>
-								`;
-			
-								// Undo functionality
-								talentDiv.addEventListener('click', () => {
-									delete currentTalents[talent.name];
-									console.log("Talent removed:", talent.name);
-									console.log("Current talents:", JSON.stringify(currentTalents, null, 2));
-									populateObtainedTalents(currentTalents, talentsData);
-									populateDropdowns(talentsData, currentTalents, updatePlayerStats());
-								});
-			
-								fieldset.appendChild(talentDiv);
-							});
-			
-							obtainedTalentsContainer.appendChild(fieldset);
-						});
-			
+<script>
+    document.getElementById('exportcode').addEventListener('click', function() {
+        const statsMapping = {
+            st: 'Strength',
+            pe: 'Precision',
+            fo: 'Fortitude',
+            ag: 'Agility',
+            in: 'Intelligence',
+            wi: 'Willpower',
+            ch: 'Charisma',
+            he: 'Heavy Wep.',
+            me: 'Medium Wep.',
+            li: 'Light Wep.',
+            fl: 'Flamecharm',
+            fr: 'Frostdraw',
+            th: 'Thundercall',
+            ga: 'Galebreathe',
+            sh: 'Shadowcast',
+            ir: 'Ironsing',
+            bl: 'Bloodrend',
+            eb: 'Earthbend',
+            ra: 'Race',
+            oa: 'Oath',
+            mu: 'Murmur',
+            be: 'Bell'
+        };
 
-					}
-				});
-			</script>
+        // Collect the stats from the inputs
+        const stats = {};
+        Object.keys(statsMapping).forEach(key => {
+            const input = document.querySelector(`input[statname="${statsMapping[key]}"]`);
+            const select = document.querySelector(`select[statname="${statsMapping[key]}"]`);
+
+            if (input) {
+                stats[key] = input.value || 0;
+            } else if (select) {
+                stats[key] = select.value || 0;
+            } else {
+                stats[key] = 0; // Default to 0 if no input or select found
+            }
+        });
+
+        // Convert stats into a string in the format "key/value"
+        const statsString = Object.entries(stats)
+            .map(([key, value]) => `${key}/${value}`)
+            .join('/');
+
+        // Copy to clipboard
+        navigator.clipboard.writeText(statsString).then(function() {
+            alert('Build copied to clipboard!');
+        }).catch(function(err) {
+            console.error('Could not copy build to clipboard: ', err);
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Stats mapping from the export script
+        const statsMapping = {
+            st: 'Strength',
+            pe: 'Precision',
+            fo: 'Fortitude',
+            ag: 'Agility',
+            in: 'Intelligence',
+            wi: 'Willpower',
+            ch: 'Charisma',
+            he: 'Heavy Wep.',
+            me: 'Medium Wep.',
+            li: 'Light Wep.',
+            fl: 'Flamecharm',
+            fr: 'Frostdraw',
+            th: 'Thundercall',
+            ga: 'Galebreathe',
+            sh: 'Shadowcast',
+            ir: 'Ironsing',
+            bl: 'Bloodrend',
+            eb: 'Earthbend',
+            ra: 'Race',
+            oa: 'Oath',
+            mu: 'Murmur',
+            be: 'Bell'
+        };
+
+        // Map shorthand keys to Lua-style Total[Stat] keys
+        const luaStatsMapping = {
+            st: 'TotalStrength',
+            pe: 'TotalPrecision',
+            fo: 'TotalFortitude',
+            ag: 'TotalAgility',
+            in: 'TotalIntelligence',
+            wi: 'TotalWillpower',
+            ch: 'TotalCharisma',
+            fl: 'TotalElementFire',
+            fr: 'TotalElementIce',
+            th: 'TotalElementLightning',
+            ga: 'TotalElementWind',
+            sh: 'TotalElementShadow',
+            ir: 'TotalElementIron',
+            bl: 'TotalElementBlood',
+            eb: 'TotalElementEarth'
+        };
+
+        // Mutual exclusivity rules (expanded from Lua code)
+        const mutualExclusivityRules = {
+            "Risky Moves": ["Safety Dance", "Observation"],
+            "Safety Dance": ["Risky Moves"],
+            "Observation": ["Risky Moves"],
+            "Azure Flames": ["Wraith Path: Umbra", "Twisted Puppets"],
+            "Wraith Path: Umbra": ["Azure Flames"],
+            "Twisted Puppets": ["Azure Flames"],
+            "Manipulation Path: Agile Misery": ["Manipulation Path: Spirit Lantern", "Simple Manipulation: Unstable Blood"],
+            "Manipulation Path: Spirit Lantern": ["Manipulation Path: Agile Misery", "Simple Manipulation: Unstable Blood"],
+            "Simple Manipulation: Unstable Blood": ["Manipulation Path: Agile Misery", "Manipulation Path: Spirit Lantern"],
+            "Electrocution": ["Raiton Path: Enlightened", "Unipolar Path: Teslafication"],
+            "Raiton Path: Enlightened": ["Electrocution"],
+            "Unipolar Path: Teslafication": ["Electrocution"],
+            // Add remaining mutual exclusivity rules from Lua code here
+        };
+
+        // Talent dependencies (expanded from Lua code)
+        const talentDependencies = {
+            "Ghost": ["Risky Moves"],
+            "Scatter": ["Electrocution"],
+            "Emperor Flame": ["The Final Act"],
+            "Short Circuit": ["Electrocution"],
+            "Decaying Posture": ["Decay Path: Oxidize"],
+            "Oxidizing Blitz": ["Decay Path: Oxidize"],
+            "Unipolar Conductivity": ["Unipolar Path: Teslafication"],
+            "Melted Wire": ["Unipolar Path: Teslafication"],
+            "Raiton's Charge": ["Raiton Path: Enlightened"],
+            "Overcharge": ["Unipolar Path: Teslafication"],
+            "Molten Defense": ["Eruption Path: Lava Serpent"],
+            "Flash Point": ["Eruption Path: Lava Serpent"],
+            "The Floor is Lava": ["Eruption Path: Lava Serpent"],
+            "Double Trouble": ["Eruption Path: Lava Serpent"],
+            "Tough Love": ["Charismatic Cast"],
+            "Magical Resolve": ["Battle Tendency"],
+            "Turtle Shell": ["Knight's Rally"],
+            "Maiming Claws": ["Down Comes the Claw"],
+            "Crystal Shrapnel": ["Glass Path: Crystallization"],
+            "Volcanic Glass": ["Glass Path: Crystallization", "Eruption Path: Lava Serpent"],
+            "Reclaimed Glass": ["Crystal Shrapnel"],
+            "Temperature Shock": ["Master Frostdrawer (Crystallization)"],
+            "Hell's Partisan": ["Warding Radiance"],
+            "Rushing Demise": ["Manipulation Path: Agile Misery"],
+            "Protective Offense": ["Manipulation Path: Agile Misery"],
+            "Venomous Chain": ["Manipulation Path: Spirit Lantern"],
+            "Heavy Disease": ["Manipulation Path: Spirit Lantern"],
+            "Peaking Control": ["Simple Manipulation: Unstable Blood"],
+            "Piercing Totality": ["Simple Manipulation: Unstable Blood"],
+            "Split-Second Injection": ["Bleeding Fighter"],
+            "Haunted Path: Specter": ["Master Galebreather (Specter)", "Haunted Gale"],
+            "Spectral Shift": ["Master Galebreather (Specter)", "Haunted Gale"],
+            // Add remaining dependencies from Lua code here
+        };
+
+        // Mantra requirements (expanded from Lua code)
+        const mantraRequirements = {
+            "Lord's Tithe": { mantra: "Reinforce" },
+            "Frozen Pin-Cushion": { mantra: "Ice Daggers" },
+            "Pursuit": { mantra: "Revenge" },
+            // Add remaining mantra requirements from Lua code here
+        };
+
+        // Stat requirements (expanded from Lua code)
+        const statRequirements = {
+            "Exoskeleton": { TotalFortitude: 40 },
+            "Magical Resolve": { TotalWillpower: 40 },
+            "Conditioned Runner": { TotalAgility: 25, TotalFortitude: 25 },
+            "Pursuit": { TotalAgility: 90 },
+            "Cheap Shot": { TotalAgility: 65 },
+            "Down Comes the Claw": { TotalAgility: 75 },
+            "Maiming Claws": { TotalAgility: 100 },
+            "Tap Dancer": { TotalAgility: 60 },
+            "Reinforced Armor": { TotalFortitude: 90 },
+            "Knight's Rally": { TotalFortitude: 30, TotalWillpower: 10 },
+            "Turtle Shell": { TotalFortitude: 50 },
+            "Piercing Blow": { TotalStrength: 80 },
+            "Shield Breaker": { TotalStrength: 60 },
+            "Armorclad": { TotalFortitude: 100 },
+            "Armorclad's Left": { TotalFortitude: 100 },
+            "Underdog": { TotalWillpower: 50 },
+            "Shared Misery": { TotalWillpower: 90 },
+            "All The Dead Gods": { TotalIntelligence: 40, TotalWillpower: 65 },
+            "Deflecting Handyman": { TotalPrecision: 20 },
+            "Dead Eye": { TotalPrecision: 40 },
+            "Fatality": { TotalPrecision: 80 },
+            "Sturdy Control": { TotalPrecision: 40, TotalFortitude: 40 },
+            "Master of His Craft": { TotalPrecision: 10, TotalIntelligence: 10 },
+            "Pinpoint Accuracy": { TotalPrecision: 80 },
+            "Successive Strikes": { TotalPrecision: 60 },
+            "Deadly Blow": { TotalPrecision: 50 },
+            "Stress Resistant": { TotalPrecision: 25, TotalWillpower: 40 },
+            "Close Quarters": { TotalPrecision: 75 },
+            "Upcoming Opportunity": { TotalPrecision: 90 },
+            "Professional's Standard": { TotalPrecision: 50, TotalCharisma: 25 },
+            "Breaking Stereotype": { TotalPrecision: 50, TotalStrength: 50 },
+            "Battle Tendency": { TotalFortitude: 15, TotalWillpower: 15 },
+            "Braced Collapse": { TotalFortitude: 25 },
+            "Duelist's Dance": { TotalStrength: 20 },
+            "Unwavering Resolve": { TotalStrength: 40 },
+            "Harsh Response": { TotalStrength: 25 },
+            "Steady Nerves": { TotalStrength: 15, TotalAgility: 40 },
+            "Lightspeed Reflexes": { TotalAgility: 20, TotalIntelligence: 20 },
+            "Brick Wall": { TotalWillpower: 100, TotalFortitude: 100 },
+            "Pleeksty's Faith": { TotalCharisma: 15, TotalElementFire: 25, TotalWillpower: 15 },
+            "Dazing Finisher": { TotalCharisma: 55 },
+            "Charismatic Cast": { TotalCharisma: 25 },
+            "Matador": { TotalStrength: 20, TotalAgility: 5 },
+            "Tough Love": { TotalCharisma: 25 },
+            "Cold Blood": { TotalFortitude: 50, TotalElementBlood: 20 },
+            "Manipulation Path: Agile Misery": { TotalElementBlood: 50 },
+            "Rushing Demise": { TotalElementBlood: 75 },
+            "Protective Offense": { TotalElementBlood: 100 },
+            "Manipulation Path: Spirit Lantern": { TotalElementBlood: 50 },
+            "Venomous Chain": { TotalElementBlood: 75 },
+            "Heavy Disease": { TotalElementBlood: 100 },
+            "Simple Manipulation: Unstable Blood": { TotalElementBlood: 50 },
+            "Peaking Control": { TotalElementBlood: 75 },
+            "Piercing Totality": { TotalElementBlood: 100 },
+            "Blood Syphon": { TotalElementBlood: 40, TotalWillpower: 40 },
+            "Not So Cheap Trick": { TotalElementBlood: 25 },
+            "Harvest Season": { TotalElementBlood: 25 },
+            "Payback": { TotalElementBlood: 40, TotalStrength: 25 },
+            "Emerging Transfusion": { TotalElementBlood: 50, TotalStrength: 50 },
+            "Sucker Strike": { TotalElementBlood: 80 },
+            "Lose Your Mind": { TotalStrength: 30 },
+            "Million Ton Piercer": { TotalStrength: 90 },
+            "Ether Overdrive": { TotalIntelligence: 90 },
+            "Foolish Outburst": { TotalIntelligence: 50 },
+            "Dreambreaker": { TotalStrength: 100 },
+            "Collapsed Lung": { TotalStrength: 100 },
+            "Dreambreaker's Left": { TotalStrength: 100 },
+            "Piercing Will": { TotalWillpower: 80 },
+            "Unfazed": { TotalWillpower: 50 },
+            "Grasp on Reality": { TotalWillpower: 5, TotalFortitude: 25 },
+            "Disbelief": { TotalWillpower: 25 },
+            "Speed Demon": { TotalAgility: 25 },
+            "Blade Dancer": { TotalAgility: 25 },
+            "Spine Cutter": { TotalStrength: 20, TotalAgility: 25 },
+            "Murmer: Ardour": { TotalWillpower: 40, TotalStrength: 20 },
+            "To the finish": { TotalFortitude: 50 },
+            "Ether Absorption": { TotalIntelligence: 15 },
+            "Eureka": { TotalIntelligence: 30 },
+            "Overflowing Dam": { TotalIntelligence: 40 },
+            "Twelve Steps Ahead": { TotalIntelligence: 80 },
+            "Perfect Flash": { TotalIntelligence: 20 },
+            "Charming Master": { TotalCharisma: 90 },
+            "Master Flamecharmer": { TotalElementFire: 50 },
+            "Master Bloodrender": { TotalElementBlood: 50 },
+            "Master Earthbender": { TotalElementEarth: 50 },
+            "Natural Disaster": { TotalElementEarth: 50 },
+            "Memento Mori": { TotalElementEarth: 50, TotalWillpower: 20 },
+            "Annihilator": { TotalElementEarth: 50, TotalStrength: 50 },
+            "Battlefield Strategist": { TotalElementEarth: 40 },
+            "Impermeable": { TotalElementEarth: 80 },
+            "Solidifier": { TotalElementEarth: 100 },
+            "Master Flamecharmer (Eruption)": { TotalElementFire: 50 },
+            "Eruption Path: Lava Serpent": { TotalElementFire: 50 },
+            "Molten Defense": { TotalElementFire: 75 },
+            "Meteor Impact": { TotalElementFire: 25 },
+            "Flash Point": { TotalElementFire: 80 },
+            "Double Trouble": { TotalElementFire: 100 },
+            "The Final Act": { TotalElementFire: 75 },
+            "Emperor Flame": { TotalElementFire: 80 },
+            "Flamewalker": { TotalElementFire: 40, TotalAgility: 25 },
+            "Warding Radiance": { TotalAgility: 20, TotalElementFire: 30 },
+            "Azure Flames": { TotalWillpower: 40, TotalElementFire: 75 },
+            "Explosive Flourish": { TotalElementFire: 50 },
+            "Flaming Flourish": { TotalElementFire: 25 },
+            "Master Frostdrawer": { TotalElementIce: 50 },
+            "Master Frostdrawer (Crystallization)": { TotalElementIce: 50 },
+            "Glass Path: Crystallization": { TotalElementIce: 40 },
+            "Crystal Shrapnel": { TotalElementIce: 60 },
+            "Volcanic Glass": { TotalElementIce: 40 },
+            "Reclaimed Glass": { TotalElementIce: 65 },
+            "Temperature Shock": { TotalElementIce: 40, TotalElementFire: 40 },
+            "Cold Heart": { TotalElementIce: 75 },
+            "Cryostasis": { TotalElementIce: 80 },
+            "Chilling Flourish": { TotalElementIce: 50 },
+            "Unyielding Frost": { TotalElementIce: 75 },
+            "Master Galebreather": { TotalElementWind: 50 },
+            "Master Galebreather (Ember)": { TotalElementWind: 50 },
+            "Scorched Path: Ember": { TotalElementFire: 55, TotalElementWind: 55 },
+            "Burning Lungs": { TotalElementWind: 65, TotalElementFire: 65 },
+            "Emberlink": { TotalElementWind: 101, TotalElementFire: 101 },
+            "Wind Step": { TotalElementWind: 40 },
+            "Air Pressure": { TotalElementWind: 50, TotalAgility: 20 },
+            "Master Galebreather (Specter)": { TotalElementWind: 50 },
+            "Haunted Gale": { TotalElementWind: 40 },
+            "Haunted Path: Specter": { TotalElementWind: 50 },
+            "Spectral Shift": { TotalElementWind: 75 },
+            "A World Without Song": { TotalElementWind: 75 },
+            "Suffocating Flourish": { TotalElementWind: 50 },
+            "Master Thundercaller": { TotalElementLightning: 50 },
+            "Electrocution": { TotalElementLightning: 50 },
+            "Raiton Path: Enlightened": { TotalElementLightning: 50 },
+            "Unipolar Path: Teslafication": { TotalElementLightning: 50, TotalElementIron: 50 },
+            "Wraith Path: Umbra": { TotalElementFire: 50, TotalElementShadow: 50 },
+            "Unipolar Conductivity": { TotalElementIron: 75 },
+            "Decaying Posture": { TotalElementIron: 75 },
+            "Oxidizing Blitz": { TotalElementIron: 100 },
+            "Decay Path: Oxidize": { TotalElementIron: 50 },
+            "Melted Wire": { TotalElementLightning: 80 },
+            "Raiton's Charge": { TotalElementLightning: 75 },
+            "Short Circuit": { TotalElementLightning: 75 },
+            "Scatter": { TotalElementLightning: 50 },
+            "Overload": { TotalElementLightning: 100 },
+            "Master Shadowcaster": { TotalElementShadow: 50 },
+            "There Shall Be No Light": { TotalElementShadow: 100 },
+            "Common State of Inner Violence": { TotalElementShadow: 75 },
+            "Empty Shell": { TotalElementShadow: 50 },
+            "Dark Synergy": { TotalElementShadow: 25 },
+            "Master Ironsinger": { TotalElementIron: 50 },
+            "Armor Synergy": { TotalElementIron: 50 },
+            "An Ironsinger's Instinct": { TotalElementIron: 75 },
+            "Metal Drain": { TotalElementIron: 80 },
+            "Metal Eater": { TotalElementIron: 80 },
+            "Alloyblood": { TotalElementIron: 100 },
+            "Speed Emission": { TotalAgility: 25 },
+            "Armor Conserver": { Level: 8 },
+            "Blood Path: True Frost": { TotalElementBlood: 20, TotalElementIce: 10 },
+            "Agile Path: Pressured Blood": { TotalElementBlood: 15 },
+            "Bleeding Fighter": { TotalElementBlood: 999, TotalStrength: 999 },
+            "Lord's Tithe": { TotalElementShadow: 40 },
+            "Frozen Pin-Cushion": { TotalElementIce: 40 },
+            // Add remaining stat requirements from Lua code here
+        };
+
+        // Create dependentTalents object for removal logic
+        const dependentTalents = {};
+        for (const [talent, deps] of Object.entries(talentDependencies)) {
+            deps.forEach(dep => {
+                if (!dependentTalents[dep]) dependentTalents[dep] = [];
+                dependentTalents[dep].push(talent);
+            });
+        }
+
+        // Function to collect and update player stats
+        function updatePlayerStats() {
+            const stats = {};
+            Object.keys(statsMapping).forEach(key => {
+                const input = document.querySelector(`input[statname="${statsMapping[key]}"]`);
+                const select = document.querySelector(`select[statname="${statsMapping[key]}"]`);
+
+                if (input) {
+                    stats[key] = parseInt(input.value) || 0;
+                } else if (select) {
+                    stats[key] = select.value || 0;
+                } else {
+                    stats[key] = 0;
+                }
+            });
+
+            const playerStats = {};
+            Object.keys(stats).forEach(key => {
+                if (luaStatsMapping[key]) {
+                    playerStats[luaStatsMapping[key]] = stats[key];
+                }
+            });
+
+            const levelInput = document.querySelector('input[statname="Level"]');
+            playerStats.Level = levelInput ? parseInt(levelInput.value) || 0 : 0;
+
+            const mantrasInput = document.querySelector('input[statname="Mantras"]') || document.querySelector('select[statname="Mantras"]');
+            playerStats.Mantras = mantrasInput ? mantrasInput.value : "";
+
+            return playerStats;
+        }
+
+        // Simulated current talents
+        let currentTalents = {
+            "Risky Moves": true,
+        };
+		window.currentTalents = currentTalents;
+
+        // Store the full talents data globally
+        let talentsData = null;
+
+        // Fetch the JSON file and populate initially
+        fetch('talents.json')
+            .then(response => response.json())
+            .then(data => {
+                talentsData = data.TalentsInfo;
+                const playerStats = updatePlayerStats();
+                populateDropdowns(talentsData, currentTalents, playerStats);
+                populateObtainedTalents(currentTalents, talentsData);
+
+                // Add event listeners to update talents when stats or mantras change
+                Object.values(statsMapping).forEach(statName => {
+                    const input = document.querySelector(`input[statname="${statName}"]`);
+                    const select = document.querySelector(`select[statname="${statName}"]`);
+                    if (input) {
+                        input.addEventListener('input', () => {
+                            const updatedStats = updatePlayerStats();
+                            populateDropdowns(talentsData, currentTalents, updatedStats);
+                        });
+                    } else if (select) {
+                        select.addEventListener('change', () => {
+                            const updatedStats = updatePlayerStats();
+                            populateDropdowns(talentsData, currentTalents, updatedStats);
+                        });
+                    }
+                });
+
+                const levelInput = document.querySelector('input[statname="Level"]');
+                if (levelInput) {
+                    levelInput.addEventListener('input', () => {
+                        const updatedStats = updatePlayerStats();
+                        populateDropdowns(talentsData, currentTalents, updatedStats);
+                    });
+                }
+
+                const mantrasInput = document.querySelector('input[statname="Mantras"]') || document.querySelector('select[statname="Mantras"]');
+                if (mantrasInput) {
+                    mantrasInput.addEventListener('input', () => {
+                        const updatedStats = updatePlayerStats();
+                        populateDropdowns(talentsData, currentTalents, updatedStats);
+                    });
+                    if (mantrasInput.tagName === 'SELECT') {
+                        mantrasInput.addEventListener('change', () => {
+                            const updatedStats = updatePlayerStats();
+                            populateDropdowns(talentsData, currentTalents, updatedStats);
+                        });
+                    }
+                }
+            })
+            .catch(error => console.error('Error loading talents:', error));
+
+        // Populate dropdowns with eligible talents
+        function populateDropdowns(talents, currentTalents, playerStats) {
+            const groupedTalents = {
+                Advanced: {},
+                Rare: {},
+                Common: {}
+            };
+
+            for (const [talentName, talentData] of Object.entries(talents)) {
+                if (!talentData) {
+                    console.warn("⚠️ Invalid talent detected:", talentName);
+                    continue;
+                }
+
+                // Skip if already selected
+                if (currentTalents[talentName]) continue;
+
+                // Check stat requirements
+                if (!checkStatRequirements(talentName, playerStats)) continue;
+
+                // Check dependencies
+                const requiredTalents = talentDependencies[talentName] || [];
+                const dependenciesMet = requiredTalents.every(dep => currentTalents[dep]);
+                if (!dependenciesMet) continue;
+
+                // Check mutual exclusivity
+                const exclusiveTalents = mutualExclusivityRules[talentName] || [];
+                const isMutuallyExclusive = exclusiveTalents.some(excl => currentTalents[excl]);
+                if (isMutuallyExclusive) continue;
+
+                // Check mantra requirements
+                const mantraReq = mantraRequirements[talentName];
+                if (mantraReq && !playerStats.Mantras.includes(mantraReq.mantra)) {
+                    continue;
+                }
+
+                const rarity = talentData.InnateRarity === "Legendary" ? "Advanced" : talentData.InnateRarity || "Common";
+                const className = talentData.Class || "Miscellaneous";
+
+                if (!groupedTalents[rarity][className]) {
+                    groupedTalents[rarity][className] = [];
+                }
+
+                groupedTalents[rarity][className].push({
+                    name: talentName,
+                    desc: talentData.Desc,
+                    icon: talentData.Icon || "https://deepwoken.co/newicon.png",
+                    rarity: rarity
+                });
+            }
+
+            populateDropdown('Advanced-dropdown', groupedTalents.Advanced, 'Advanced', currentTalents, playerStats);
+            populateDropdown('Rare-dropdown', groupedTalents.Rare, 'Rare', currentTalents, playerStats);
+            populateDropdown('Common-dropdown', groupedTalents.Common, 'Common', currentTalents, playerStats);
+        }
+
+        // Check stat requirements for a talent
+        function checkStatRequirements(talentName, playerStats) {
+            const reqs = statRequirements[talentName];
+            if (reqs) {
+                for (const [stat, value] of Object.entries(reqs)) {
+                    if (playerStats[stat] < value) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        // Populate a single dropdown with talents
+        function populateDropdown(dropdownId, talentsByClass, rarity, currentTalents, playerStats) {
+            const dropdown = document.getElementById(dropdownId);
+            if (!dropdown) return;
+
+            dropdown.innerHTML = '';
+
+            for (const [className, talents] of Object.entries(talentsByClass)) {
+                const fieldset = document.createElement('fieldset');
+                fieldset.className = 'svelte-hwcpcr';
+
+                const legend = document.createElement('legend');
+                legend.className = 'svelte-hwcpcr';
+                legend.textContent = className;
+                fieldset.appendChild(legend);
+
+                talents.forEach(talent => {
+                    const talentDiv = document.createElement('div');
+                    talentDiv.className = `talent ${rarity} svelte-hwcpcr`;
+                    talentDiv.setAttribute('role', 'button');
+                    talentDiv.setAttribute('tabindex', '0');
+                    talentDiv.style.userSelect = 'none';
+                    talentDiv.style.touchAction = 'auto';
+                    talentDiv.dataset.talentName = talent.name;
+
+                    talentDiv.innerHTML = `
+                        ${talent.name}
+                        <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">
+                            <img class="icon svelte-hwcpcr" title="${talent.desc}" width="14" height="14" alt="new" src="https://deepwoken.co/newicon.png">
+                        </div>
+                    `;
+
+                    talentDiv.addEventListener('click', () => {
+                        currentTalents[talent.name] = true;
+                        console.log("Talent selected:", talent.name);
+                        populateObtainedTalents(currentTalents, talentsData);
+                        populateDropdowns(talentsData, currentTalents, updatePlayerStats());
+                    });
+
+                    fieldset.appendChild(talentDiv);
+                });
+
+                dropdown.appendChild(fieldset);
+            }
+
+            if (dropdown.innerHTML.trim() === '') {
+                const noTalentsDiv = document.createElement('div');
+                noTalentsDiv.className = 'talent svelte-hwcpcr';
+                noTalentsDiv.textContent = 'No talents :(';
+                dropdown.appendChild(noTalentsDiv);
+            }
+        }
+
+        // Populate the obtained talents section
+        function populateObtainedTalents(currentTalents, talentsData) {
+            const obtainedTalentsContainer = document.querySelector('#rollable-talent-2 .talents-container');
+            if (!obtainedTalentsContainer) return;
+
+            obtainedTalentsContainer.innerHTML = '';
+
+            const groupedObtainedTalents = {};
+            for (const [talentName] of Object.entries(currentTalents)) {
+                if (talentsData[talentName]) {
+                    const className = talentsData[talentName].Class || "Miscellaneous";
+                    const rarity = talentsData[talentName].InnateRarity === "Legendary" ? "Advanced" : talentsData[talentName].InnateRarity || "Common";
+                    if (!groupedObtainedTalents[className]) {
+                        groupedObtainedTalents[className] = [];
+                    }
+                    groupedObtainedTalents[className].push({
+                        name: talentName,
+                        desc: talentsData[talentName].Desc,
+                        icon: talentsData[talentName].Icon || "https://deepwoken.co/newicon.png",
+                        rarity: rarity
+                    });
+                } else {
+                    console.warn("⚠️ Talent not found in talentsData:", talentName);
+                }
+            }
+
+            const sortedClasses = Object.keys(groupedObtainedTalents).sort();
+            sortedClasses.forEach(className => {
+                const fieldset = document.createElement('fieldset');
+                fieldset.className = 'svelte-hwcpcr';
+
+                const legend = document.createElement('legend');
+                legend.className = 'svelte-hwcpcr';
+                legend.textContent = className;
+                fieldset.appendChild(legend);
+
+                groupedObtainedTalents[className].forEach(talent => {
+                    const talentDiv = document.createElement('div');
+                    talentDiv.className = `talent ${talent.rarity} svelte-hwcpcr`;
+                    talentDiv.style.userSelect = 'none';
+                    talentDiv.style.touchAction = 'auto';
+                    talentDiv.dataset.talentName = talent.name;
+
+                    talentDiv.innerHTML = `
+                        ${talent.name}
+                        <div class="svelte-hwcpcr" style="display: flex; gap: 4px;">
+                            <img class="icon svelte-hwcpcr" title="${talent.desc}" width="14" height="14" alt="new" src="https://deepwoken.co/newicon.png">
+                        </div>
+                    `;
+
+                    talentDiv.addEventListener('click', () => {
+                        removeTalentAndDependents(talent.name);
+                        console.log("Talent removed:", talent.name);
+                        populateObtainedTalents(currentTalents, talentsData);
+                        populateDropdowns(talentsData, currentTalents, updatePlayerStats());
+                    });
+
+                    fieldset.appendChild(talentDiv);
+                });
+
+                obtainedTalentsContainer.appendChild(fieldset);
+            });
+        }
+
+        // Remove a talent and its dependent talents
+        function removeTalentAndDependents(talentName) {
+            delete currentTalents[talentName];
+            const dependents = dependentTalents[talentName] || [];
+            dependents.forEach(dep => removeTalentAndDependents(dep));
+        }
+    });
+</script>
+
+<div class="container" id="Talents">
+    <div class="grid-item rollable-talents" id="rollable-talent-1">
+        <div style="text-align: center">
+            <b>Obtainable Talents</b>
+        </div>
+        <div id="Advanced-dropdown" class="talents-container"></div>
+        <div id="Rare-dropdown" class="talents-container"></div>
+        <div id="Common-dropdown" class="talents-container"></div>
+    </div>
+    <div class="grid-item obtained-talents" id="rollable-talent-2">
+        <div style="text-align: center">
+            <b>Obtained Talents</b>
+        </div>
+        <div class="talents-container"></div>
+    </div>
+</div>
         <button id="exportdeep" href="javascript:void(0);"class="function-button border-thin svelte-g2d5k9" data-svelte-h="svelte-oiyxom"><div><b class="svelte-g2d5k9">Export</b> to the deep</div></button>  </div>
 		<script>
-			document.getElementById('exportdeep').addEventListener('click', function() {
+			document.addEventListener('DOMContentLoaded', () => {
+			  const btn = document.getElementById('exportdeep');
+			  if (!btn) return;
+			
+			  btn.addEventListener('click', function () {
 				const statsMapping = {
-					st: 'Strength',
-					pe: 'Precision',
-					fo: 'Fortitude',
-					ag: 'Agility',
-					in: 'Intelligence',
-					wi: 'Willpower',
-					ch: 'Charisma',
-					he: 'Heavy Wep.',
-					me: 'Medium Wep.',
-					li: 'Light Wep.',
-					fl: 'Flamecharm',
-					fr: 'Frostdraw',
-					th: 'Thundercall',
-					ga: 'Galebreathe',
-					sh: 'Shadowcast',
-					ir: 'Ironsing',
-					bl: 'Bloodrend',
-					eb: 'Earthbend'
+				  st: 'Strength', pe: 'Precision', fo: 'Fortitude', ag: 'Agility',
+				  in: 'Intelligence', wi: 'Willpower', ch: 'Charisma',
+				  he: 'Heavy Wep.', me: 'Medium Wep.', li: 'Light Wep.',
+				  fl: 'Flamecharm', fr: 'Frostdraw', th: 'Thundercall',
+				  ga: 'Galebreathe', sh: 'Shadowcast', ir: 'Ironsing',
+				  bl: 'Bloodrend', eb: 'Earthbend'
 				};
 			
-				// Collect stats
 				const stats = {};
 				Object.keys(statsMapping).forEach(key => {
-					const input = document.querySelector(`input[statname="${statsMapping[key]}"]`);
-					stats[key] = input ? input.value || 0 : 0;
+				  const input = document.querySelector(`input[statname="${statsMapping[key]}"]`);
+				  stats[key] = input ? input.value || 0 : 0;
 				});
 			
-				// Get build name & description
 				const buildName = document.getElementById('build-name')?.value.trim() || "Unnamed Build";
 				const buildDesc = document.getElementById('build-description')?.textContent.trim() || "No description.";
+				const race = document.querySelector('select[statname="Race"]')?.selectedOptions[0]?.text || "Unknown Race";
+				const oath = document.querySelector('select[statname="Oath"]')?.selectedOptions[0]?.text || "Oathless";
 			
-				// Get race name
-				const raceSelect = document.querySelector('select[statname="Race"]');
-				const race = raceSelect ? raceSelect.options[raceSelect.selectedIndex].text : "Unknown Race";
+				const NON_ATTUNEMENT_FREE = 15, HIGHEST_ATTUNEMENT_FREE = 10, OTHER_ATTUNEMENT_FREE = 5;
+				const totalBuildPoints = 400;
 			
-				// Get oath name
-				const oathSelect = document.querySelector('select[statname="Oath"]');
-				const oath = oathSelect ? oathSelect.options[oathSelect.selectedIndex].text : "Oathless";
-			
-				// Power Calculation (using your logic)
-				const totalBuildPoints = 505 - 105;
-				const NON_ATTUNEMENT_FREE = 15;
-				const HIGHEST_ATTUNEMENT_FREE = 10;
-				const OTHER_ATTUNEMENT_FREE = 5;
-			
-				function calculateNonAttunementCost() {
-					let allocated = 0;
-					document.querySelectorAll('input.stat-input[stattype="base"]').forEach(input => {
-						allocated += parseInt(input.value) || 0;
-					});
-					return allocated > NON_ATTUNEMENT_FREE ? allocated - NON_ATTUNEMENT_FREE : 0;
+				function calc(selector, type = 'default') {
+				  let sum = 0;
+				  document.querySelectorAll(selector).forEach(input => {
+					const val = parseInt(input.value) || 0;
+					if (type === 'checkbox') sum += input.checked ? 1 : 0;
+					else sum += val;
+				  });
+				  return sum;
 				}
 			
-				function calculateWeaponCost() {
-					let cost = 0;
-					document.querySelectorAll('input.stat-input[stattype="weapon"]').forEach(input => {
-						cost += parseInt(input.value) || 0;
-					});
-					return cost;
-				}
+				const baseCost = Math.max(0, calc('input.stat-input[stattype="base"]') - NON_ATTUNEMENT_FREE);
+				const weaponCost = calc('input.stat-input[stattype="weapon"]');
+				const attunementVals = [...document.querySelectorAll('input.stat-input[stattype="attunement"]')].map(i => parseInt(i.value) || 0);
+				const maxAttune = Math.max(...attunementVals, 0);
+				const attuneCost = attunementVals.reduce((sum, val) => {
+				  const free = (val === maxAttune && val >= HIGHEST_ATTUNEMENT_FREE) ? HIGHEST_ATTUNEMENT_FREE : OTHER_ATTUNEMENT_FREE;
+				  return sum + (val > free ? val - free : 0);
+				}, 0);
+				const metaCost = calc('input.stat-input[stattype="meta"]', 'checkbox');
 			
-				function calculateAttunementCost() {
-					const values = [];
-					document.querySelectorAll('input.stat-input[stattype="attunement"]').forEach(input => {
-						values.push(parseInt(input.value) || 0);
-					});
-					if (values.length === 0) return 0;
-					const maxValue = Math.max(...values);
-					let cost = 0;
-					document.querySelectorAll('input.stat-input[stattype="attunement"]').forEach(input => {
-						let value = parseInt(input.value) || 0;
-						let freeThreshold = OTHER_ATTUNEMENT_FREE;
-						if (value === maxValue && value >= HIGHEST_ATTUNEMENT_FREE) {
-							freeThreshold = HIGHEST_ATTUNEMENT_FREE;
-						}
-						cost += value < freeThreshold ? value : (value - freeThreshold);
-					});
-					return cost;
-				}
+				const totalCost = baseCost + weaponCost + attuneCost + metaCost;
+				const powerLevel = Math.min(Math.floor(totalCost / (totalBuildPoints / 80)), 80);
 			
-				function calculateMetaCost() {
-					let cost = 0;
-					document.querySelectorAll('input.stat-input[stattype="meta"]').forEach(input => {
-						if (input.type === 'checkbox') {
-							cost += input.checked ? 1 : 0;
-						} else if (input.type === 'select-one' || input.tagName === 'SELECT') {
-							cost += parseInt(input.value) || 0;
-						} else {
-							cost += parseInt(input.value) || 0;
-						}
-					});
-					return cost;
-				}
+				const currentTalents = window.currentTalents || {}; // get talents from global
+				const talentNames = Object.keys(currentTalents);
+				const formattedTalents = talentNames.length > 0 ? `\n== TALENTS ==\n${talentNames.join('\n')}` : '';
 			
-				// Compute total cost
-				const totalCost = calculateNonAttunementCost() + calculateWeaponCost() + calculateAttunementCost() + calculateMetaCost();
-			
-				// Compute power level
-				let powerLevel = Math.min(Math.floor(totalCost / (totalBuildPoints / 80)), 80);
-			
-				// Build formatted output
 				const output = `
 ${buildName}, The ${oath} | ${buildDesc}
 =====
@@ -2169,16 +1605,18 @@ ${stats.st} Strength; ${stats.pe} Precision; ${stats.fo} Fortitude; ${stats.ag} 
 ${stats.he} Heavy Weapon; ${stats.me} Medium Weapon; ${stats.li} Light Weapon
 =====
 ${stats.fl} Flamecharm; ${stats.fr} Frostdraw; ${stats.th} Thunder; ${stats.ga} Gale; ${stats.sh} Shadowcast; ${stats.ir} Ironsing; ${stats.bl} Bloodrend; ${stats.eb} Earthbend
-				`.trim();
+${formattedTalents}
+			`.trim();
 			
-				// Copy to clipboard
 				navigator.clipboard.writeText(output).then(() => {
-					alert('Build copied in Deepwoken format!');
+				  alert('Build copied in Deepwoken format!');
 				}).catch(err => {
-					console.error('Could not copy build to clipboard:', err);
+				  console.error('Clipboard error:', err);
 				});
+			  });
 			});
 			</script>
+			
 			
 		 </script>
 		<div class="functions grid-item svelte-g2d5k9" ignore-in-export="">
